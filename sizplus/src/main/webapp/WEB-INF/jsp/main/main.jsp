@@ -114,7 +114,7 @@
                         <a class="nav-link" href="reservation.html">Reservation</a>
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link" href="reservation.html">로그인</a>
+                        <a class="nav-link" href="/login.do">로그인</a>
                     </li>
                 </div>
                 <li class="nav-item">

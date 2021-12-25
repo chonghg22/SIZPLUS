@@ -23,11 +23,18 @@ public class MainController {
 	private MainService mainService;
 	
 	@RequestMapping(value="/index.do")
-    public String openSampleBoardList(CommandMap commandMap) throws Exception{
+    public String mainList(CommandMap commandMap) throws Exception{
     	
-    	List<Map<String,Object>> list = mainService.selectBoardList(commandMap.getMap());
-    	System.out.println("메인::"+list);
+//    	List<Map<String,Object>> list = mainService.selectBoardList(commandMap.getMap());
     	return "main/main";
     }
+	
+	@RequestMapping(value="/login.do")
+    public String loginView(CommandMap commandMap) throws Exception{
+    	
+//    	List<Map<String,Object>> list = mainService.selectBoardList(commandMap.getMap());
+    	return "login/login";
+    }
+	
 	
 }

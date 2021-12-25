@@ -8,7 +8,6 @@ import javax.annotation.Resource;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 
-import sizplus.sample.dao.SampleDAO;
 import sizplus.user.board.dao.BoardDAO;
 
 @Service("boardService")
