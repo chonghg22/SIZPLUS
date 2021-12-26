@@ -136,7 +136,7 @@
                            	회원가입
                         </h2>
                     </div>
-                    <form method="post" name="contact-us" action="/insertMemberProc.do">
+                    <form method="post" name="contact-us" action="/member/member_input_proc.do">
                         <div class="row">
                             <div class="col-md-12 form-group">
                                 <input type="text" class="form-control" id="memberId" name="memberId" placeholder="아이디">
@@ -235,7 +235,7 @@
          		<div class="footer-widget pl-lg-5 pl-0">
          			<h4>Newsletter</h4>
 	         		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-	         		<form id="newsletter">
+	         		<form id="newsletter" action="/login_proc.do">
 						<div class="form-group">
 							<input type="text" class="form-control" id="memberId" name="memberId" placeholder="아이디">
 							<input type="text" class="form-control" id="memeberPw" name="memberPw" placeholder="비밀번호">

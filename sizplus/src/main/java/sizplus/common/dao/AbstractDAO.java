@@ -7,11 +7,14 @@ import org.apache.commons.logging.LogFactory;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import sizplus.common.common.CommandMap;
+
 public class AbstractDAO {
 	protected Log log = LogFactory.getLog(AbstractDAO.class);
 	
 	@Autowired
 	private SqlSessionTemplate sqlSession;
+	
 	
 	protected void printQueryId(String queryId) {
 		if(log.isDebugEnabled()){
@@ -24,22 +27,22 @@ public class AbstractDAO {
 		return sqlSession.insert(queryId, params);
 	}
 	
-	public Object update(String queryId, Object params){
+	public int update(String queryId, Object params){
 		printQueryId(queryId);
 		return sqlSession.update(queryId, params);
 	}
 	
-	public Object delete(String queryId, Object params){
+	public int delete(String queryId, Object params){
 		printQueryId(queryId);
 		return sqlSession.delete(queryId, params);
 	}
 	
-	public Object selectOne(String queryId){
+	public int selectCount(String queryId){
 		printQueryId(queryId);
 		return sqlSession.selectOne(queryId);
 	}
 	
-	public Object selectOne(String queryId, Object params){
+	public Object selectView(String queryId, Object params){
 		printQueryId(queryId);
 		return sqlSession.selectOne(queryId, params);
 	}

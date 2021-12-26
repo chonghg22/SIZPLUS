@@ -22,7 +22,7 @@ public class MemberController {
 	@Resource(name="memberService")
 	private MemberService memberService;
 	
-	@RequestMapping(value="/insertMemberProc.do")
+	@RequestMapping(value="/member/member_input_proc.do")
     public String insertMemberProc(ModelMap model, HttpServletResponse response, HttpServletRequest request, CommandMap commandMap) throws Exception{
 		//login.jsp에서 보낸 값들이 commandMap으로 들어옴
 		Map<String, Object> map = new  HashMap<String, Object>();
