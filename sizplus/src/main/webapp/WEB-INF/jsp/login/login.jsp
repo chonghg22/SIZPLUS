@@ -130,8 +130,9 @@
                 <div class="section-content bg-white p-5 shadow">
                     <div class="heading-section text-center">
                         <span class="subheading">
-                            Reservation
+                            	<h4>예약을 위한</h4>
                         </span>
+                          
                         <h2>
                            	회원가입
                         </h2>
@@ -142,14 +143,14 @@
                                 <input type="text" class="form-control" id="memberId" name="memberId" placeholder="아이디">
                             </div>
                             <div class="col-md-12 form-group">
-                                <input type="text" class="form-control" id="memberPw" name="memberPw" placeholder="비밀번호">
+                                <input type="password" class="form-control" id="memberPw" name="memberPw" placeholder="비밀번호">
                             </div>
                             <div class="col-md-12 form-group">
-                                <input type="number" class="form-control" id="phoneNumber" name="phoneNumber" placeholder="Phone">
+                                <input type="number" class="form-control" id="phoneNumber" name="phoneNumber" placeholder="연락처">
                             </div>
                             <div class="col-md-6 form-group">
                                 <div class="input-group date" id="datetimepicker4" data-target-input="nearest">
-                                    <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker4" placeholder="Date" />
+                                    <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker4" placeholder="날짜" />
                                     <div class="input-group-append" data-target="#datetimepicker4" data-toggle="datetimepicker">
                                         <div class="input-group-text">
                                             <span class="lnr lnr-calendar-full"></span>
@@ -160,7 +161,7 @@
 
                             <div class="col-md-6 form-group">
                                 <div class="input-group date" id="datetimepicker3" data-target-input="nearest">
-                                    <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker3" placeholder="Time" />
+                                    <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker3" placeholder="시간" />
                                     <div class="input-group-append" data-target="#datetimepicker3" data-toggle="datetimepicker">
                                         <div class="input-group-text">
                                             <span class="lnr lnr-clock"></span>
@@ -181,7 +182,7 @@
                             </div>
                  
                             <div class="col-md-12 form-group">
-                                <textarea class="form-control" id="message" name="message" rows="6" placeholder="Your Message ..."></textarea>
+                                <textarea class="form-control" id="message" name="message" rows="6" placeholder="남기고 싶은 메모"></textarea>
                             </div>
                             <div class="col-md-12 text-center">
                                 <button class="btn btn-primary btn-shadow btn-lg" type="submit" name="submit">회원가입</button>
@@ -200,7 +201,7 @@
          	<div class="col-lg-4">
          		<div class="footer-widget pr-lg-5 pr-0">
          			<img src="lib/user/img/logo.png" class="img-fluid footer-logo mb-3" alt="">
-	         		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Et obcaecati quisquam id sit omnis explicabo voluptate aut placeat, soluta, nisi ea magni facere, itaque incidunt modi? Magni, et voluptatum dolorem.</p>
+	         		<p> 여기는 몰까요? </p>
 	         		<nav class="nav nav-mastfoot justify-content-start">
 		                <a class="nav-link" href="#">
 		                	<i class="fab fa-facebook-f"></i>
@@ -219,13 +220,13 @@
          		<div class="footer-widget px-lg-5 px-0">
          			<h4>Open Hours</h4>
 	         		<ul class="list-unstyled open-hours">
-		                <li class="d-flex justify-content-between"><span>Monday</span><span>9:00 - 24:00</span></li>
-		                <li class="d-flex justify-content-between"><span>Tuesday</span><span>9:00 - 24:00</span></li>
-		                <li class="d-flex justify-content-between"><span>Wednesday</span><span>9:00 - 24:00</span></li>
-		                <li class="d-flex justify-content-between"><span>Thursday</span><span>9:00 - 24:00</span></li>
-		                <li class="d-flex justify-content-between"><span>Friday</span><span>9:00 - 02:00</span></li>
-		                <li class="d-flex justify-content-between"><span>Saturday</span><span>9:00 - 02:00</span></li>
-		                <li class="d-flex justify-content-between"><span>Sunday</span><span> Closed</span></li>
+		                <li class="d-flex justify-content-between"><span>월요일</span><span>9:00 - 24:00</span></li>
+		                <li class="d-flex justify-content-between"><span>화요일</span><span>9:00 - 24:00</span></li>
+		                <li class="d-flex justify-content-between"><span>수요일</span><span>9:00 - 24:00</span></li>
+		                <li class="d-flex justify-content-between"><span>목요일</span><span>9:00 - 24:00</span></li>
+		                <li class="d-flex justify-content-between"><span>금요일</span><span>9:00 - 02:00</span></li>
+		                <li class="d-flex justify-content-between"><span>토요일</span><span>9:00 - 02:00</span></li>
+		                <li class="d-flex justify-content-between"><span>일요일</span><span>- 휴 무 -&nbsp;&nbsp;&nbsp;&nbsp;</span></li>
 		              </ul>
          		</div>
          		
@@ -234,7 +235,7 @@
          	<div class="col-lg-4">
          		<div class="footer-widget pl-lg-5 pl-0">
          			<h4>Newsletter</h4>
-	         		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+	         		<p>소식 전달</p>
 	         		<form id="newsletter" action="/login_proc.do">
 						<div class="form-group">
 							<input type="text" class="form-control" id="memberId" name="memberId" placeholder="아이디">

@@ -114,7 +114,7 @@
                         <a class="nav-link" href="reservation.html">Reservation</a>
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link" href="/login.do">로그인</a>
+                        <a class="nav-link" href="/login.do">login</a>
                     </li>
                 </div>
                 <li class="nav-item">
@@ -732,5 +732,55 @@
 
 	<!-- Main JS -->
 	<script src="lib/user/js/app.min.js "></script>
+	
+	<!-- 비밀번호 암호화 등 -->
+<script	src="https://cdnjs.cloudflare.com/ajax/libs/js-sha256/0.9.0/sha256.min.js"></script>
+
+<script>
+
+	var joinFormSubmitted = false;
+
+	function submitJoinForm(form) {
+		if (joinFormSubmitted) {
+			alert('처리 중입니다.');
+			return;
+		}
+
+		form.loginPw.value = form.loginPw.value.trim();
+		if (form.loginPw.value.length == 0) {
+			alert('비밀번호를 입력해주세요.');
+			form.loginPw.focus();
+
+			return;
+		}
+
+		<!-- 입력된 비밀번호(loginPw)와 확인(loginPwConfirm) 일치하는지 체크 )-->
+		form.loginPwConfirm.value = form.loginPwConfirm.value.trim();
+		if (form.loginPwConfirm.value.length == 0) {
+			alert('비밀번호를 입력해주세요.');
+			form.loginPw.focus();
+
+			return;
+		}
+		
+		if (form.loginPwConfirm.value != form.loginPw.value ) {
+			alert('로그인 비밀번호 확인이 일치하지 않습니다.');
+			form.loginPwConfirm.focus();
+
+			return;
+		}
+		
+		<!-- 패스워드 함호화 -->
+		form.loginPwReal.value = sha256(form.loginPw.value);
+		form.loginPw.value = '';
+		form.loginPwConfirm.value = form.loginPw.value;
+
+		form.submit();
+		joinFormSubmitted = true;
+	}
+    
+</script>
+	
+	
 </body>
 </html>
