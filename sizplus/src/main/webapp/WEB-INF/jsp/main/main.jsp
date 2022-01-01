@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,26 +9,9 @@
     <title>Resto - Restaurant Bootstrap 4 Template by GetTemplates.co</title>
     <meta name="description" content="Resto">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
     <!-- External CSS -->
     <link rel="stylesheet" href="lib/user/vendor/bootstrap/bootstrap.min.css">
-    <link rel="stylesheet" href="lib/user/vendor/select2/select2.min.css">
-    <link rel="stylesheet" href="lib/user/vendor/owlcarousel/owl.carousel.min.css">
-    <link rel="stylesheet" href="https://cdn.rawgit.com/noelboss/featherlight/1.7.13/release/featherlight.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.1/lib/user/css/tempusdominus-bootstrap-4.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.1/lib/user/css/brands.css">
-
-    <!-- Fonts -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700|Josefin+Sans:300,400,700">
-    <link rel="stylesheet" href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/lib/user/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
-
-    <!-- CSS -->
     <link rel="stylesheet" href="lib/user/css/style.min.css">
-
-    <!-- Modernizr JS for IE8 support of HTML5 elements and media queries -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.js"></script>
-
 </head>
 <body data-spy="scroll" data-target="#navbar" class="static-layout">
 	<div id="side-nav" class="sidenav">
@@ -114,7 +98,12 @@
                         <a class="nav-link" href="reservation.html">Reservation</a>
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link" href="/login.do">login</a>
+                    	<c:if test="${empty memberSession}">
+                        	<a class="nav-link" href="/login.do">login</a>
+                        </c:if>
+                        <c:if test="${not empty memberSession}">
+                        	<a class="nav-link" href="/logout_proc.do">logout</a>
+                        </c:if>
                     </li>
                 </div>
                 <li class="nav-item">
@@ -125,57 +114,7 @@
             </ul>
         </div>
     </div>
-</nav>		<div class="hero">
-  <div class="container">
-	<div class="row d-flex align-items-center">
-		<div class="col-lg-6 hero-left">
-		    <h1 class="display-4 mb-5">We Love <br>Delicious Foods!</h1>
-		    <div class="mb-2">
-		    	<a class="btn btn-primary btn-shadow btn-lg" href="#" role="button">Explore Menu</a>
-			    <a class="btn btn-icon btn-lg" href="https://player.vimeo.com/video/33110953" data-featherlight="iframe" data-featherlight-iframe-allowfullscreen="true">
-			    	<span class="lnr lnr-film-play"></span>
-			    	Play Video
-			    </a>
-		    </div>
-		   
-		    <ul class="hero-info list-unstyled d-flex text-center mb-0">
-		    	<li class="border-right">
-		    		<span class="lnr lnr-rocket"></span>
-		    		<h5>
-		    			Fast Delivery
-		    		</h5>
-		    	</li>
-		    	<li class="border-right">
-		    		<span class="lnr lnr-leaf"></span>
-		    		<h5>
-		    			Fresh Food
-		    		</h5>
-		    	</li>
-		    	<li class="">
-		    		<span class="lnr lnr-bubble"></span>
-		    		<h5>
-		    			24/7 Support
-		    		</h5>
-		    	</li>
-		    </ul>
-
-	    </div>
-	    <div class="col-lg-6 hero-right">
-	    	<div class="owl-carousel owl-theme hero-carousel">
-			    <div class="item">
-			    	<img class="img-fluid" src="lib/user/img/hero-1.jpg" alt="">
-			    </div>
-			    <div class="item">
-			    	<img class="img-fluid" src="lib/user/img/hero-2.jpg" alt="">
-			    </div>
-			    <div class="item">
-			    	<img class="img-fluid" src="lib/user/img/hero-3.jpg" alt="">
-			    </div>
-			</div>
-	    </div>
-	</div>
-  </div>
-</div>		<!-- Welcome Section -->
+</nav>	
 <section id="gtco-welcome" class="bg-white section-padding">
     <div class="container">
         <div class="section-content">
@@ -719,68 +658,6 @@
     </div>
 </footer>	</div>
 </div>
-	<!-- External JS -->
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.lib/user/js/2.22.2/moment.min.js"></script>
-	<script src="lib/user/vendor/bootstrap/popper.min.js"></script>
-	<script src="lib/user/vendor/bootstrap/bootstrap.min.js"></script>
-	<script src="lib/user/vendor/select2/select2.min.js "></script>
-	<script src="lib/user/vendor/owlcarousel/owl.carousel.min.js"></script>
-	<script src="https://cdn.rawgit.com/noelboss/featherlight/1.7.13/release/featherlight.min.js"></script>
-	<script src="lib/user/vendor/stellar/jquery.stellar.js" type="text/javascript" charset="utf-8"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.1/lib/user/js/tempusdominus-bootstrap-4.min.js"></script>
-
-	<!-- Main JS -->
-	<script src="lib/user/js/app.min.js "></script>
-	
-	<!-- 비밀번호 암호화 등 -->
-<script	src="https://cdnjs.cloudflare.com/ajax/libs/js-sha256/0.9.0/sha256.min.js"></script>
-
-<script>
-
-	var joinFormSubmitted = false;
-
-	function submitJoinForm(form) {
-		if (joinFormSubmitted) {
-			alert('처리 중입니다.');
-			return;
-		}
-
-		form.loginPw.value = form.loginPw.value.trim();
-		if (form.loginPw.value.length == 0) {
-			alert('비밀번호를 입력해주세요.');
-			form.loginPw.focus();
-
-			return;
-		}
-
-		<!-- 입력된 비밀번호(loginPw)와 확인(loginPwConfirm) 일치하는지 체크 )-->
-		form.loginPwConfirm.value = form.loginPwConfirm.value.trim();
-		if (form.loginPwConfirm.value.length == 0) {
-			alert('비밀번호를 입력해주세요.');
-			form.loginPw.focus();
-
-			return;
-		}
-		
-		if (form.loginPwConfirm.value != form.loginPw.value ) {
-			alert('로그인 비밀번호 확인이 일치하지 않습니다.');
-			form.loginPwConfirm.focus();
-
-			return;
-		}
-		
-		<!-- 패스워드 함호화 -->
-		form.loginPwReal.value = sha256(form.loginPw.value);
-		form.loginPw.value = '';
-		form.loginPwConfirm.value = form.loginPw.value;
-
-		form.submit();
-		joinFormSubmitted = true;
-	}
-    
-</script>
-	
 	
 </body>
 </html>

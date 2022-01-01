@@ -140,10 +140,10 @@
                     <form method="post" name="contact-us" action="/member/member_input_proc.do">
                         <div class="row">
                             <div class="col-md-12 form-group">
-                                <input type="text" class="form-control" id="memberId" name="memberId" placeholder="아이디">
+                                <input type="text" class="form-control" id="memberId" name="member_id" placeholder="아이디">
                             </div>
                             <div class="col-md-12 form-group">
-                                <input type="password" class="form-control" id="memberPw" name="memberPw" placeholder="비밀번호">
+                                <input type="password" class="form-control" id="memberPw" name="member_pw" placeholder="비밀번호">
                             </div>
                             <div class="col-md-12 form-group">
                                 <input type="number" class="form-control" id="phoneNumber" name="phoneNumber" placeholder="연락처">
