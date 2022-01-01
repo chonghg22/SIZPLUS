@@ -25,6 +25,14 @@ public class MemberServiceImpl implements MemberService{
 		
 	}
 	
+	//여기에 메소드 적고  Service 에 안적으면 오류남 
+	@Override
+	public int updateMemberProc(Map<String, Object> map) throws Exception {
+		return memberDAO.updateMemberProc(map);
+	}
+	
+	
+	
 	@Override
 	public MemberVO selectUserLoginView(MemberVO memberVO) throws Exception {
 		return memberDAO.selectUserLoginView(memberVO);

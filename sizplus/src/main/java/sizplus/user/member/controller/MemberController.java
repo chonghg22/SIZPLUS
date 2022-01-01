@@ -13,6 +13,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import sizplus.common.common.CommandMap;
+import sizplus.common.common.CommonUtil;
 import sizplus.user.member.service.MemberService;
 
 @Controller
@@ -22,22 +23,28 @@ public class MemberController {
 	@Resource(name="memberService")
 	private MemberService memberService;
 	
+	//회원가입 페이지 호출
+	@RequestMapping(value="/member/member_input.do")
+    public String insertMember(ModelMap model, HttpServletRequest request) throws Exception{
+
+		return "member/member_input";
+    }
+	
+	//회원가입 처리
 	@RequestMapping(value="/member/member_input_proc.do")
     public String insertMemberProc(ModelMap model, HttpServletResponse response, HttpServletRequest request, CommandMap commandMap) throws Exception{
 		//login.jsp에서 보낸 값들이 commandMap으로 들어옴
 		Map<String, Object> map = new  HashMap<String, Object>();
-		//commandMap에 들어가있는 memberId 값을 map에 memberId 라는 변수로 값 넣어주기
-		map.put("memberId", commandMap.get("memberId"));
-		map.put("memberPw", commandMap.get("memberPw"));
+		//이용자가 입력한 아이디 값은 commandMap을 통해서 값을 가져오고 그걸 다시 map에 memberId라는 변수에 담음
+		map.put("memberId", commandMap.get("member_id").toString());
+		//이용자가 입력한 비밀번호값은 암호화 처리 하여 memberPw라는 변수에 담음
+		map.put("memberPw", CommonUtil.hexSha256(commandMap.get("member_pw").toString()));
 		int result = memberService.insertMemberProc(map);
 		//실행 완료 후 login.do 메소드로 이동
     	return "redirect:/login.do";
     	//추가 개발사항
-    	//1.비밀번호 암호화 
     	//2.추가로 넣을 데이터 설계 (이메일,연락처,닉네임 등등)
-    	//3.Map으로 값을 넣는게 아닌 VO로 변경
     	//4.아이디 중복 체크
-    	//5.로그인 기능 만들기
     }
 	
 }

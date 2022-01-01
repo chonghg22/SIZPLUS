@@ -2,7 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="member">
-	
+	<!-- 1번  -->
+	<!-- SQL.xml(1번) -> DAO(2번) -> ServiceImpl(3번) -> Service(4번) -> controller(5번) -> jsp -->
 	<insert id="insertMemberProc" parameterType="hashmap">
 		/*insertMngrManagerProc*/
 		insert into e_member(
@@ -15,6 +16,16 @@
 			now()
 		)
 	</insert>
+	
+	<!-- 회원정보 수정 -->
+	<update id="updateMemberProc" parameterType="hashmap" >
+		/*updateMngrManagerProc*/
+		update e_member 
+		set 
+		member_pw = #{memberPw}
+		where
+		member_id = #{memberId}
+	</update>
 	
 	<select id="selectUserLoginView" parameterType="sizplus.user.member.dao.MemberVO" resultType="sizplus.user.member.dao.MemberVO">
 		select

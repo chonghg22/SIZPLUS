@@ -10,14 +10,14 @@
 <body>
 	<h1>회원 가입</h1>
 	<div class="join-form-box">
-		<form action="/member/member_input_proc.do" method="POST" class="join-form form2"	onsubmit="submitJoinForm(this); return false;">
+		<form action="/member/member_edit_proc.do" method="POST" class="join-form form2"	onsubmit="submitJoinForm(this); return false;">
 		
 			<input type="hidden" name="loginPwReal">
 			<div class="form-row">
 				<div class="label">아이디</div>
 				<div class="input">
 					<!-- member_id(박스) 라는 명칭으로 사용자가 입력한 값(물품)을 자바로 넘겨줄꺼임 -->
-					<input type="text" name="member_id" value="" maxlength="20"  placeholder="id 입력">
+					<input type="text" name="member_id" value="chonghg55" maxlength="20"  placeholder="id 입력">
 				</div>
 			</div>
 			<div class="form-row">
