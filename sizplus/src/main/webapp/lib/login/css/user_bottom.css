@@ -1,0 +1,28 @@
+.loginType > div > ul > li {
+    float: left;
+    width: 270px;
+    margin: 0 10px 20px;
+}
+.loginType > div > ul > li.login1 > a {
+    background: url(../images/naver.png) no-repeat 23px 50% #34b733;
+}
+.loginType > div > ul > li > a {
+    display: block;
+    height: 62px;
+    line-height: 62px;
+    color: #fff;
+    font-size: 16px;
+    padding-left: 75px;
+    text-decoration: none;
+    border-radius: 4px;
+}
+.loginType > div > ul > li.login2 > a {
+    background: url(../images/google.png) no-repeat 19px 50% #cc3731;
+}
+.loginType > div > ul > li.login3 > a {
+    background: url(../images/kakaotalk.png) no-repeat 25px 50% #fed325;
+    color: #381e1f;
+}
+.loginType > div > ul > li.login4 > a {
+    background: url(../images/facebook.png) no-repeat 28px 50% #3b589c;
+}
