@@ -55,6 +55,12 @@ public class MainController {
     	return "main/login";
     }
 	
+	@RequestMapping(value="/contact.do")
+    public String contactView(CommandMap commandMap) throws Exception{
+    	
+    	return "main/contact";
+    }
+	
 	@RequestMapping(value="/login_proc.do")
     public String loginProc(ModelMap model, HttpServletRequest request, HttpServletResponse response, HttpSession session, CommandMap commandMap) throws Exception {
     	//추가 개발사항

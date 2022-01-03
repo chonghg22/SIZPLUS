@@ -7,71 +7,58 @@
     <title>Resto - Restaurant Bootstrap 4 Template by GetTemplates.co</title>
     <meta name="description" content="Resto">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="lib/user/vendor/bootstrap/bootstrap.min.css">
-    <link rel="stylesheet" href="lib/user/css/style.min.css">
+    <link href="lib/user/img/favicon.ico" rel="icon">
+	<link href="https://fonts.googleapis.com/css?family=Montserrat:400,600&display=swap" rel="stylesheet">
+	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+	<link href="lib/user/css/style.css" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&display=swap" rel="stylesheet">
+	<link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<nav id="navbar-header" class="navbar navbar-expand-lg">
-    <div class="container">
-        <a class="navbar-brand navbar-brand-center d-flex align-items-center p-0 only-mobile" href="/index.do">
-            <img src="lib/user/img/logo.png" alt="">
-        </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="lnr lnr-menu"></span>
-        </button>
+<div class="brand">
+	<div class="container">
+		<div class="row align-items-center">
+			<div class="col-lg-6 col-md-4">
+				<div class="b-logo">
+					<a href="index.html"> <img src="lib/user/img/logo.png" alt="Logo">
+					</a>
+				</div>
+			</div>
+			<div class="col-lg-6 col-md-4">
+				<div class="b-search">
+					<input type="text" placeholder="Search">
+					<button>
+						<i class="fa fa-search"></i>
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="nav-bar">
+	<div class="container">
+		<nav class="navbar navbar-expand-md bg-dark navbar-dark">
+			<a href="#" class="navbar-brand">MENU</a>
+			<button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+				<span class="navbar-toggler-icon"></span>
+			</button>
 
-        <div class="collapse navbar-collapse justify-content-between" id="navbarSupportedContent">
-            <ul class="navbar-nav d-flex justify-content-between">
-                <li class="nav-item only-desktop">
-                    <a class="nav-link" id="side-nav-open" href="#">
-                        <span class="lnr lnr-menu"></span>
-                    </a>
-                </li>
-                <div class="d-flex flex-lg-row flex-column">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="about.html">About</a>
-                    </li>
-
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                          Special Dishes
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                          <a class="dropdown-item" href="special-dishes.html">Beef Steak Sauce</a>
-                          <a class="dropdown-item" href="special-dishes.html">Salmon Zucchini</a>
-                        </div>
-                    </li>
-                </div>
-            </ul>
-            
-            <a class="navbar-brand navbar-brand-center d-flex align-items-center only-desktop" href="/index.do">
-                <img src="lib/user/img/logo.png" alt="">
-            </a>
-            <ul class="navbar-nav d-flex justify-content-between">
-                <div class="d-flex flex-lg-row flex-column">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="menu.html">Menu</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="team.html">Team</a>
-                    </li>
-
-                    <li class="nav-item dropdown">
-                        <a class="nav-link" href="reservation.html">Reservation</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link" href="/login.do">login</a>
-                    </li>
-                </div>
-                <li class="nav-item">
-                    <a id="side-search-open" class="nav-link" href="#">
-                        <span class="lnr lnr-magnifier"></span>
-                    </a>
-                </li>
-            </ul>
-        </div>
-    </div>
-</nav>		
+			<div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+				<div class="navbar-nav mr-auto">
+					<a href="/index.do" class="nav-item nav-link active">Home</a>
+					<div class="nav-item dropdown">
+						<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Dropdown</a>
+						<div class="dropdown-menu">
+							<a href="#" class="dropdown-item">Sub Item 1</a>
+							<a href="#" class="dropdown-item">Sub Item 2</a>
+						</div>
+					</div>
+					<a href="single-page.html" class="nav-item nav-link">Single Page</a>
+					<a href="contact.html" class="nav-item nav-link">Contact Us</a>
+					<a href="/login.do" class="nav-item nav-link">로그인</a>
+				</div>
+			</div>
+		</nav>
+	</div>
+</div>
   
