@@ -19,13 +19,8 @@
 	<link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&display=swap" rel="stylesheet">
 	<link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 	<link rel="stylesheet" href="lib/board/assets/css/fontawesome.css">
-	<link rel="stylesheet" href="lib/board/assets/css/templatemo-sixteen.css">
+	<link rel="stylesheet"href="lib/board/assets/css/templatemo-sixteen.css">
 	<link rel="stylesheet" href="lib/board/assets/css/owl.css">
-	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
-	<script src="lib/user/lib/easing/easing.min.js"></script>
-	<script src="lib/user/lib/slick/slick.min.js"></script>
-	<script src="lib/user/js/main.js"></script>
 	<script src="lib/board/vendor/jquery/jquery.min.js"></script>
 	<script src="lib/board/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 	<script src="lib/board/assets/js/custom.js"></script>
@@ -111,36 +106,20 @@
 					</div>
 				</div>
 				<div class="col-md-6 tn-right">
-					<div class="row">
+					<div class="row tn-slider">
 						<div class="col-md-6">
 							<div class="tn-img">
-								<img src="lib/user/img/news-350x223-1.jpg" />
+								<img src="lib/user/img/news-450x350-1.jpg" />
 								<div class="tn-title">
-									<a href="">[브랜드]갈비탕</a>
+									<a href="">이분은 누구</a>
 								</div>
 							</div>
 						</div>
 						<div class="col-md-6">
 							<div class="tn-img">
-								<img src="lib/user/img/news-350x223-2.jpg" />
+								<img src="lib/user/img/news-450x350-2.jpg" />
 								<div class="tn-title">
-									<a href="">[브랜드]삼겹살</a>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-6">
-							<div class="tn-img">
-								<img src="lib/user/img/news-350x223-3.jpg" />
-								<div class="tn-title">
-									<a href="">[브랜드]오징어볶음</a>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-6">
-							<div class="tn-img">
-								<img src="lib/user/img/news-350x223-4.jpg" />
-								<div class="tn-title">
-									<a href="">[브랜드]미나리</a>
+									<a href="">책상</a>
 								</div>
 							</div>
 						</div>
@@ -739,5 +718,10 @@
 		</div>
 	</div>
 	<a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+	<script src="lib/user/lib/easing/easing.min.js"></script>
+	<script src="lib/user/lib/slick/slick.min.js"></script>
+	<script src="lib/user/js/main.js"></script>
 </body>
 </html>
