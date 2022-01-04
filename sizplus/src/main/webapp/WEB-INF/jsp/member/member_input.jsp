@@ -2,8 +2,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-
     <meta charset="utf-8">
+    
+    <!-- 여기밑에부터 고치고  -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Resto - Restaurant Bootstrap 4 Template by GetTemplates.co</title>
     <meta name="description" content="Resto">

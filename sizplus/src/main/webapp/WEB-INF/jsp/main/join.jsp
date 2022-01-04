@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+   pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -7,92 +7,121 @@
 <title>Insert title here</title>
 </head>
 
-<body>
-	<h1>회원 가입</h1>
-	<div class="join-form-box">
-		<form action="/member/member_input_proc.do" method="POST" class="join-form form2"	onsubmit="submitJoinForm(this); return false;">
-		
-			<input type="hidden" name="loginPwReal">
-			<div class="form-row">
-				<div class="label">아이디</div>
-				<div class="input">
-					<!-- member_id(박스) 라는 명칭으로 사용자가 입력한 값(물품)을 자바로 넘겨줄꺼임 -->
-					<input type="text" name="member_id" value="" maxlength="20"  placeholder="id 입력">
-				</div>
-			</div>
-			<div class="form-row">
-				<div class="label">비밀번호</div>
-				<div class="input">
-					<input type="password" name="member_pw" value="" maxlength="20"
-						placeholder="password 입력">
-				</div>
-			</div>
-<!-- 			<div class="form-row"> -->
-<!-- 				<div class="label">비밀번호 확인</div> -->
-<!-- 				<div class="input"> -->
-<!-- 					<input type="password" name="loginPwConfirm" maxlength="20" -->
-<!-- 						placeholder="password 확인 입력"> -->
-<!-- 				</div> -->
-<!-- 			</div> -->
-			<div class="form-row">
-				<div class="input flex-jc-c">
-					<button type="submit" value="완료">완료</button>
-					<button type="button" value="취소" onClick="alert('회원가입이 취소되었습니다.')">
-						<a href="/blog/s/home/main">취소</a>
-					</button>
-				</div>
-			</div>
-		</form>
-	</div>
+<style>
 
-	<!-- 비밀번호 암호화 등 -->
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/js-sha256/0.9.0/sha256.min.js"></script>
-	<script>
-
-	var joinFormSubmitted = false;
-
-	function submitJoinForm(form) {
-		if (joinFormSubmitted) {
-			alert('처리 중입니다.');
-			return;
-		}
-
-		form.loginPw.value = form.loginPw.value.trim();
-		if (form.loginPw.value.length == 0) {
-			alert('비밀번호를 입력해주세요.');
-			form.loginPw.focus();
-
-			return;
-		}
-
-		<!-- 입력된 비밀번호(loginPw)와 확인(loginPwConfirm) 일치하는지 체크 )-->
-		form.loginPwConfirm.value = form.loginPwConfirm.value.trim();
-		if (form.loginPwConfirm.value.length == 0) {
-			alert('비밀번호를 입력해주세요.');
-			form.loginPw.focus();
-
-			return;
-		}
-		
-		if (form.loginPwConfirm.value != form.loginPw.value ) {
-			alert('로그인 비밀번호 확인이 일치하지 않습니다.');
-			form.loginPwConfirm.focus();
-
-			return;
-		}
-		
-		<!-- 패스워드 함호화 -->
-		form.loginPwReal.value = sha256(form.loginPw.value);
-		form.loginPw.value = '';
-		form.loginPwConfirm.value = form.loginPw.value;
-
-		form.submit();
-		joinFormSubmitted = true;
-	}
+   * {
+       margin:0; padding: 0;
+   }
     
-</script>
+   body {
+      background-color: #F5F6F7;
+   }
+   
+    div { 
+       margin-top: 60px;margin-left: 38%;
+    }
+    
+    ul,li { 
+       list-style: none;
+    }
+            
+    li {
+    margin-bottom: 20px; text-align: left;
+    }
+           
+    .box {
+    width: 450px; height: 50px; border: 1px solid #666; padding: 10px;
+    }
+            
+    .pbox {
+    width: 120px; height: 50px; border: 1px solid #666; padding: 10px;
+    }
+            
+    .necessary {
+    font-size: small; color:red;
+    }
+            
+    button {
+    background:#00C850; color:white; width: 450px; border: 1px solid #666; height:50px; font-size: x-large;
+    }
+ 
+</style>
+        
+
+</head>
+
+<body>
+
+<div>
+      <ul>
+           <li>
+           <span >아이디 </span>
+           <br>
+           <input type = "text" placeholder = "아이디를 입력하세요" class = 'box'/>
+           <br>
+            <span class = 'necessary' >필수 정보입니다.</span>
+           </li>
+           
+            <li>
+            <span >패스워드 </span>
+            <br>
+            <input type = "password" placeholder = "패스워드를 입력하세요" class = 'box'/>
+            <br>
+            <span class = 'necessary' >필수 정보입니다.</span>
+            </li>
+            
+            <li>
+            <span >패스워드 확인 </span>
+            <br>
+            <input type = "password" placeholder = "다시 패스워드를 입력하세요" class = 'box'/>
+            <br>
+            <span class = 'necessary' >필수 정보입니다.</span>
+            </li>
+            
+            
+            <li>
+           <span >닉네임 </span>
+           <br>
+           <input type = "text" placeholder = "사용하실 닉네임을 입력하세요" class = 'box'/>
+           </li>
+            
+            
+            
+            <li>
+            <span >생년월일</span>
+            <br>
+            <input type = "date" placeholder = "생년월일을 입력하세요." class = 'box'/>
+            <br>
+            <span class = 'necessary' >태어난 년도 4자리를 정확하게 입력하세요.</span>
+            </li>
+            
+            <li>
+            <span >전화번호</span>
+            <br>
+            <input type = "text" class = 'pbox' maxlength="3" /> - <input type = "text" class = 'pbox' maxlength="4" /> - <input type = "text" class = 'pbox' maxlength="4" />
+            <br>
+            <span class = 'necessary' >필수 정보입니다.</span>
+            </li>
+            
+            <li>
+            <span >성별</span>
+            <br>  남자<input type ="radio" name="gender"/>  여자<input type="radio" name="gender" />
+            </li>
+            
+            <li><span >가입경로</span>
+            <br>
+            <input type="checkbox" />인터넷
+            <input type="checkbox"/>어플
+            <input type="checkbox"/>광고
+            <input type="checkbox" />지인
+            <input type="checkbox" />유튜브
+            <br>
+            <span class = 'necessary' >중복 체크 가능.</span>
+            </li>
+            
+            <li><button>가입하기</button></li>
+        </ul>
+</div>
 
 </body>
-
 </html>
