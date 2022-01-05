@@ -11,16 +11,16 @@
 	<link href="https://fonts.googleapis.com/css?family=Montserrat:400,600&display=swap" rel="stylesheet">
 	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
-	<link href="lib/user/css/style.css" rel="stylesheet">
+	<link href="/lib/user/css/style.css" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&display=swap" rel="stylesheet">
-	<link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	<link href="/lib/board/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <div class="brand">
 	<div class="container">
 		<div class="row align-items-center">
 			<div class="col-lg-6 col-md-4">
 				<div class="b-logo">
-					<a href="index.html"> <img src="lib/user/img/logo.png" alt="Logo">
+					<a href="/index.do"> <img src="/lib/user/img/logo.png" alt="Logo">
 					</a>
 				</div>
 			</div>
@@ -54,7 +54,7 @@
 						</div>
 					</div>
 					<a href="single-page.html" class="nav-item nav-link">Single Page</a>
-					<a href="contact.html" class="nav-item nav-link">Contact Us</a>
+					<a href="/board/board_list.do" class="nav-item nav-link">모두의 레시피</a>
 					<a href="/login.do" class="nav-item nav-link">로그인</a>
 				</div>
 			</div>

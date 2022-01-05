@@ -12,7 +12,7 @@
 	<link href="lib/user/lib/slick/slick.css" rel="stylesheet">
 	<link href="lib/user/lib/slick/slick-theme.css" rel="stylesheet">
 	<link rel="stylesheet" href="lib/board/assets/css/fontawesome.css">
-	<link rel="stylesheet"href="lib/board/assets/css/templatemo-sixteen.css">
+	<link rel="stylesheet" href="lib/board/assets/css/templatemo-sixteen.css">
 	<link rel="stylesheet" href="lib/board/assets/css/owl.css">
 	<script src="lib/board/vendor/jquery/jquery.min.js"></script>
 	<script src="lib/board/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -216,7 +216,7 @@
 				<div class="col-md-6">
 					<ul class="nav nav-pills nav-justified">
 						<li class="nav-item">
-							<a class="nav-link active" data-toggle="pill" href="#featured">자유게시판</a>
+							<a class="nav-link active" data-toggle="pill" href="#featured">모두의 레시피</a>
 						</li>
 						<li class="nav-item">
 							<a class="nav-link" data-toggle="pill" href="#popular">라이프스타일</a></li>

@@ -30,7 +30,6 @@ public class MemberDAO extends AbstractDAO{
 	//AbstractDAO를 호출하지 않고 SqlSessionTemplate 직접 사용하여 쿼리 조회
 	public MemberVO selectUserLoginView(MemberVO memberVO) throws Exception{
 		return sqlSession.selectOne("member.selectUserLoginView", memberVO);
-		
 	}
 
 }
