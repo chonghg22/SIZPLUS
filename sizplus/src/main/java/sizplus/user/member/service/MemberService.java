@@ -13,5 +13,6 @@ public interface MemberService {
 	int updateMemberProc(Map<String, Object> map) throws Exception;
 	
 	MemberVO selectUserLoginView(MemberVO memberVO) throws Exception;
-
+	
+	
 }

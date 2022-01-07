@@ -5,8 +5,8 @@
 	<title>Login V1</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" type="text/css" href="lib/login/css/main.css">
-	<link rel="stylesheet" type="text/css" href="lib/login/css/user_bottom.css">
+	<link rel="stylesheet" type="text/css" href="/lib/login/css/main.css">
+	<link rel="stylesheet" type="text/css" href="/lib/login/css/user_bottom.css">
 </head>
 <body>
 	<%@ include file="/WEB-INF/jsp/userLayout/top.jsp" %>

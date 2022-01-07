@@ -43,8 +43,8 @@
                       <div class="product-item">
                         <a href="#"><img src="/lib/board/assets/images/product_01.jpg" alt=""></a>
                         <div class="down-content">
-                          <a href="#"><h4>Tittle goes here</h4></a>
-                          <h6>$18.25</h6>
+                          <a href="#"><h4>순두부찌개</h4></a>
+<!--                           <h6>$18.25</h6> -->
                           <p>Lorem ipsume dolor sit amet, adipisicing elite. Itaque, corporis nulla aspernatur.</p>
                           <ul class="stars">
                             <li><i class="fa fa-star"></i></li>
@@ -52,8 +52,8 @@
                             <li><i class="fa fa-star"></i></li>
                             <li><i class="fa fa-star"></i></li>
                             <li><i class="fa fa-star"></i></li>
+                          	<li><span>Reviews (123)</span></li>
                           </ul>
-                          <span>Reviews (12)</span>
                         </div>
                       </div>
                     </div>

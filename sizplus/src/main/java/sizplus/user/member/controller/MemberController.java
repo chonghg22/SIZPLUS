@@ -39,11 +39,30 @@ public class MemberController {
 		map.put("memberId", commandMap.get("member_id").toString());
 		//이용자가 입력한 비밀번호값은 암호화 처리 하여 memberPw라는 변수에 담음
 		map.put("memberPw", CommonUtil.hexSha256(commandMap.get("member_pw").toString()));
+		
+		map.put("memberPwc", commandMap.get("member_pwc").toString());
+		map.put("memberNickname", commandMap.get("member_nickname").toString());
+		map.put("memberPhoneNum", commandMap.get("member_phone_num").toString());
+		map.put("memberBirth", commandMap.get("member_birth").toString());
+		if(commandMap.get("member_gender") == null) {
+			map.put("memberGender", null);
+		}else {
+			map.put("memberGender", commandMap.get("member_gender").toString());
+		}
+		if(commandMap.get("member_way") == null) {
+			map.put("memberWay", null);
+		}else {
+			map.put("memberWay", commandMap.get("member_way").toString());
+		}
+		
 		int result = memberService.insertMemberProc(map);
+
+		
 		//실행 완료 후 login.do 메소드로 이동
     	return "redirect:/login.do";
     	//추가 개발사항
     	//2.추가로 넣을 데이터 설계 (이메일,연락처,닉네임 등등)
+    	//이미지 넣기 
     	//4.아이디 중복 체크
     }
 	
