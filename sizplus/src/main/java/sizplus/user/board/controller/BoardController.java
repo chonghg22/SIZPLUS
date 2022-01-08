@@ -18,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import sizplus.common.common.CommandMap;
 import sizplus.common.common.CommonUtil;
+import sizplus.common.common.PaginationInfo;
 import sizplus.user.board.service.BoardService;
 
 @Controller
@@ -40,4 +41,48 @@ public class BoardController {
     	//2.추가로 넣을 데이터 설계 (이메일,연락처,닉네임 등등)
     	//4.아이디 중복 체크
     }
+	
+	//모두의 꿀팁
+		@RequestMapping(value="/board/userTip_list.do")
+	    public String selectUserTipList(Map<String, Object> map, ModelMap model, HttpServletResponse response, HttpServletRequest request, CommandMap commandMap) throws Exception{
+			//login.jsp에서 보낸 값들이 commandMap으로 들어옴
+			int page = 1;
+			if(commandMap.get("page") != null) {
+				page = Integer.parseInt(commandMap.get("page").toString());
+			}
+			
+			int viewCount = 10;
+			if(commandMap.get("viewCount") != null) {
+				viewCount = Integer.parseInt(commandMap.get("viewCount").toString());
+			}
+			map.put("page", page);
+			map.put("viewCount", viewCount);
+			
+
+			int totCnt = boardService.selectUserTipCnt(commandMap); //게시글 수
+
+			/** paging setting */
+			PaginationInfo paginationInfo = new PaginationInfo();
+			paginationInfo.setCurrentPageNo(page);
+			paginationInfo.setRecordCountPerPage(viewCount);
+			paginationInfo.setPageSize(10);
+			paginationInfo.setTotalRecordCount(totCnt);
+			
+			map.put("firstIndex", paginationInfo.getFirstRecordIndex());
+			map.put("recordCountPerPage", paginationInfo.getRecordCountPerPage());
+
+			List<Map<String, Object>> list = boardService.selectUserTipList(map);
+			
+			model.addAttribute("commandMap", commandMap); //페이징 정보
+			model.addAttribute("paginationInfo", paginationInfo); //페이징 정보
+			model.addAttribute("listNo", (totCnt - ((page - 1)* paginationInfo.getRecordCountPerPage()))); //페이지 No 의 시작 값 가상의 넘버링
+			model.addAttribute("list", list);
+			//실행 완료 후 login.do 메소드로 이동
+	    	return "board/userTip_list";
+	    	//추가 개발사항
+	    	//2.추가로 넣을 데이터 설계 (이메일,연락처,닉네임 등등)
+	    	//4.아이디 중복 체크
+	    }
+	
+	
 }

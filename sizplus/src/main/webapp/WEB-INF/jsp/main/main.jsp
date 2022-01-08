@@ -221,7 +221,7 @@
 						<li class="nav-item">
 							<a class="nav-link" data-toggle="pill" href="#popular">라이프스타일</a></li>
 						<li class="nav-item">
-							<a class="nav-link" data-toggle="pill" href="#latest">공지사항</a>
+							<a class="nav-link" data-toggle="pill" href="#latest">모두의 꿀팁</a>
 						</li>
 					</ul>
 

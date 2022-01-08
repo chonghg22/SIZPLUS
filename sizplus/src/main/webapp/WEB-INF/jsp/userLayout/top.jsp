@@ -47,14 +47,14 @@
 				<div class="navbar-nav mr-auto">
 					<a href="/index.do" class="nav-item nav-link active">Home</a>
 					<div class="nav-item dropdown">
-						<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Dropdown</a>
+						<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">모두의 게시판</a>
 						<div class="dropdown-menu">
-							<a href="#" class="dropdown-item">Sub Item 1</a>
-							<a href="#" class="dropdown-item">Sub Item 2</a>
+							<a href="/board/board_list.do" class="dropdown-item">모두의 레시피</a>
+							<a href="#" class="dropdown-item">라이프 스타일</a>
+							<a href="/board/userTip_list.do" class="dropdown-item">모두의 꿀팁</a>
 						</div>
 					</div>
 					<a href="single-page.html" class="nav-item nav-link">Single Page</a>
-					<a href="/board/board_list.do" class="nav-item nav-link">모두의 레시피</a>
 					<a href="/login.do" class="nav-item nav-link">로그인</a>
 				</div>
 			</div>

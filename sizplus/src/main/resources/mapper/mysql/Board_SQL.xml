@@ -25,4 +25,32 @@
 		limit 10;
 	</select>
 	
+	<select id="selectUserTipList" parameterType="hashmap" resultType="hashmap">
+		select
+			a.seq,
+			a.bbs_id,
+			a.open_yn,
+			a.top_yn,
+			a.type_etc,
+			a.title,
+			a.contents,
+			a.file_id,
+			a.input_id,
+			a.input_nm,
+			a.input_date,
+			a.edit_id,
+			a.edit_nm,
+			a.edit_date,
+			a.hit,
+			a.orders
+		from e_board a
+		limit #{firstIndex}, #{recordCountPerPage}
+	</select>
+	
+	<select id="selectUserTipCnt" resultType="int">
+		select
+			count(*) cnt
+		from e_board
+	</select>
+	
 </mapper>
