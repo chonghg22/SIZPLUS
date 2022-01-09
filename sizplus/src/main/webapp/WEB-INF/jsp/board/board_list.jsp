@@ -41,20 +41,30 @@
                     
                     <div class="col-lg-3 col-md-3 all des" style="position: absolute; left: 0%; top: 0px;">
                       <div class="product-item">
-                        <a href="#"><img src="/lib/board/assets/images/product_01.jpg" alt=""></a>
+                        <a href="#"><img src="/lib/board/assets/images/tofu_main.jpg" alt=""></a>
                         <div class="down-content">
-                          <a href="#"><h4>순두부찌개</h4></a>
-<!--                           <h6>$18.25</h6> -->
-                          <p>Lorem ipsume dolor sit amet, adipisicing elite. Itaque, corporis nulla aspernatur.</p>
+                          <a href="#"><h4>참치 순두부찌개</h4></a>
+
+                          <p>이걸? 넣어서??</p>
+                        
+                          <p>전문점 뺨치는 간단 참치 순두부찌개 양념 레시피!</p>
+                          
                           <ul class="stars">
                             <li><i class="fa fa-star"></i></li>
                             <li><i class="fa fa-star"></i></li>
                             <li><i class="fa fa-star"></i></li>
                             <li><i class="fa fa-star"></i></li>
                             <li><i class="fa fa-star"></i></li>
-                          	<li><span>Reviews (123)</span></li>
+                         	
+                          	 <li><span>평점</span></li>
+             
                           </ul>
+                    
                         </div>
+                        <li><span>조회수 (34)</span></li>
+                         <li><span>추천수 (24)</span></li>
+                        
+                          <li><span>댓글 (14)</span</li>
                       </div>
                     </div>
                     <div class="col-lg-3 col-md-3 all dev" style="position: absolute; left: 33.3333%; top: 0px;">
@@ -71,7 +81,7 @@
                             <li><i class="fa fa-star"></i></li>
                             <li><i class="fa fa-star"></i></li>
                           </ul>
-                          <span>Reviews (24)</span>
+                         <span>Reviews (123)</span>
                         </div>
                       </div>
                     </div>

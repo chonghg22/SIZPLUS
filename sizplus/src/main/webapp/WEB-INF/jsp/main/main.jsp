@@ -216,12 +216,13 @@
 				<div class="col-md-6">
 					<ul class="nav nav-pills nav-justified">
 						<li class="nav-item">
-							<a class="nav-link active" data-toggle="pill" href="#featured">모두의 레시피</a>
+							<a class="nav-link active" data-toggle="pill" href="#featured">따끈따끈 레시피</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" data-toggle="pill" href="#popular">라이프스타일</a></li>
+							<a class="nav-link" data-toggle="pill" href="#popular">라이프 스타일</a>
+							</li>
 						<li class="nav-item">
-							<a class="nav-link" data-toggle="pill" href="#latest">공지사항</a>
+							<a class="nav-link" data-toggle="pill" href="#latest">나만 알면 억울해</a>
 						</li>
 					</ul>
 
@@ -230,26 +231,26 @@
 							<a href="products.html" style="padding-left: 415px;">더보기 <i class="fa fa-angle-right"></i></a><br>
 							<div class="tn-news">
 								<div class="tn-img">
-									<img src="lib/user/img/news-350x223-1.jpg" />
+									<img src="lib/user/img/tofu_main.jpg" />
 								</div>
 								<div class="tn-title">
-									<a href="">Lorem ipsum dolor sit amet</a>
+									<a href="">못참아 이건! 참치 순두부찌개 레시피</a>
 								</div>
 							</div>
 							<div class="tn-news">
 								<div class="tn-img">
-									<img src="lib/user/img/news-350x223-2.jpg" />
+									<img src="lib/user/img/hodduck_main.jpg" />
 								</div>
 								<div class="tn-title">
-									<a href="">Lorem ipsum dolor sit amet</a>
+									<a href="">겨울에만 먹는 호떡 하지만 이번엔 메이플이다!</a>
 								</div>
 							</div>
 							<div class="tn-news">
 								<div class="tn-img">
-									<img src="lib/user/img/news-350x223-3.jpg" />
+									<img src="lib/user/img/세발나물_350x223.jpg" />
 								</div>
 								<div class="tn-title">
-									<a href="">Lorem ipsum dolor sit amet</a>
+									<a href="">싱그러운 봄향기를 미리 느끼는 세발나물 무침</a>
 								</div>
 							</div>
 						</div>
@@ -260,7 +261,7 @@
 									<img src="lib/user/img/news-350x223-4.jpg" />
 								</div>
 								<div class="tn-title">
-									<a href="">Lorem ipsum dolor sit amet</a>
+									<a href="">OOO을 다녀왔습니다!</a>
 								</div>
 							</div>
 							<div class="tn-news">
@@ -268,7 +269,7 @@
 									<img src="lib/user/img/news-350x223-5.jpg" />
 								</div>
 								<div class="tn-title">
-									<a href="">Lorem ipsum dolor sit amet</a>
+									<a href="">OOO "내돈내산" 후기</a>
 								</div>
 							</div>
 							<div class="tn-news">
@@ -276,7 +277,7 @@
 									<img src="lib/user/img/news-350x223-1.jpg" />
 								</div>
 								<div class="tn-title">
-									<a href="">Lorem ipsum dolor sit amet</a>
+									<a href="">걱정말고 일단 가보세요 OOO!</a>
 								</div>
 							</div>
 						</div>
@@ -284,26 +285,29 @@
 							<a href="products.html" style="padding-left: 415px;">더보기 <i class="fa fa-angle-right"></i></a><br>
 							<div class="tn-news">
 								<div class="tn-img">
-									<img src="lib/user/img/news-350x223-2.jpg" />
+									<img src="lib/user/img/불고기맛집_350x223.jpg" />
 								</div>
+								
+                <!-- // 여기서 [지역]은 말머리나 카테고리로 -->
+
 								<div class="tn-title">
-									<a href="">Lorem ipsum dolor sit amet</a>
+									<a href="">[서울] 불고기맛집 "OOO"</a>
 								</div>
 							</div>
 							<div class="tn-news">
 								<div class="tn-img">
-									<img src="lib/user/img/news-350x223-3.jpg" />
+									<img src="lib/user/img/제주해장국맛집_350x223.jpg" />
 								</div>
 								<div class="tn-title">
-									<a href="">Lorem ipsum dolor sit amet</a>
+									<a href="">[제주] 해장국은 여기 "OOO"</a>
 								</div>
 							</div>
 							<div class="tn-news">
 								<div class="tn-img">
-									<img src="lib/user/img/news-350x223-4.jpg" />
+									<img src="lib/user/img/인천조개구이맛집_350x223.jpg" />
 								</div>
 								<div class="tn-title">
-									<a href="">Lorem ipsum dolor sit amet</a>
+									<a href="">[인천] 조개구이 원조 "OOO"</a>
 								</div>
 							</div>
 						</div>
