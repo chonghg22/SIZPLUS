@@ -8,7 +8,7 @@
         <property name="driverClassName" value="com.mysql.jdbc.Driver" />
         <property name="url" value="jdbc:mysql://127.0.0.1:3306/eplus?useUnicode=true&amp;characterEncoding=UTF8" />
 		<property name="username" value="root" />
-		<property name="password" value="1234" />
+		<property name="password" value="admin" />
     </bean>
     
     <bean id="dataSource" class="net.sf.log4jdbc.Log4jdbcProxyDataSource">

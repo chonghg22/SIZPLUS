@@ -9,6 +9,8 @@ public interface BoardService {
 
 	List<Map<String, Object>> selectBoardList(CommandMap commandMap) throws Exception;
 	
+	List<Map<String, Object>> selectUserTipList(Map<String, Object> commandMap) throws Exception;
 	
+	int selectUserTipCnt(CommandMap commandMap) throws Exception;
 
 }
