@@ -16,12 +16,13 @@
 			<div class="row">
 				<div class="col-lg-3 col-md-6">
 					<div class="footer-widget">
-						<h3 class="title">Get in Touch</h3>
+						<h4 class="title"> +시즈닝 플러스</h4>
 						<div class="contact-info">
-							<p><i class="fa fa-map-marker"></i>123 News Street, NY, USA</p>
-							<p><i class="fa fa-envelope"></i>info@example.com</p>
-							<p><i class="fa fa-phone"></i>+123-456-7890</p>
+							<p><i class="fa fa-map-marker"></i> 서울시 은평구 은평로</p>
+							<p><i class="fa fa-envelope"></i> wows95@naver.com</p>
+							<p><i class="fa fa-phone"></i> +010-7549-0000</p>
 							<div class="social">
+							<!-- 여기 호버 색깔 변경 -->
 								<a href=""><i class="fab fa-twitter"></i></a>
 								<a href=""><i class="fab fa-facebook-f"></i></a>
 								<a href=""><i class="fab fa-linkedin-in"></i></a>
@@ -34,39 +35,40 @@
 
 				<div class="col-lg-3 col-md-6">
 					<div class="footer-widget">
-						<h3 class="title">Useful Links</h3>
+						<h3 class="title"> 인기 카테고리</h3>
 						<ul>
-							<li><a href="#">Lorem ipsum</a></li>
-							<li><a href="#">Pellentesque</a></li>
-							<li><a href="#">Aenean vulputate</a></li>
-							<li><a href="#">Vestibulum sit amet</a></li>
-							<li><a href="#">Nam dignissim</a></li>
+							<li><a href="#"> HOT한 먹방 영상</a></li>
+							<li><a href="#"> 이달의 BEST 조리도구</a></li>
+							<li><a href="#"> HOT한 요리 영상</a></li>
+							<li><a href="#"> 따끈따끈 레시피</a></li>
+							<li><a href="#"> 자유게시판</a></li>
 						</ul>
 					</div>
 				</div>
 
 				<div class="col-lg-3 col-md-6">
 					<div class="footer-widget">
-						<h3 class="title">Quick Links</h3>
+						<h3 class="title"> 맞다! 이거 볼려고</h3>
 						<ul>
-							<li><a href="#">Lorem ipsum</a></li>
-							<li><a href="#">Pellentesque</a></li>
-							<li><a href="#">Aenean vulputate</a></li>
-							<li><a href="#">Vestibulum sit amet</a></li>
-							<li><a href="#">Nam dignissim</a></li>
+							<li><a href="#"> 핫한 맛집</a></li>
+							<li><a href="#"> (알뜰)추천, (살뜰)비교</a></li>
+							<li><a href="#"> 라이프 스타일</a></li>
+							<li><a href="#"> 맛집 리뷰</a></li>
+							<li><a href="#"> 요리 Q&A</a></li>
 						</ul>
 					</div>
 				</div>
 
 				<div class="col-lg-3 col-md-6">
 					<div class="footer-widget">
-						<h3 class="title">Newsletter</h3>
+						<h3 class="title">의견제출</h3>
 						<div class="newsletter">
-							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-								Vivamus sed porta dui. Class aptent taciti sociosqu</p>
+							<p>시즈닝 플러스에서의
+							 <br>불편사항이나 의견이 있으시다면
+							<br>여기에 남겨주세요</p>
 							<form>
-								<input class="form-control" type="email" placeholder="Your email here">
-								<button class="btn">Submit</button>
+								<input class="form-control" type="email" placeholder="의견을 적어주세요">
+								<button class="btn">접수</button>
 							</form>
 						</div>
 					</div>
@@ -80,12 +82,12 @@
 	<div class="footer-menu">
 		<div class="container">
 			<div class="f-menu">
-				<a href="">Terms of use</a>
-				<a href="">Privacy policy</a>
-				<a href="">Cookies</a>
-				<a href="">Accessibility help</a>
-				<a href="">Advertise with us</a>
-				<a href="/contact.do">Contact us</a>
+				<a href="">회사소개</a>
+				<a href="">개인정보취급방침</a>
+				<a href="">이용약관</a>
+				<a href="">사업자등록번호</a>
+				<a href="">광고, 제휴문의</a>
+				<a href="/contact.do">찾아오시는 길</a>
 			</div>
 		</div>
 	</div>
@@ -97,14 +99,12 @@
 			<div class="row">
 				<div class="col-md-6 copyright">
 					<p>
-						Copyright &copy; <a href="https://htmlcodex.com">HTML Codex</a>.
+						Copyright &copy; <a href="https://htmlcodex.com">SeasoningPlus</a>.
 						All Rights Reserved
 					</p>
 				</div>
 				<div class="col-md-6 template-by">
-					<p>
-						Template By <a href="https://htmlcodex.com">HTML Codex</a>
-					</p>
+					<!--  지워야할듯 -->
 				</div>
 			</div>
 		</div>
