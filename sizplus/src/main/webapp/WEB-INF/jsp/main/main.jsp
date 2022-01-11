@@ -219,7 +219,7 @@
 				<div class="col-md-6">
 					<ul class="nav nav-pills nav-justified">
 						<li class="nav-item">
-							<a class="nav-link active" data-toggle="pill" href="#featured">따끈따끈 레시피</a>
+							<a class="nav-link active" data-toggle="pill" href="#featured">자유게시판</a>
 						</li>
 						<li class="nav-item">
 							<a class="nav-link" data-toggle="pill" href="#popular">라이프 스타일</a>
@@ -231,31 +231,44 @@
 
 					<div class="tab-content">
 						<div id="featured" class="container tab-pane active">
-							<a href="products.html" style="padding-left: 415px;">더보기 <i class="fa fa-angle-right"></i></a><br>
-							<div class="tn-news">
-								<div class="tn-img">
-									<img src="lib/user/img/tofu_main.jpg" />
-								</div>
+							<a href="/board/board_list.do" style="padding-left: 415px;">더보기 <i class="fa fa-angle-right"></i></a><br>
+							<div class="tn-news" style="margin-bottom: 19.5px;">
+								
 								<div class="tn-title">
 									<a href="">못참아 이건! 참치 순두부찌개 레시피</a>
 								</div>
+								
 							</div>
-							<div class="tn-news">
-								<div class="tn-img">
-									<img src="lib/user/img/hodduck_main.jpg" />
-								</div>
+							<div class="tn-news" style="margin-bottom: 19.5px;">
+								
 								<div class="tn-title">
-									<a href="">겨울에만 먹는 호떡 하지만 이번엔 메이플이다!</a>
+									<a href="">못참아 이건! 참치 순두부찌개 레시피</a>
 								</div>
+								
 							</div>
-							<div class="tn-news">
-								<div class="tn-img">
-									<img src="lib/user/img/세발나물_350x223.jpg" />
-								</div>
+							<div class="tn-news" style="margin-bottom: 19.5px;">
+								
 								<div class="tn-title">
-									<a href="">싱그러운 봄향기를 미리 느끼는 세발나물 무침</a>
+									<a href="">못참아 이건! 참치 순두부찌개 레시피</a>
 								</div>
+								
 							</div>
+							<div class="tn-news" style="margin-bottom: 19.5px;">
+								
+								<div class="tn-title">
+									<a href="">못참아 이건! 참치 순두부찌개 레시피</a>
+								</div>
+								
+							</div>
+							<div class="tn-news" style="margin-bottom: 19.5px;">
+								
+								<div class="tn-title">
+									<a href="">못참아 이건! 참치 순두부찌개 레시피</a>
+								</div>
+								
+							</div>
+				
+		
 						</div>
 						<div id="popular" class="container tab-pane fade">
 							<a href="products.html" style="padding-left: 415px;">더보기 <i class="fa fa-angle-right"></i></a><br>

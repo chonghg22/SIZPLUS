@@ -53,4 +53,18 @@
 		from e_board
 	</select>
 	
+	<insert id="insertFreeBoard">
+		insert into e_free_board(
+			nick_name,
+			title,
+			contents,
+			password
+		)values(
+			#{nickName},
+			#{title},
+			#{contents},
+			#{password}
+		)
+	</insert>
+	
 </mapper>

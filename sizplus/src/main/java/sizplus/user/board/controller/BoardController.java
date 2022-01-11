@@ -42,6 +42,42 @@ public class BoardController {
     	//4.아이디 중복 체크
     }
 	
+	
+	//자유게시판 글쓰기 페이지
+	@RequestMapping(value="/board/board_input.do")
+    public String insertFreeBoardList(ModelMap model, HttpServletResponse response, HttpServletRequest request, CommandMap commandMap) throws Exception{
+		
+		//실행 완료 후 input.do 메소드로 이동
+    	return "board/board_input";
+    
+    }
+	
+	//자유게시판 글쓰기 페이지
+	@RequestMapping(value="/board/board_input_proc.do")
+    public String insertFreeBoardProcList(Map<String, Object> map, ModelMap model, HttpServletResponse response, HttpServletRequest request, CommandMap commandMap) throws Exception{
+		
+		//jsp에서 작성한 input 태그의 name값을 CommandMap으로 가져옴 
+		commandMap.get("nick_name").toString();
+		commandMap.get("password").toString();
+		commandMap.get("title").toString();
+		commandMap.get("contents").toString();
+		System.out.println("이게뭐고");
+		map.put("nickName", commandMap.get("nick_name").toString());
+		map.put("password", commandMap.get("password").toString());
+		map.put("title", commandMap.get("title").toString());
+		map.put("contents", commandMap.get("contents").toString());
+		
+		int insertResult = boardService.insertFreeBoard(map);
+		
+		
+		//실행 완료 후 input.do 메소드로 이동
+		return "redirect:/board/board_list.do";
+    
+    }
+	
+	
+	
+	
 	//모두의 꿀팁
 		@RequestMapping(value="/board/userTip_list.do")
 	    public String selectUserTipList(Map<String, Object> map, ModelMap model, HttpServletResponse response, HttpServletRequest request, CommandMap commandMap) throws Exception{

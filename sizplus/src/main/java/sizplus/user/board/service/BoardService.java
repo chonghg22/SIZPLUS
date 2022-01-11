@@ -12,5 +12,7 @@ public interface BoardService {
 	List<Map<String, Object>> selectUserTipList(Map<String, Object> commandMap) throws Exception;
 	
 	int selectUserTipCnt(CommandMap commandMap) throws Exception;
+	
+	int insertFreeBoard(Map<String, Object> map) throws Exception;
 
 }

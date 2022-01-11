@@ -35,6 +35,7 @@ public class MemberController {
     public String insertMemberProc(ModelMap model, HttpServletResponse response, HttpServletRequest request, CommandMap commandMap) throws Exception{
 		//login.jsp에서 보낸 값들이 commandMap으로 들어옴
 		Map<String, Object> map = new  HashMap<String, Object>();
+		//jsp에서 자바스크립트로 무조건 입력하게 해놔서 별도로 if 구문 사용하지 않음
 		//이용자가 입력한 아이디 값은 commandMap을 통해서 값을 가져오고 그걸 다시 map에 memberId라는 변수에 담음
 		map.put("memberId", commandMap.get("member_id").toString());
 		//이용자가 입력한 비밀번호값은 암호화 처리 하여 memberPw라는 변수에 담음
@@ -44,19 +45,24 @@ public class MemberController {
 		map.put("memberNickname", commandMap.get("member_nickname").toString());
 		map.put("memberPhoneNum", commandMap.get("member_phone_num").toString());
 		map.put("memberBirth", commandMap.get("member_birth").toString());
+		
+		
+		//jsp에서 member_gender 값이 null 이면 에러가 떠서  member_gender가 null일경우 대체 값을 입력
 		if(commandMap.get("member_gender") == null) {
-			map.put("memberGender", null);
+			//대신 들어가는 값
+			map.put("memberGender", "대신 들어감");
+		//그게 아니고 memberGender 값이 null 아닐경우 jsp에서 보내주는 값을 저장
 		}else {
 			map.put("memberGender", commandMap.get("member_gender").toString());
 		}
 		if(commandMap.get("member_way") == null) {
-			map.put("memberWay", null);
+			map.put("memberWay", "대신 들어감");
 		}else {
+			//사용자가 입력한 값을 넣어줌
 			map.put("memberWay", commandMap.get("member_way").toString());
 		}
 		
 		int result = memberService.insertMemberProc(map);
-
 		
 		//실행 완료 후 login.do 메소드로 이동
     	return "redirect:/login.do";

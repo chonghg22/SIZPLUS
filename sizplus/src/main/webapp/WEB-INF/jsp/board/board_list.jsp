@@ -26,16 +26,6 @@
       <div class="container">
         <div class="row">
           <div class="col-md-12">
-            <div class="filters">
-              <ul>
-                  <li class="active" data-filter="*">한식</li>
-                  <li data-filter=".des" class="">중식</li>
-                  <li data-filter=".dev" class="">일식</li>
-                  <li data-filter=".gra" class="">양식</li>
-              </ul>
-            </div>
-          </div>
-          <div class="col-md-12">
             <div class="filters-content">
                 <div class="row grid" style="position: relative; height: 768.562px;">
                     

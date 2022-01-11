@@ -21,19 +21,21 @@ public class BoardDAO{
 	//AbstractDAO를 호출하지 않고 SqlSessionTemplate 직접 사용하여 쿼리 조회
 	public List<Map<String, Object>> selectBoardList(CommandMap commandMap) throws Exception{
 		return sqlSession.selectList("board.selectBoardList", commandMap);
-		
 	}
 	
 	//AbstractDAO를 호출하지 않고 SqlSessionTemplate 직접 사용하여 쿼리 조회
 	public List<Map<String, Object>> selectUserTipList(Map<String, Object> commandMap) throws Exception{
 		return sqlSession.selectList("board.selectUserTipList", commandMap);
-		
 	}
 	
 	//AbstractDAO를 호출하지 않고 SqlSessionTemplate 직접 사용하여 쿼리 조회
-		public int selectUserTipCnt(CommandMap commandMap) throws Exception{
-			return sqlSession.selectOne("board.selectUserTipCnt");
-			
-		}
+	public int selectUserTipCnt(CommandMap commandMap) throws Exception{
+		return sqlSession.selectOne("board.selectUserTipCnt");
+	}
+	
+	
+	public int insertFreeBoard(Map<String, Object> map) throws Exception{
+		return sqlSession.insert("board.insertFreeBoard", map);
+	}
 
 }

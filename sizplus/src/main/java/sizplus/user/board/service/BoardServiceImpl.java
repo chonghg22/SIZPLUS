@@ -35,5 +35,11 @@ public class BoardServiceImpl implements BoardService{
 		return boardDAO.selectUserTipCnt(commandMap);
 		
 	}
+	
+	@Override
+	public int insertFreeBoard(Map<String, Object> map) throws Exception {
+		return boardDAO.insertFreeBoard(map);
+		
+	}
 
 }
