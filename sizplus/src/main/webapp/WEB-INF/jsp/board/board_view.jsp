@@ -40,7 +40,14 @@
 	<input type="hidden" name="bbsId" value="" />
 	<div class="products">
 		<div class="container">
-			<h4><span>모두의 꿀팁</span><button style="float: right;" onclick="fn_list()">목록</button></h4>
+			<h4>
+			<c:if test="${commandMap.get('bbsId') eq 'free' }">
+			<span>자유게시판</span>
+			</c:if>
+			<c:if test="${commandMap.get('bbsId') eq 'userTip' }">
+			<span>모두의 꿀팁</span>
+			</c:if>
+			<button style="float: right;" onclick="fn_list()">목록</button></h4>
 			<div class="row">
 				<table class="works_table" style="width: 100%;">
 					<colgroup>

@@ -19,20 +19,14 @@ public class BoardServiceImpl implements BoardService{
 	private BoardDAO boardDAO;
 	
 	@Override
-	public List<Map<String, Object>> selectBoardList(CommandMap commandMap) throws Exception {
+	public List<Map<String, Object>> selectBoardList(Map<String, Object> commandMap) throws Exception {
 		return boardDAO.selectBoardList(commandMap);
 		
 	}
 	
 	@Override
-	public List<Map<String, Object>> selectUserTipList(Map<String, Object> commandMap) throws Exception {
-		return boardDAO.selectUserTipList(commandMap);
-		
-	}
-	
-	@Override
-	public int selectUserTipCnt(CommandMap commandMap) throws Exception {
-		return boardDAO.selectUserTipCnt(commandMap);
+	public int selectBoardCnt(CommandMap commandMap) throws Exception {
+		return boardDAO.selectBoardCnt(commandMap);
 		
 	}
 	

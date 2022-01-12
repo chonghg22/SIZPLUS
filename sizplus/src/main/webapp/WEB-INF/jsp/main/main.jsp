@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -213,6 +216,9 @@
 	<!-- Category News End-->
 
 	<!-- Tab News Start-->
+	<form name="listForm" id="listForm" method="post">
+		<input type="hidden" name="bbsId" value="" />
+	</form>
 	<div class="tab-news">
 		<div class="container">
 			<div class="row">
@@ -231,7 +237,7 @@
 
 					<div class="tab-content">
 						<div id="featured" class="container tab-pane active">
-							<a href="/board/board_list.do" style="padding-left: 415px;">더보기 <i class="fa fa-angle-right"></i></a><br>
+							<a href="#" onclick="fn_goBoard('free')" style="padding-left: 415px;">더보기 <i class="fa fa-angle-right"></i></a><br>
 							<div class="tn-news" style="margin-bottom: 19.5px;">
 								
 								<div class="tn-title">
@@ -298,7 +304,7 @@
 							</div>
 						</div>
 						<div id="latest" class="container tab-pane fade">
-							<a href="products.html" style="padding-left: 415px;">더보기 <i class="fa fa-angle-right"></i></a><br>
+							<a href="#" onclick="fn_goBoard('userTip')" style="padding-left: 415px;">더보기 <i class="fa fa-angle-right"></i></a><br>
 							<div class="tn-news">
 								<div class="tn-img">
 									<img src="/lib/user/img/불고기맛집_350x223.jpg" />
@@ -580,10 +586,18 @@
 	</div>
 	<%@ include file="/WEB-INF/jsp/userLayout/bottom.jsp" %>
 	<!--  -->
-	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
-	<script src="/lib/user/lib/easing/easing.min.js"></script>
-	<script src="/lib/user/lib/slick/slick.min.js"></script>
-	<script src="/lib/user/js/main.js"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+<script src="/lib/user/lib/easing/easing.min.js"></script>
+<script src="/lib/user/lib/slick/slick.min.js"></script>
+<script src="/lib/user/js/main.js"></script>
+<script>
+function fn_goBoard(bbsId) {
+	var frm = document.listForm;
+	frm.bbsId.value = bbsId;
+	frm.action = "/board/board_list.do";
+	frm.submit();
+}
+</script>
 </body>
 </html>

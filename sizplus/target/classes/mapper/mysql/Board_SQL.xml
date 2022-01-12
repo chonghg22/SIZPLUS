@@ -15,35 +15,18 @@
 			a.input_date,
 			a.edit_ip,
 			a.edit_date,
-			a.hit
-		from e_board a
-		limit 10;
-	</select>
-	
-	<select id="selectUserTipList" parameterType="hashmap" resultType="hashmap">
-		select
-			a.seq,
-			a.bbs_id,
-			a.open_yn,
-			a.title,
-			a.contents,
-			a.input_nm,
-			a.input_ip,
-			a.input_date,
-			a.edit_ip,
-			a.edit_date,
 			a.good_cnt,
 			a.hit
 		from e_board a
-		where bbs_id = 'userTip'
+		where bbs_id = #{bbsId}
 		limit #{firstIndex}, #{recordCountPerPage}
 	</select>
 	
-	<select id="selectUserTipCnt" resultType="int">
+	<select id="selectBoardCnt" resultType="int">
 		select
 			count(*) cnt
 		from e_board
-		where bbs_id = 'userTip'
+		where bbs_id = #{bbsId}
 	</select>
 	
 	<select id="selectBoardView" parameterType="hashmap" resultType="hashmap">
