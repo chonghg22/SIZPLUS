@@ -74,6 +74,7 @@ public class BoardController {
 	@RequestMapping(value="/board/board_input.do")
     public String insertFreeBoardList(ModelMap model, HttpServletResponse response, HttpServletRequest request, CommandMap commandMap) throws Exception{
 		
+		model.addAttribute("commandMap", commandMap); //페이징 정보
 		//실행 완료 후 input.do 메소드로 이동
     	return "board/board_input";
     
@@ -84,7 +85,7 @@ public class BoardController {
     public String insertFreeBoardProcList(Map<String, Object> map, ModelMap model, HttpServletResponse response, HttpServletRequest request, CommandMap commandMap) throws Exception{
 		
 		//jsp에서 작성한 input 태그의 name값을 CommandMap으로 가져옴 
-		map.put("bbsId", commandMap.get("bbs_id").toString());
+		map.put("bbsId", commandMap.get("bbsId").toString());
 		map.put("inputNm", commandMap.get("input_nm").toString());
 		map.put("password", CommonUtil.hexSha256(commandMap.get("password").toString()));
 		map.put("title", commandMap.get("title").toString());

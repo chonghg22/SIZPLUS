@@ -53,7 +53,7 @@
 			<c:if test="${commandMap.get('bbsId') eq 'userTip' }">
 			<span>모두의 꿀팁</span>
 			</c:if>
-			<button style="float: right;" onclick="fn_goInput();">글쓰기</button>
+			<button style="float: right;" onclick="fn_goInput('${commandMap.get('bbsId')}');">글쓰기</button>
 			</h4>
 			<div class="row">
 				<table class="works_table" style="width: 100%;">
@@ -125,8 +125,9 @@ function fn_egov_link_page(pageNo){
 }
 
 //등록페이지 이동
-function fn_goInput(){
+function fn_goInput(bbsId){
 	var frm = document.listForm;
+	frm.bbsId.value = bbsId;
 	frm.action = "/board/board_input.do";
 	frm.submit();
 }

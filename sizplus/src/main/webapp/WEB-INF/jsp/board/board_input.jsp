@@ -41,11 +41,11 @@
 		<div class="container">
 			<h4>
 			<c:if test="${commandMap.get('bbsId') eq 'free' }">
-			<input type="hidden" name="bbs_id" value="free" />
+			<input type="hidden" name="bbsId" value="free" />
 			<span>자유게시판</span>
 			</c:if>
 			<c:if test="${commandMap.get('bbsId') eq 'userTip' }">
-			<input type="hidden" name="bbs_id" value="userTip" />
+			<input type="hidden" name="bbsId" value="userTip" />
 			<span>모두의 꿀팁</span>
 			</c:if>
 			<button style="float: right;" onclick="fn_input()">등록</button></h4>
