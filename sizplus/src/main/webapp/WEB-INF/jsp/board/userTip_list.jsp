@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -37,63 +39,57 @@
 	<form name="listForm" id="listForm" method="post">
 	<input type="hidden" name="viewCount" value="<c:out value="${map.viewCount}" />" />
 	<input type="hidden" name="page" value="<c:out value="${map.page}" />" />
+	<input type="hidden" name="seq" value="" />
+	<input type="hidden" name="bbsId" value="" />
 	<div class="products">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-12">
-            <div class="filters-content">
-                <div class="row grid" >
-                    <div class="col-lg-12 col-md-12 all des" style="position: absolute; left: 0%; top: 0px;">
-            	<table class="works_table">
-						<colgroup>
-							<col width="10%">
-							<col width="50%">
-							<col width="10%">
-							<col width="10%">
-							<col width="10%">
-							<col width="10%">
-						</colgroup>
-						<thead>
-							<tr style="border-top: solid 2px #000000; border-bottom: solid 1px #000000;">
-								<th>번호</th>
-								<th>제목</th>
-								<th>글쓴이</th>
-								<th>작성일</th>
-								<th>조회</th>
-								<th>추천</th>
-							</tr>
-						</thead>
-						<tbody>
-							<c:forEach var="result" items="${list}" varStatus="status">
-							<tr style="cursor:default">
-								<td><c:out value="${listNo - status.index}"/></td>
-								<td>
-								<a href="#" style="text-decoration: none;color: #000;">${result.title } [1]</a>
-								</td>
-								<td style="text-align:left">${result.inpudId }</td>
-								<td>${result.inputDate }</td>
-								<td>${result.hit }</td>
-								<td>11</td>
-							</tr>
-							</c:forEach>
-						</tbody>
-					</table>
-                    </div>
-                </div>
-            </div>
-          </div>
-<!--           <div class="col-md-12"> -->
-<!--             <ul class="pages"> -->
-<!--               <li><a href="#">1</a></li> -->
-<!--               <li class="active"><a href="#">2</a></li> -->
-<!--               <li><a href="#">3</a></li> -->
-<!--               <li><a href="#">4</a></li> -->
-<!--               <li><a href="#"><i class="fa fa-angle-double-right"></i></a></li> -->
-<!--             </ul> -->
-<!--           </div> -->
-		<%@ include file="/WEB-INF/jsp/pagination/comm_pagination_include.jsp" %>
-        </div>
-      </div>
+		<div class="container">
+			
+			<h4><span>모두의 꿀팁</span><button style="float: right;" onclick="fn_goInput();">글쓰기</button></h4>
+			<div class="row">
+				<table class="works_table" style="width: 100%;">
+					<colgroup>
+						<col width="10%">
+						<col width="50%">
+						<col width="10%">
+						<col width="20%">
+						<col width="5%">
+						<col width="5%">
+					</colgroup>
+					<thead>
+						<tr style="border-top: solid 2px #000000; border-bottom: solid 1px #000000;">
+							<th style="text-align: center;">번호</th>
+							<th style="text-align: center;">제목</th>
+							<th style="text-align: center;">글쓴이</th>
+							<th style="text-align: center;">작성일</th>
+							<th style="text-align: center;">조회</th>
+							<th style="text-align: center;">추천</th>
+						</tr>
+					</thead>
+					<tbody>
+						<c:forEach var="result" items="${list}" varStatus="status">
+						<tr style="cursor:default">
+							<td style="text-align: center;"><c:out value="${listNo - status.index}"/></td>
+							<td style="text-align: left;">
+							 <c:choose>
+					           <c:when test="${fn:length(result.title) > 35}">
+					            <a href="#" onclick="fn_goView('<c:out value="${result.seq}"/>','<c:out value="${result.bbs_id}"/>')" style="text-decoration: none;color: #000;"><c:out value="${fn:substring(result.title,0,35)}"/>....[1]</a>
+					           </c:when>
+					           <c:otherwise>
+					            <a href="#" onclick="fn_goView('<c:out value="${result.seq}"/>','<c:out value="${result.bbs_id}"/>')" style="text-decoration: none;color: #000;"><c:out value="${result.title}"/> [1]</a>
+					           </c:otherwise> 
+					          </c:choose>
+							</td>
+							<td style="text-align: center;">${result.input_id }</td>
+							<td style="text-align: center;">${fn:substring(result.input_date,5,16)}</td>
+							<td style="text-align: center;">${result.hit }</td>
+							<td style="text-align: center;">11</td>
+						</tr>
+						</c:forEach>
+					</tbody>
+				</table>
+				<%@ include file="/WEB-INF/jsp/pagination/comm_pagination_include.jsp" %>
+        	</div>
+		</div>
     </div>
 	<%@ include file="/WEB-INF/jsp/userLayout/bottom.jsp" %>
 </body>
@@ -115,6 +111,22 @@ function fn_egov_link_page(pageNo){
 	var frm = document.listForm;
 	frm.action = "/board/userTip_list.do";
 	frm.page.value = pageNo;
+	frm.submit();
+}
+
+//등록페이지 이동
+function fn_goInput(){
+	var frm = document.listForm;
+	frm.action = "/board/userTip_input.do";
+	frm.submit();
+}
+
+/* 글 상세보기 화면 function */
+function fn_goView(seq,bbsId) {
+	var frm = document.listForm;
+	frm.seq.value = seq;
+	frm.bbsId.value = bbsId;
+	frm.action = "/board/userTip_view.do";
 	frm.submit();
 }
 </script>

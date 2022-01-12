@@ -13,6 +13,8 @@ public interface BoardService {
 	
 	int selectUserTipCnt(CommandMap commandMap) throws Exception;
 	
-	int insertFreeBoard(Map<String, Object> map) throws Exception;
+	int insertBoard(Map<String, Object> map) throws Exception;
+	
+	Map<String, Object> selectBoardView(Map<String, Object> map) throws Exception;
 
 }

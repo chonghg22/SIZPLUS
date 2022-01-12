@@ -8,19 +8,14 @@
 			a.seq,
 			a.bbs_id,
 			a.open_yn,
-			a.top_yn,
-			a.type_etc,
 			a.title,
 			a.contents,
-			a.file_id,
-			a.input_id,
 			a.input_nm,
+			a.input_ip,
 			a.input_date,
-			a.edit_id,
-			a.edit_nm,
+			a.edit_ip,
 			a.edit_date,
-			a.hit,
-			a.orders
+			a.hit
 		from e_board a
 		limit 10;
 	</select>
@@ -30,20 +25,17 @@
 			a.seq,
 			a.bbs_id,
 			a.open_yn,
-			a.top_yn,
-			a.type_etc,
 			a.title,
 			a.contents,
-			a.file_id,
-			a.input_id,
 			a.input_nm,
+			a.input_ip,
 			a.input_date,
-			a.edit_id,
-			a.edit_nm,
+			a.edit_ip,
 			a.edit_date,
-			a.hit,
-			a.orders
+			a.good_cnt,
+			a.hit
 		from e_board a
+		where bbs_id = 'userTip'
 		limit #{firstIndex}, #{recordCountPerPage}
 	</select>
 	
@@ -51,19 +43,47 @@
 		select
 			count(*) cnt
 		from e_board
+		where bbs_id = 'userTip'
 	</select>
 	
-	<insert id="insertFreeBoard">
-		insert into e_free_board(
-			nick_name,
+	<select id="selectBoardView" parameterType="hashmap" resultType="hashmap">
+		select
+			a.seq,
+			a.bbs_id,
+			a.open_yn,
+			a.title,
+			a.contents,
+			a.input_nm,
+			a.input_ip,
+			a.input_date,
+			a.edit_ip,
+			a.edit_date,
+			a.good_cnt,
+			a.hit
+		from e_board a
+		where 
+		a.bbs_id = #{bbsId}
+		and
+		a.seq = #{seq}
+	</select>
+	
+	<insert id="insertBoard">
+		insert into e_board(
+			bbs_id,
+			open_yn,
 			title,
 			contents,
-			password
+			password,
+			input_nm,
+			input_date
 		)values(
-			#{nickName},
+			#{bbsId},
+			'Y',
 			#{title},
 			#{contents},
-			#{password}
+			#{password},
+			#{inputNm},
+			now()
 		)
 	</insert>
 	

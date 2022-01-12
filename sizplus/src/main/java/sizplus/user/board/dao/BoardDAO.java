@@ -29,13 +29,19 @@ public class BoardDAO{
 	}
 	
 	//AbstractDAO를 호출하지 않고 SqlSessionTemplate 직접 사용하여 쿼리 조회
+	public Map<String, Object> selectBoardView(Map<String, Object> map) throws Exception{
+		return sqlSession.selectOne("board.selectBoardView", map);
+	}
+	
+	
+	//AbstractDAO를 호출하지 않고 SqlSessionTemplate 직접 사용하여 쿼리 조회
 	public int selectUserTipCnt(CommandMap commandMap) throws Exception{
 		return sqlSession.selectOne("board.selectUserTipCnt");
 	}
 	
 	
-	public int insertFreeBoard(Map<String, Object> map) throws Exception{
-		return sqlSession.insert("board.insertFreeBoard", map);
+	public int insertBoard(Map<String, Object> map) throws Exception{
+		return sqlSession.insert("board.insertBoard", map);
 	}
 
 }
