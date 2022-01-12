@@ -37,7 +37,8 @@
 <body>
 	<%@ include file="/WEB-INF/jsp/userLayout/top.jsp" %>
 	<form name="listForm" id="listForm" method="post">
-	<input type="hidden" name="bbsId" value="" />
+	<input type="hidden" name="bbsId" value="${result.bbs_id}" />
+	<input type="hidden" name="seq" value="${result.seq}" />
 	<div class="products">
 		<div class="container">
 			<h4>
@@ -47,7 +48,9 @@
 			<c:if test="${commandMap.get('bbsId') eq 'userTip' }">
 			<span>모두의 꿀팁</span>
 			</c:if>
-			<button style="float: right;" onclick="fn_list()">목록</button></h4>
+			<button style="float: right;" onclick="fn_remove()">삭제</button>
+			<button style="float: right;" onclick="fn_list()">목록</button>
+			</h4>
 			<div class="row">
 				<table class="works_table" style="width: 100%;">
 					<colgroup>
@@ -75,11 +78,17 @@
 	<%@ include file="/WEB-INF/jsp/userLayout/bottom.jsp" %>
 </body>
 <script type="text/javascript">
-/* pagination 페이지 링크 function */
 function fn_list(){
 	var frm = document.listForm;
-	frm.action = "/board/userTip_list.do";
+	frm.action = "/board/board_list.do";
 	frm.submit();
 }
+
+function fn_remove(){
+	var frm = document.listForm;
+	frm.action = "/board/board_delete_proc.do";
+	frm.submit();
+}
+
 </script>
 </html>

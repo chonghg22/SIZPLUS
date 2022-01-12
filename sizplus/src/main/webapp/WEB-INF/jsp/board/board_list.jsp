@@ -104,8 +104,7 @@
 	<%@ include file="/WEB-INF/jsp/userLayout/bottom.jsp" %>
 </body>
 <script type="text/javascript">
-/* pagination 페이지 링크 function */
-function fn_egov_link_page(pageNo){
+function fn_link_page(pageNo){
 	if(pageNo == 1){
 		if(${paginationInfo.currentPageNo} <2){
 			alert("첫 페이지 입니다.");

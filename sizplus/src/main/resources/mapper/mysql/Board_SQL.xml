@@ -22,7 +22,7 @@
 		limit #{firstIndex}, #{recordCountPerPage}
 	</select>
 	
-	<select id="selectBoardCnt" resultType="int">
+	<select id="selectBoardCnt" parameterType="hashmap" resultType="int">
 		select
 			count(*) cnt
 		from e_board
@@ -69,5 +69,9 @@
 			now()
 		)
 	</insert>
+	
+	<delete id="deleteBoard">
+		delete from e_board where seq = #{seq}
+	</delete>
 	
 </mapper>

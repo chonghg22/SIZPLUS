@@ -36,7 +36,7 @@
 </head>
 <body>
 	<%@ include file="/WEB-INF/jsp/userLayout/top.jsp" %>
-	<form name="listForm" id="listForm" method="post">
+	<form name="listForm" id="listForm">
 	<div class="products">
 		<div class="container">
 			<h4>
@@ -62,7 +62,7 @@
 						</tr>
 						<tr style="border-top: solid 2px #000000; border-bottom: solid 1px #000000;">
 							<th style="text-align: center;">비밀번호</th>
-							<td><input type="text" name="password" id="password" maxlength="150"  style="width:100%" /></td>
+							<td><input type="password" name="password" id="password" maxlength="150"  style="width:100%" /></td>
 						</tr>
 						<tr style="border-top: solid 2px #000000; border-bottom: solid 1px #000000;">
 							<th style="text-align: center;">제목</th>
@@ -84,6 +84,7 @@
 function fn_input(){
 	var frm = document.listForm;
 	frm.action = "/board/board_input_proc.do";
+	frm.method = "post";
 	frm.submit();
 }
 </script>

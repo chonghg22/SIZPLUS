@@ -25,8 +25,8 @@ public class BoardServiceImpl implements BoardService{
 	}
 	
 	@Override
-	public int selectBoardCnt(CommandMap commandMap) throws Exception {
-		return boardDAO.selectBoardCnt(commandMap);
+	public int selectBoardCnt(Map<String, Object> map) throws Exception {
+		return boardDAO.selectBoardCnt(map);
 		
 	}
 	
@@ -39,7 +39,11 @@ public class BoardServiceImpl implements BoardService{
 	@Override
 	public int insertBoard(Map<String, Object> map) throws Exception {
 		return boardDAO.insertBoard(map);
-		
+	}
+	
+	@Override
+	public int deleteBoard(Map<String, Object> map) throws Exception {
+		return boardDAO.deleteBoard(map);
 	}
 
 }

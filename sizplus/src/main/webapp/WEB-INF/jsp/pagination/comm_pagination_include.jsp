@@ -1,10 +1,11 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt"%>
 					<c:if test="${ not empty paginationInfo.totalRecordCount and paginationInfo.totalRecordCount ne 0 }">
 					<script>
 					function fn_page_prev(page) {
 												
 						if (page > 1){
-							fn_egov_link_page(page - 1);
+							fn_link_page(page - 1);
 						}
 						else {
 							alert("첫페이지 입니다.");
@@ -13,7 +14,7 @@
 					}
 					function fn_page_next(page) {
 						if (page < ${ paginationInfo.totalPageCount}){
-							fn_egov_link_page(page + 1);
+							fn_link_page(page + 1);
 						}else {
 							alert("마지막 페이지 입니다.");
 							return;
@@ -39,19 +40,19 @@
 							$(".paginate_input").focus();
 							return;
 						}
-						fn_egov_link_page(page);
+						fn_link_page(page);
 					}
 					</script>
 					<div class="col-md-12">
 			            <ul class="pages">
-			            <li><a href="#" onclick="fn_egov_link_page(1);"><i class="fa fa-angle-double-left"></i></a></li>
+			            <li><a href="#" onclick="fn_link_page(1);"><i class="fa fa-angle-double-left"></i></a></li>
 						  <c:forEach var="p" begin="${paginationInfo.firstPageNoOnPageList}" step="1" end="${paginationInfo.lastPageNoOnPageList}">
 							<c:choose>
-							  	<c:when test="${paginationInfo.currentPageNo eq p }"><li class="active"><a href="#" onClick="fn_egov_link_page('${p }')">${p }</a></li></c:when>
-							   	<c:otherwise><li><a href="#" onClick="fn_egov_link_page('${p }')">${p }</a></li></c:otherwise>
+							  	<c:when test="${paginationInfo.currentPageNo eq p }"><li class="active"><a href="#" onClick="fn_link_page('${p }')">${p }</a></li></c:when>
+							   	<c:otherwise><li><a href="#" onClick="fn_link_page('${p }')">${p }</a></li></c:otherwise>
 							</c:choose>
 						</c:forEach>			            
-			              <li><a href="#" onclick="fn_egov_link_page(${paginationInfo.totalPageCount});"><i class="fa fa-angle-double-right"></i></a></li>
+			              <li><a href="#" onclick="fn_link_page(${paginationInfo.totalPageCount});"><i class="fa fa-angle-double-right"></i></a></li>
 			            </ul>
 			        </div>
 					</c:if>

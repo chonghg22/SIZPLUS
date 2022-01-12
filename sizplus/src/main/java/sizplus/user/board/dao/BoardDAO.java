@@ -30,13 +30,17 @@ public class BoardDAO{
 	
 	
 	//AbstractDAO를 호출하지 않고 SqlSessionTemplate 직접 사용하여 쿼리 조회
-	public int selectBoardCnt(CommandMap commandMap) throws Exception{
-		return sqlSession.selectOne("board.selectBoardCnt");
+	public int selectBoardCnt(Map<String, Object> map) throws Exception{
+		return sqlSession.selectOne("board.selectBoardCnt", map);
 	}
 	
 	
 	public int insertBoard(Map<String, Object> map) throws Exception{
 		return sqlSession.insert("board.insertBoard", map);
+	}
+	
+	public int deleteBoard(Map<String, Object> map) throws Exception{
+		return sqlSession.delete("board.deleteBoard", map);
 	}
 
 }

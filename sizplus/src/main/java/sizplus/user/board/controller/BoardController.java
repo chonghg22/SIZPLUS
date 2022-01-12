@@ -28,10 +28,9 @@ public class BoardController {
 	@Resource(name="boardService")
 	private BoardService boardService;
 	
-	//회원가입 처리
+	//게시판 리스트
 	@RequestMapping(value="/board/board_list.do")
 	public String selectUserBoardList(Map<String, Object> map, ModelMap model, HttpServletResponse response, HttpServletRequest request, CommandMap commandMap) throws Exception{
-		//login.jsp에서 보낸 값들이 commandMap으로 들어옴
 		String bbsId = commandMap.get("bbsId").toString();
 		map.put("bbsId", bbsId);
 		int page = 1;
@@ -47,9 +46,8 @@ public class BoardController {
 		map.put("viewCount", viewCount);
 		
 
-		int totCnt = boardService.selectBoardCnt(commandMap); //게시글 수
+		int totCnt = boardService.selectBoardCnt(map); //게시글 수
 
-		/** paging setting */
 		PaginationInfo paginationInfo = new PaginationInfo();
 		paginationInfo.setCurrentPageNo(page);
 		paginationInfo.setRecordCountPerPage(viewCount);
@@ -69,22 +67,35 @@ public class BoardController {
     	return "board/board_list";
     }
 	
+	@RequestMapping(value="/board/board_view.do")
+	public String selectUserBoardView(Map<String, Object> map, ModelMap model, HttpServletResponse response, HttpServletRequest request, CommandMap commandMap) throws Exception{
+
+		map.put("seq", commandMap.get("seq").toString());
+		map.put("bbsId", commandMap.get("bbsId").toString());
+		
+		Map<String, Object> result = boardService.selectBoardView(map);
+		
+		model.addAttribute("commandMap", commandMap); //페이징 정보
+		model.addAttribute("result", result);
+		
+    	return "board/board_view";
+    }
+	
 	
 	//자유게시판 글쓰기 페이지
 	@RequestMapping(value="/board/board_input.do")
     public String insertFreeBoardList(ModelMap model, HttpServletResponse response, HttpServletRequest request, CommandMap commandMap) throws Exception{
 		
 		model.addAttribute("commandMap", commandMap); //페이징 정보
-		//실행 완료 후 input.do 메소드로 이동
-    	return "board/board_input";
+
+		return "board/board_input";
     
     }
 	
-	//자유게시판 글쓰기 페이지
+	//자유게시판 글등록 처리
 	@RequestMapping(value="/board/board_input_proc.do")
     public String insertFreeBoardProcList(Map<String, Object> map, ModelMap model, HttpServletResponse response, HttpServletRequest request, CommandMap commandMap) throws Exception{
 		
-		//jsp에서 작성한 input 태그의 name값을 CommandMap으로 가져옴 
 		map.put("bbsId", commandMap.get("bbsId").toString());
 		map.put("inputNm", commandMap.get("input_nm").toString());
 		map.put("password", CommonUtil.hexSha256(commandMap.get("password").toString()));
@@ -92,22 +103,28 @@ public class BoardController {
 		map.put("contents", commandMap.get("contents").toString());
 		
 		int insertResult = boardService.insertBoard(map);
+		if(insertResult == 1) {
+			CommonUtil.NotificationMessage(model, "성공", "등록되었습니다.", "location.href='/board/board_list.do?bbsId='"+commandMap.get("bbsId").toString());
+		}
 		
-		//실행 완료 후 input.do 메소드로 이동
 		return "redirect:/board/board_list.do";
     
     }
 	
-	
-	
-	
+	//자유게시판 삭제 기능
+	@RequestMapping(value="/board/board_delete_proc.do")
+    public String deleteBoardProc(Map<String, Object> map, ModelMap model, HttpServletResponse response, HttpServletRequest request, CommandMap commandMap) throws Exception{
 		
-	//자유게시판 글쓰기 페이지
-	@RequestMapping(value="/board/userTip_input.do")
-    public String insertUserTip(ModelMap model, HttpServletResponse response, HttpServletRequest request, CommandMap commandMap) throws Exception{
-		//실행 완료 후 input.do 메소드로 이동
-    	return "board/userTip_input";
-    }	
-	
+		map.put("seq", commandMap.get("seq").toString());
+		
+		int deleteResult = boardService.deleteBoard(map);
+		
+		if(deleteResult == 1) {
+			CommonUtil.NotificationMessage(model, "성공", "삭제되었습니다.", "location.href='/board/board_list.do?bbsId='"+commandMap.get("bbsId").toString());
+		}
+		
+		return "redirect:/board/board_list.do";
+    
+    }
 	
 }

@@ -9,9 +9,11 @@ public interface BoardService {
 
 	List<Map<String, Object>> selectBoardList(Map<String, Object> commandMap) throws Exception;
 	
-	int selectBoardCnt(CommandMap commandMap) throws Exception;
+	int selectBoardCnt(Map<String, Object> map) throws Exception;
 	
 	int insertBoard(Map<String, Object> map) throws Exception;
+	
+	int deleteBoard(Map<String, Object> map) throws Exception;
 	
 	Map<String, Object> selectBoardView(Map<String, Object> map) throws Exception;
 
