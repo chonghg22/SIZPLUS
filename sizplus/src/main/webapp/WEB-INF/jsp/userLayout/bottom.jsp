@@ -66,10 +66,10 @@
 							<p>시즈닝 플러스에서의
 							 <br>불편사항이나 의견이 있으시다면
 							<br>여기에 남겨주세요</p>
-							<form>
-								<input class="form-control" type="email" placeholder="의견을 적어주세요">
-								<button class="btn">접수</button>
-							</form>
+<!-- 							<form> -->
+<!-- 								<input class="form-control" type="email" placeholder="의견을 적어주세요"> -->
+<!-- 								<button class="btn">접수</button> -->
+<!-- 							</form> -->
 						</div>
 					</div>
 				</div>

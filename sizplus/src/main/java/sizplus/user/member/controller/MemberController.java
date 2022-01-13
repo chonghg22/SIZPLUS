@@ -30,6 +30,15 @@ public class MemberController {
 		return "member/member_input";
     }
 	
+	//회원가입 페이지 호출
+	@RequestMapping(value="/member/mypage.do")
+    public String seelctMyPageView(ModelMap model, HttpServletRequest request) throws Exception{
+
+		return "member/mypage";
+    }
+	
+	
+	
 	//회원가입 처리
 	@RequestMapping(value="/member/member_input_proc.do")
     public String insertMemberProc(ModelMap model, HttpServletResponse response, HttpServletRequest request, CommandMap commandMap) throws Exception{

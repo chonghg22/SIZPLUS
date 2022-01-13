@@ -39,6 +39,14 @@ public class BoardDAO{
 		return sqlSession.insert("board.insertBoard", map);
 	}
 	
+	public int updateBoardHitCount(Map<String, Object> map) throws Exception{
+		return sqlSession.update("board.updateBoardHitCount", map);
+	}
+	
+	public int updateBoard(Map<String, Object> map) throws Exception{
+		return sqlSession.update("board.updateBoard", map);
+	}
+	
 	public int deleteBoard(Map<String, Object> map) throws Exception{
 		return sqlSession.delete("board.deleteBoard", map);
 	}

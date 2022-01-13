@@ -3,15 +3,39 @@ package sizplus.common.common;
 import java.io.IOException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
  
 public class CommonUtil {
+	
+	public static HashMap<String, Object> convertMap(HttpServletRequest request) {
+		 
+	    HashMap<String, Object> hmap = new HashMap<String, Object>();
+	    String key;
+	 
+	    Enumeration<?> tt = request.getParameterNames();
+	 
+	    while (tt.hasMoreElements()) {
+	        key = (String) tt.nextElement();
+	        if (request.getParameterValues(key).length > 1) {
+	            hmap.put(key, request.getParameterValues(key));
+	        } else {
+	            hmap.put(key, request.getParameter(key));
+	        }
+	 
+	    }
+	 
+	    return hmap;
+	}
+
 	
 	/**
      * sha256 암호화

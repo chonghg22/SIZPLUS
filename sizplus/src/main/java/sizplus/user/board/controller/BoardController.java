@@ -30,7 +30,8 @@ public class BoardController {
 	
 	//게시판 리스트
 	@RequestMapping(value="/board/board_list.do")
-	public String selectUserBoardList(Map<String, Object> map, ModelMap model, HttpServletResponse response, HttpServletRequest request, CommandMap commandMap) throws Exception{
+	public String selectUserBoardList(Map<String, Object> map, ModelMap model, HttpServletRequest request) throws Exception{
+		HashMap<String, Object> commandMap = CommonUtil.convertMap(request);
 		String bbsId = commandMap.get("bbsId").toString();
 		map.put("bbsId", bbsId);
 		int page = 1;
@@ -69,10 +70,11 @@ public class BoardController {
 	
 	@RequestMapping(value="/board/board_view.do")
 	public String selectUserBoardView(Map<String, Object> map, ModelMap model, HttpServletResponse response, HttpServletRequest request, CommandMap commandMap) throws Exception{
-
+		
 		map.put("seq", commandMap.get("seq").toString());
 		map.put("bbsId", commandMap.get("bbsId").toString());
 		
+		int hitCount = boardService.updateBoardHitCount(map);
 		Map<String, Object> result = boardService.selectBoardView(map);
 		
 		model.addAttribute("commandMap", commandMap); //페이징 정보
@@ -104,10 +106,44 @@ public class BoardController {
 		
 		int insertResult = boardService.insertBoard(map);
 		if(insertResult == 1) {
-			CommonUtil.NotificationMessage(model, "성공", "등록되었습니다.", "location.href='/board/board_list.do?bbsId='"+commandMap.get("bbsId").toString());
+			CommonUtil.NotificationMessage(model, "성공", "등록 되었습니다.", "location.href='/board/board_list.do?bbsId="+commandMap.get("bbsId").toString()+"';");
 		}
 		
 		return "redirect:/board/board_list.do";
+    
+    }
+	
+	//자유게시판 글쓰기 페이지
+	@RequestMapping(value="/board/board_edit.do")
+    public String updateFreeBoardList(Map<String, Object> map,ModelMap model, HttpServletResponse response, HttpServletRequest request, CommandMap commandMap) throws Exception{
+		
+		map.put("seq", commandMap.get("seq").toString());
+		map.put("bbsId", commandMap.get("bbsId").toString());
+		
+		Map<String, Object> result = boardService.selectBoardView(map);
+		
+		model.addAttribute("result", result);
+		model.addAttribute("commandMap", commandMap);
+
+		return "board/board_edit";
+    
+    }
+	
+	//자유게시판 글등록 처리
+	@RequestMapping(value="/board/board_edit_proc.do")
+    public String updateFreeBoardProc(Map<String, Object> map, ModelMap model, HttpServletResponse response, HttpServletRequest request, CommandMap commandMap) throws Exception{
+		
+		map.put("seq", commandMap.get("seq").toString());
+		map.put("password", CommonUtil.hexSha256(commandMap.get("password").toString()));
+		map.put("title", commandMap.get("title").toString());
+		map.put("contents", commandMap.get("contents").toString());
+		
+		int insertResult = boardService.updateBoard(map);
+		if(insertResult == 1) {
+			CommonUtil.NotificationMessage(model, "성공", "수정되었습니다.", "location.href='/board/board_list.do?bbsId="+commandMap.get("bbsId").toString()+"';");
+		}
+		
+		return "redirect:/board/board_list.do?bbsId="+commandMap.get("bbsId").toString();
     
     }
 	

@@ -238,70 +238,37 @@
 					<div class="tab-content">
 						<div id="featured" class="container tab-pane active">
 							<a href="#" onclick="fn_goBoard('free')" style="padding-left: 415px;">더보기 <i class="fa fa-angle-right"></i></a><br>
+							<c:forEach var="free" items="${freeBoardList}" varStatus="status">
 							<div class="tn-news" style="margin-bottom: 19.5px;">
-								
 								<div class="tn-title">
-									<a href="">못참아 이건! 참치 순두부찌개 레시피</a>
+									<c:choose>
+						           <c:when test="${fn:length(free.title) > 35}">
+						            <a href="#" onclick="fn_goView('<c:out value="${free.seq}"/>','<c:out value="${free.bbs_id}"/>')" style="text-decoration: none;color: #000;"><c:out value="${fn:substring(free.title,0,35)}"/>....</a>
+						           </c:when>
+						           <c:otherwise>
+						            <a href="#" onclick="fn_goView('<c:out value="${free.seq}"/>','<c:out value="${free.bbs_id}"/>')" style="text-decoration: none;color: #000;"><c:out value="${free.title}"/></a>
+						           </c:otherwise> 
+						          </c:choose>
 								</div>
-								
 							</div>
-							<div class="tn-news" style="margin-bottom: 19.5px;">
-								
-								<div class="tn-title">
-									<a href="">못참아 이건! 참치 순두부찌개 레시피</a>
-								</div>
-								
-							</div>
-							<div class="tn-news" style="margin-bottom: 19.5px;">
-								
-								<div class="tn-title">
-									<a href="">못참아 이건! 참치 순두부찌개 레시피</a>
-								</div>
-								
-							</div>
-							<div class="tn-news" style="margin-bottom: 19.5px;">
-								
-								<div class="tn-title">
-									<a href="">못참아 이건! 참치 순두부찌개 레시피</a>
-								</div>
-								
-							</div>
-							<div class="tn-news" style="margin-bottom: 19.5px;">
-								
-								<div class="tn-title">
-									<a href="">못참아 이건! 참치 순두부찌개 레시피</a>
-								</div>
-								
-							</div>
-				
-		
+							</c:forEach>
 						</div>
 						<div id="popular" class="container tab-pane fade">
-							<a href="products.html" style="padding-left: 415px;">더보기 <i class="fa fa-angle-right"></i></a><br>
-							<div class="tn-news">
-								<div class="tn-img">
-									<img src="/lib/user/img/news-350x223-4.jpg" />
-								</div>
+							<a href="#" onclick="fn_goBoard('life')" style="padding-left: 415px;">더보기 <i class="fa fa-angle-right"></i></a><br>
+							<c:forEach var="life" items="${lifeBoardList}" varStatus="status">
+							<div class="tn-news" style="margin-bottom: 19.5px;">
 								<div class="tn-title">
-									<a href="">OOO을 다녀왔습니다!</a>
+									<c:choose>
+						           <c:when test="${fn:length(life.title) > 35}">
+						            <a href="#" onclick="fn_goView('<c:out value="${life.seq}"/>','<c:out value="${life.bbs_id}"/>')" style="text-decoration: none;color: #000;"><c:out value="${fn:substring(life.title,0,35)}"/>....</a>
+						           </c:when>
+						           <c:otherwise>
+						            <a href="#" onclick="fn_goView('<c:out value="${life.seq}"/>','<c:out value="${life.bbs_id}"/>')" style="text-decoration: none;color: #000;"><c:out value="${life.title}"/></a>
+						           </c:otherwise> 
+						          </c:choose>
 								</div>
 							</div>
-							<div class="tn-news">
-								<div class="tn-img">
-									<img src="/lib/user/img/news-350x223-5.jpg" />
-								</div>
-								<div class="tn-title">
-									<a href="">OOO "내돈내산" 후기</a>
-								</div>
-							</div>
-							<div class="tn-news">
-								<div class="tn-img">
-									<img src="/lib/user/img/news-350x223-1.jpg" />
-								</div>
-								<div class="tn-title">
-									<a href="">걱정말고 일단 가보세요 OOO!</a>
-								</div>
-							</div>
+							</c:forEach>
 						</div>
 						<div id="latest" class="container tab-pane fade">
 							<a href="#" onclick="fn_goBoard('userTip')" style="padding-left: 415px;">더보기 <i class="fa fa-angle-right"></i></a><br>
@@ -452,8 +419,8 @@
 			<div class="row">
 				<div class="col-md-12">
 					<div class="section-heading">
-						<h2>Latest Products</h2>
-						<a href="products.html">view all products <i class="fa fa-angle-right"></i></a>
+						<h2>Best 레시피</h2>
+						<a href="products.html">더 많은 레시피 보기 <i class="fa fa-angle-right"></i></a>
 					</div>
 				</div>
 				<div class="col-md-4">

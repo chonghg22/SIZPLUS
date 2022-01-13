@@ -41,16 +41,23 @@
 	<input type="hidden" name="seq" value="${result.seq}" />
 	<div class="products">
 		<div class="container">
-			<h4>
-			<c:if test="${commandMap.get('bbsId') eq 'free' }">
-			<span>자유게시판</span>
-			</c:if>
-			<c:if test="${commandMap.get('bbsId') eq 'userTip' }">
-			<span>모두의 꿀팁</span>
-			</c:if>
-			<button style="float: right;" onclick="fn_remove()">삭제</button>
-			<button style="float: right;" onclick="fn_list()">목록</button>
-			</h4>
+			<div class="col-md-12">
+				<div class="filters">
+					<ul>
+						<li class="" data-filter="*" style="float: left;">
+						<h3>
+							<c:if test="${commandMap.get('bbsId') eq 'free' }">
+							<span>자유게시판</span>
+							</c:if>
+							<c:if test="${commandMap.get('bbsId') eq 'life' }">
+							<span>라이프스타일</span>
+							</c:if> 
+				  		</h3>
+						</li>
+						<li class="active" data-filter="*" ></li>
+					</ul>
+				</div>
+			</div>
 			<div class="row">
 				<table class="works_table" style="width: 100%;">
 					<colgroup>
@@ -73,6 +80,17 @@
 					</tbody>
 				</table>
         	</div>
+		    <div class="col-md-12">
+				<div class="filters" style="border-bottom: 0px;">
+					<br>
+					<ul>
+						<li class="active" data-filter="*" ></li>
+						<li data-filter=".gra" class="" style="float: right;" onclick="fn_remove();">삭제</li>
+						<li data-filter=".gra" class="" style="float: right;" onclick="fn_edit();">수정</li>
+						<li data-filter=".gra" class="" style="float: right;" onclick="fn_list();">목록</li>
+					</ul>
+				</div>
+			</div>
 		</div>
     </div>
 	<%@ include file="/WEB-INF/jsp/userLayout/bottom.jsp" %>
@@ -81,6 +99,12 @@
 function fn_list(){
 	var frm = document.listForm;
 	frm.action = "/board/board_list.do";
+	frm.submit();
+}
+
+function fn_edit(){
+	var frm = document.listForm;
+	frm.action = "/board/board_edit.do";
 	frm.submit();
 }
 

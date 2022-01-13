@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="board">
+<mapper namespace="recipe">
 	
-	<select id="selectBoardList" parameterType="hashmap" resultType="hashmap">
+	<select id="selectRecipeList" parameterType="hashmap" resultType="hashmap">
 		select
 			a.seq,
 			a.bbs_id,
@@ -23,14 +23,14 @@
 		limit #{firstIndex}, #{recordCountPerPage}
 	</select>
 	
-	<select id="selectBoardCnt" parameterType="hashmap" resultType="int">
+	<select id="selectRecipeCnt" parameterType="hashmap" resultType="int">
 		select
 			count(*) cnt
 		from e_board
 		where bbs_id = #{bbsId}
 	</select>
 	
-	<select id="selectBoardView" parameterType="hashmap" resultType="hashmap">
+	<select id="selectRecipeView" parameterType="hashmap" resultType="hashmap">
 		select
 			a.seq,
 			a.bbs_id,
@@ -51,7 +51,7 @@
 		a.seq = #{seq}
 	</select>
 	
-	<insert id="insertBoard">
+	<insert id="insertRecipe">
 		insert into e_board(
 			bbs_id,
 			open_yn,
@@ -71,25 +71,11 @@
 		)
 	</insert>
 	
-	<update id="updateBoard">
-		update e_board set
-			title = #{title},
-			contents = #{contents},
-			password = #{password},
-			edit_date = now()
-		where
-			seq = #{seq}
-		
+	<update id="updateRecipeHitCount">
+		update e_board set hit = hit +1 where seq = #{seq}
 	</update>
 	
-	<update id="updateBoardHitCount">
-		update e_board set
-			hit = hit +1
-		where 
-			seq = #{seq}
-	</update>
-	
-	<delete id="deleteBoard">
+	<delete id="deleteRecipe">
 		delete from e_board where seq = #{seq}
 	</delete>
 	

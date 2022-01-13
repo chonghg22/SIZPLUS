@@ -45,16 +45,23 @@
 	<input type="hidden" name="bbsId" value="" />
 	<div class="products">
 		<div class="container">
-			
-			<h4>
-			<c:if test="${commandMap.get('bbsId') eq 'free' }">
-			<span>자유게시판</span>
-			</c:if>
-			<c:if test="${commandMap.get('bbsId') eq 'userTip' }">
-			<span>모두의 꿀팁</span>
-			</c:if>
-			<button style="float: right;" onclick="fn_goInput('${commandMap.get('bbsId')}');">글쓰기</button>
-			</h4>
+			<div class="col-md-12">
+				<div class="filters">
+					<ul>
+						<li class="" data-filter="*" style="float: left;">
+						<h3>
+							<c:if test="${commandMap.get('bbsId') eq 'free' }">
+							<span>자유게시판</span>
+							</c:if>
+							<c:if test="${commandMap.get('bbsId') eq 'life' }">
+							<span>라이프스타일</span>
+							</c:if> 
+				  		</h3>
+						</li>
+						<li class="active" data-filter="*" ></li>
+					</ul>
+				</div>
+			</div>
 			<div class="row">
 				<table class="works_table" style="width: 100%;">
 					<colgroup>
@@ -89,7 +96,7 @@
 					           </c:otherwise> 
 					          </c:choose>
 							</td>
-							<td style="text-align: center;">${result.input_id }</td>
+							<td style="text-align: center;">${result.input_nm }</td>
 							<td style="text-align: center;">${fn:substring(result.input_date,5,16)}</td>
 							<td style="text-align: center;">${result.hit }</td>
 							<td style="text-align: center;">11</td>
@@ -99,6 +106,15 @@
 				</table>
 				<%@ include file="/WEB-INF/jsp/pagination/comm_pagination_include.jsp" %>
         	</div>
+        	<div class="col-md-12">
+				<div class="filters" style="border-bottom: 0px;">
+					<br>
+					<ul>
+						<li class="active" data-filter="*" ></li>
+						<li data-filter=".gra" class="" style="float: right;" onclick="fn_goInput('${commandMap.get('bbsId')}');">글쓰기</li>
+					</ul>
+				</div>
+			</div>
 		</div>
     </div>
 	<%@ include file="/WEB-INF/jsp/userLayout/bottom.jsp" %>

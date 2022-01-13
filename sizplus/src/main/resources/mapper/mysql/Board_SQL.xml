@@ -19,6 +19,7 @@
 			a.hit
 		from e_board a
 		where bbs_id = #{bbsId}
+		order by seq desc
 		limit #{firstIndex}, #{recordCountPerPage}
 	</select>
 	
@@ -69,6 +70,24 @@
 			now()
 		)
 	</insert>
+	
+	<update id="updateBoard">
+		update e_board set
+			title = #{title},
+			contents = #{contents},
+			password = #{password},
+			edit_date = now()
+		where
+			seq = #{seq}
+		
+	</update>
+	
+	<update id="updateBoardHitCount">
+		update e_board set
+			hit = hit +1
+		where 
+			seq = #{seq}
+	</update>
 	
 	<delete id="deleteBoard">
 		delete from e_board where seq = #{seq}

@@ -42,8 +42,18 @@ public class BoardServiceImpl implements BoardService{
 	}
 	
 	@Override
+	public int updateBoardHitCount(Map<String, Object> map) throws Exception {
+		return boardDAO.updateBoardHitCount(map);
+	}
+	
+	@Override
+	public int updateBoard(Map<String, Object> map) throws Exception {
+		return boardDAO.updateBoard(map);
+	}
+	
+	@Override
 	public int deleteBoard(Map<String, Object> map) throws Exception {
 		return boardDAO.deleteBoard(map);
 	}
-
+	
 }

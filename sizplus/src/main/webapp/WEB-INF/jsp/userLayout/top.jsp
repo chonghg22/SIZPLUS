@@ -49,15 +49,14 @@
 					<div class="nav-item dropdown">
 						<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">모두의 게시판</a>
 						<div class="dropdown-menu">
-						<a href="/board/userTip_list.do" class="dropdown-item">자유게시판</a>
-							<a href="/board/board_list.do" class="dropdown-item">모두의 레시피</a>
-							<a href="#" class="dropdown-item">라이프 스타일</a>
-							<a href="/board/userTip_list.do" class="dropdown-item">모두의 꿀팁</a>
-							
+							<a href="/board/board_list.do?bbsId=free" class="dropdown-item">자유게시판</a>
+							<a href="/board/board_list.do?bbsId=life" class="dropdown-item">라이프 스타일</a>
+							<a href="/recipe/recipe_list.do" class="dropdown-item">모두의 레시피</a>
 						</div>
 					</div>
 					<a href="single-page.html" class="nav-item nav-link">Single Page</a>
 					<a href="/login.do" class="nav-item nav-link">로그인</a>
+					<a href="/member/mypage.do" class="nav-item nav-link">마이페이지</a>
 				</div>
 			</div>
 		</nav>

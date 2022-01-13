@@ -15,6 +15,10 @@ public interface BoardService {
 	
 	int deleteBoard(Map<String, Object> map) throws Exception;
 	
+	int updateBoardHitCount(Map<String, Object> map) throws Exception;
+	
+	int updateBoard(Map<String, Object> map) throws Exception;
+	
 	Map<String, Object> selectBoardView(Map<String, Object> map) throws Exception;
 
 }
