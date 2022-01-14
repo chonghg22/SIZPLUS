@@ -79,7 +79,7 @@
 						</tr>
 						<tr style="border-top: solid 2px #000000; border-bottom: solid 1px #000000;">
 							<th style="text-align: center;">내용</th>
-							<td><textarea type="text" name="contents" id="contents" maxlength="150"  style="width:100%;height: 200px;" ></textarea></td>
+							<td><textarea name="contents" id="contents" class="required" style="width:100%; height:300px;"  title="상세내용"></textarea></td>
 						</tr>
 					</tbody>
 				</table>
@@ -97,10 +97,43 @@
     </div>
 	<%@ include file="/WEB-INF/jsp/userLayout/bottom.jsp" %>
 </body>
+<!-- SmartEditor를 사용하기 위해서 다음 js파일을 추가 (경로 확인완료) -->
+<script type="text/javascript" src="/lib/smartEditor/js/HuskyEZCreator.js" charset="utf-8"></script>
+<!-- 에디터 스킨 불러오기(경로 확인완료) -->
+<script type="text/javascript" src="/lib/smartEditor/SmartEditor2Skin.html"></script>
+<script type="text/javascript">
+/* 스마트에디터 적용 스크립트*/
+var oEditors = [];
+$(function(){
+      nhn.husky.EZCreator.createInIFrame({
+          oAppRef: oEditors,
+          elPlaceHolder: "contents", //textarea에서 지정한 id와 일치해야 합니다.
+          //SmartEditor2Skin.html 파일이 존재하는 경로
+          sSkinURI: "/lib/smartEditor/SmartEditor2Skin.html",
+          htParams : {
+              // 툴바 사용 여부 (true:사용/ false:사용하지 않음)
+              bUseToolbar : true,
+              // 입력창 크기 조절바 사용 여부 (true:사용/ false:사용하지 않음)
+              bUseVerticalResizer : true,
+              // 모드 탭(Editor | HTML | TEXT) 사용 여부 (true:사용/ false:사용하지 않음)
+              bUseModeChanger : true,
+              fOnBeforeUnload : function(){
+
+              }
+          },
+          fOnAppLoad : function(){
+              //기존 저장된 내용의 text 내용을 에디터상에 뿌려주고자 할때 사용
+              oEditors.getById["contents"].exec("PASTE_HTML", [""]);
+          },
+          fCreator: "createSEditor2"
+      });
+});
+</script>
 <script type="text/javascript">
 /* pagination 페이지 링크 function */
 function fn_input(){
 	var frm = document.listForm;
+	oEditors.getById["contents"].exec("UPDATE_CONTENTS_FIELD", []);
 	frm.action = "/board/board_input_proc.do";
 	frm.method = "post";
 	frm.submit();
