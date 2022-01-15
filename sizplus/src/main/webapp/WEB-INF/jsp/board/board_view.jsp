@@ -55,6 +55,8 @@
 				  		</h3>
 						</li>
 						<li class="active" data-filter="*" ></li>
+						<li data-filter=".gra" class="" style="float: right;" onclick="fn_bad();">비추천[<span id="badCnt">${result.bad_cnt}</span>]</li>
+						<li data-filter=".gra" class="" style="float: right;" onclick="fn_good();">추천[<span id="goodCnt">${result.good_cnt}</span>]</li>
 					</ul>
 				</div>
 			</div>
@@ -96,23 +98,95 @@
 	<%@ include file="/WEB-INF/jsp/userLayout/bottom.jsp" %>
 </body>
 <script type="text/javascript">
+//목록으로 이동
 function fn_list(){
 	var frm = document.listForm;
 	frm.action = "/board/board_list.do";
 	frm.submit();
 }
 
+//수정페이지 이동
 function fn_edit(){
 	var frm = document.listForm;
 	frm.action = "/board/board_edit.do";
 	frm.submit();
 }
 
+//게시글 삭제
 function fn_remove(){
 	var frm = document.listForm;
 	frm.action = "/board/board_delete_proc.do";
 	frm.submit();
 }
 
+//추천
+function fn_good(){
+	$.ajax({
+		url : "/board/boardGoodCnt_update_proc.ajax"
+		, data : $("#listForm").serialize()
+		, type : "post"
+		, dataType : "json"
+		, success : function(data){
+			alert(data.message);
+			$("#goodCnt").html(${result.good_cnt}+1)
+// 			if(data.result == "0"){
+// 				alert(data.message);//
+// 				checkFlag = false;
+// 				return false;
+// 			}else if(data.result == "1"){
+// 				$("#idHelp").text("사용가능한 사업코드 입니다.");
+// 				checkFlag = true;
+// 			}else if(data.result == "2"){
+// 				$("#idHelp").text("중복된 사업코드 입니다.");
+// 				$("#bizCode").val("");
+// 				return false;
+// 				checkFlag = false;
+// 			}else{
+// 				$("#idHelp").text("사업코드를 다시 입력 해 주세요.");
+// 				$("#bizCode").val("");
+// 				return false;
+// 				checkFlag = false;
+// 			}
+		}
+		, error:function(request,status,error){
+			alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+		}
+	});
+}
+
+//추천
+function fn_bad(){
+	$.ajax({
+		url : "/board/boardBadCnt_update_proc.ajax"
+		, data : $("#listForm").serialize()
+		, type : "post"
+		, dataType : "json"
+		, success : function(data){
+			alert(data.message);
+			$("#badCnt").html(${result.bad_cnt}+1)
+// 			if(data.result == "0"){
+// 				alert(data.message);//
+// 				checkFlag = false;
+// 				return false;
+// 			}else if(data.result == "1"){
+// 				$("#idHelp").text("사용가능한 사업코드 입니다.");
+// 				checkFlag = true;
+// 			}else if(data.result == "2"){
+// 				$("#idHelp").text("중복된 사업코드 입니다.");
+// 				$("#bizCode").val("");
+// 				return false;
+// 				checkFlag = false;
+// 			}else{
+// 				$("#idHelp").text("사업코드를 다시 입력 해 주세요.");
+// 				$("#bizCode").val("");
+// 				return false;
+// 				checkFlag = false;
+// 			}
+		}
+		, error:function(request,status,error){
+			alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+		}
+	});
+}
 </script>
 </html>

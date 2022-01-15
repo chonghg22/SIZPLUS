@@ -38,11 +38,11 @@
 </head>
 <body>
 	<%@ include file="/WEB-INF/jsp/userLayout/top.jsp" %>
-	<form name="listForm" id="listForm" method="post">
-	<input type="hidden" name="viewCount" value="<c:out value="${map.viewCount}" />" />
-	<input type="hidden" name="page" value="<c:out value="${map.page}" />" />
+	<form name="listForm" id="listForm" method="get">
+	<input type="hidden" name="viewCount" value="<c:out value="${commandMap.viewCount}" />" />
+	<input type="hidden" name="page" value="<c:out value="${commandMap.page}" />" />
 	<input type="hidden" name="seq" value="" />
-	<input type="hidden" name="bbsId" value="" />
+	<input type="hidden" name="bbsId" value="${commandMap.get('bbsId')}" />
 	<div class="products">
 		<div class="container">
 			<div class="col-md-12">
@@ -109,6 +109,17 @@
         	<div class="col-md-12">
 				<div class="filters" style="border-bottom: 0px;">
 					<br>
+					<div class="b-search">
+						<select name="schFld" id="schFld">
+							<option value="0" <c:if test="${commandMap.get('schFld') eq '0' }">selected="selected"</c:if>>전체</option>
+							<option value="1" <c:if test="${commandMap.get('schFld') eq '1' }">selected="selected"</c:if>>제목</option>
+							<option value="2" <c:if test="${commandMap.get('schFld') eq '2' }">selected="selected"</c:if>>작성자</option>
+						</select>
+						<input type="text" name="schStr" id="schStr" value="${commandMap.get('schStr')}" placeholder="Search"/>
+						<button onclick="fn_search();">
+							<i class="fa fa-search"></i>
+						</button>
+					</div>
 					<ul>
 						<li class="active" data-filter="*" ></li>
 						<li data-filter=".gra" class="" style="float: right;" onclick="fn_goInput('${commandMap.get('bbsId')}');">글쓰기</li>
@@ -117,9 +128,11 @@
 			</div>
 		</div>
     </div>
+    </form>
 	<%@ include file="/WEB-INF/jsp/userLayout/bottom.jsp" %>
 </body>
 <script type="text/javascript">
+//페이징 처리
 function fn_link_page(pageNo){
 	if(pageNo == 1){
 		if(${paginationInfo.currentPageNo} <2){
@@ -153,6 +166,13 @@ function fn_goView(seq,bbsId) {
 	frm.seq.value = seq;
 	frm.bbsId.value = bbsId;
 	frm.action = "/board/board_view.do";
+	frm.submit();
+}
+
+//검색
+function fn_search(){
+	var frm = document.listForm;
+	frm.action = "/board/board_list.do";
 	frm.submit();
 }
 </script>

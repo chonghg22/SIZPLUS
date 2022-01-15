@@ -1,5 +1,6 @@
 package sizplus.user.board.service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -19,13 +20,13 @@ public class BoardServiceImpl implements BoardService{
 	private BoardDAO boardDAO;
 	
 	@Override
-	public List<Map<String, Object>> selectBoardList(Map<String, Object> commandMap) throws Exception {
+	public List<Map<String, Object>> selectBoardList(HashMap<String, Object> commandMap) throws Exception {
 		return boardDAO.selectBoardList(commandMap);
 		
 	}
 	
 	@Override
-	public int selectBoardCnt(Map<String, Object> map) throws Exception {
+	public int selectBoardCnt(HashMap<String, Object> map) throws Exception {
 		return boardDAO.selectBoardCnt(map);
 		
 	}
@@ -44,6 +45,16 @@ public class BoardServiceImpl implements BoardService{
 	@Override
 	public int updateBoardHitCount(Map<String, Object> map) throws Exception {
 		return boardDAO.updateBoardHitCount(map);
+	}
+	
+	@Override
+	public int updateBoardGoodCount(Map<String, Object> map) throws Exception {
+		return boardDAO.updateBoardGoodCount(map);
+	}
+	
+	@Override
+	public int updateBoardBadCount(Map<String, Object> map) throws Exception {
+		return boardDAO.updateBoardBadCount(map);
 	}
 	
 	@Override

@@ -49,13 +49,13 @@ public class MainController {
 	
 	@RequestMapping(value="/index.do")
     public String mainList(Map<String, Object> map, ModelMap model, HttpServletResponse response, HttpServletRequest request, CommandMap commandMap) throws Exception{
-    	
-		map.put("firstIndex", 0);
-		map.put("recordCountPerPage", 5);
-		map.put("bbsId", "free");
-		List<Map<String, Object>> freeBoardList = boardService.selectBoardList(map);
-		map.put("bbsId", "life");
-		List<Map<String, Object>> lifeBoardList = boardService.selectBoardList(map);
+		HashMap<String, Object> resultMap = CommonUtil.convertMap(request);
+		resultMap.put("firstIndex", 0);
+		resultMap.put("recordCountPerPage", 5);
+		resultMap.put("bbsId", "free");
+		List<Map<String, Object>> freeBoardList = boardService.selectBoardList(resultMap);
+		resultMap.put("bbsId", "life");
+		List<Map<String, Object>> lifeBoardList = boardService.selectBoardList(resultMap);
 		model.addAttribute("freeBoardList", freeBoardList);
 		model.addAttribute("lifeBoardList", lifeBoardList);
 		

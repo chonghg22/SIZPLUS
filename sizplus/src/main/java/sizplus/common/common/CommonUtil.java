@@ -10,6 +10,7 @@ import java.util.Map.Entry;
 import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -77,4 +78,18 @@ public class CommonUtil {
 		model.addAttribute("message", message);
 		return "comm/message/message";
   	}
+    
+    /**
+     * Ajax 메세지 응답
+     * @param text
+     * @return
+     * @throws IOException
+     */ 
+    public static void printAjax(String json, HttpServletResponse response) throws IOException {
+	    response.setCharacterEncoding("UTF-8");
+	    response.setHeader("Cache-Control", "no-cache");
+		response.getWriter().println(json);
+		response.getWriter().flush();
+	    response.getWriter().close();
+    }
 }

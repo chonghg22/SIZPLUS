@@ -1,5 +1,6 @@
 package sizplus.user.board.dao;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -19,7 +20,7 @@ public class BoardDAO{
 	
 	
 	//AbstractDAO를 호출하지 않고 SqlSessionTemplate 직접 사용하여 쿼리 조회
-	public List<Map<String, Object>> selectBoardList(Map<String, Object> commandMap) throws Exception{
+	public List<Map<String, Object>> selectBoardList(HashMap<String, Object> commandMap) throws Exception{
 		return sqlSession.selectList("board.selectBoardList", commandMap);
 	}
 	
@@ -30,8 +31,8 @@ public class BoardDAO{
 	
 	
 	//AbstractDAO를 호출하지 않고 SqlSessionTemplate 직접 사용하여 쿼리 조회
-	public int selectBoardCnt(Map<String, Object> map) throws Exception{
-		return sqlSession.selectOne("board.selectBoardCnt", map);
+	public int selectBoardCnt(HashMap<String, Object> commandMap) throws Exception{
+		return sqlSession.selectOne("board.selectBoardCnt", commandMap);
 	}
 	
 	
@@ -41,6 +42,14 @@ public class BoardDAO{
 	
 	public int updateBoardHitCount(Map<String, Object> map) throws Exception{
 		return sqlSession.update("board.updateBoardHitCount", map);
+	}
+	
+	public int updateBoardGoodCount(Map<String, Object> map) throws Exception{
+		return sqlSession.update("board.updateBoardGoodCount", map);
+	}
+	
+	public int updateBoardBadCount(Map<String, Object> map) throws Exception{
+		return sqlSession.update("board.updateBoardBadCount", map);
 	}
 	
 	public int updateBoard(Map<String, Object> map) throws Exception{

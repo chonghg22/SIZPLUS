@@ -1,21 +1,17 @@
 	package sizplus.user.board.controller;
 
+import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
-
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
-
+import org.springframework.web.bind.annotation.ResponseBody;
 import sizplus.common.common.CommandMap;
 import sizplus.common.common.CommonUtil;
 import sizplus.common.common.PaginationInfo;
@@ -30,10 +26,8 @@ public class BoardController {
 	
 	//게시판 리스트
 	@RequestMapping(value="/board/board_list.do")
-	public String selectUserBoardList(Map<String, Object> map, ModelMap model, HttpServletRequest request) throws Exception{
+	public String selectUserBoardList(ModelMap model, HttpServletRequest request) throws Exception{
 		HashMap<String, Object> commandMap = CommonUtil.convertMap(request);
-		String bbsId = commandMap.get("bbsId").toString();
-		map.put("bbsId", bbsId);
 		int page = 1;
 		if(commandMap.get("page") != null) {
 			page = Integer.parseInt(commandMap.get("page").toString());
@@ -43,11 +37,10 @@ public class BoardController {
 		if(commandMap.get("viewCount") != null) {
 			viewCount = Integer.parseInt(commandMap.get("viewCount").toString());
 		}
-		map.put("page", page);
-		map.put("viewCount", viewCount);
-		
+		commandMap.put("page", page);
+		commandMap.put("viewCount", viewCount);
 
-		int totCnt = boardService.selectBoardCnt(map); //게시글 수
+		int totCnt = boardService.selectBoardCnt(commandMap); //게시글 수
 
 		PaginationInfo paginationInfo = new PaginationInfo();
 		paginationInfo.setCurrentPageNo(page);
@@ -55,10 +48,10 @@ public class BoardController {
 		paginationInfo.setPageSize(10);
 		paginationInfo.setTotalRecordCount(totCnt);
 		
-		map.put("firstIndex", paginationInfo.getFirstRecordIndex());
-		map.put("recordCountPerPage", paginationInfo.getRecordCountPerPage());
+		commandMap.put("firstIndex", paginationInfo.getFirstRecordIndex());
+		commandMap.put("recordCountPerPage", paginationInfo.getRecordCountPerPage());
 
-		List<Map<String, Object>> list = boardService.selectBoardList(map);
+		List<Map<String, Object>> list = boardService.selectBoardList(commandMap);
 		
 		model.addAttribute("commandMap", commandMap); //페이징 정보
 		model.addAttribute("paginationInfo", paginationInfo); //페이징 정보
@@ -160,7 +153,52 @@ public class BoardController {
 		}
 		
 		return "redirect:/board/board_list.do";
-    
     }
+	
+	//추천 카운트 +1
+	@RequestMapping(value="/board/boardGoodCnt_update_proc.ajax")
+	@ResponseBody
+	public void boardGoodCountUpdate(ModelMap model, HttpServletRequest request, HttpServletResponse response) throws Exception{
+		
+		HashMap<String, Object> commandMap = CommonUtil.convertMap(request);
+		String result = "0";
+		String message = "알수없는 오류가 발생했습니다. 다시 시도해 주세요.";
+		if(commandMap.get("seq") != null){
+			int resultCount = boardService.updateBoardGoodCount(commandMap);
+
+//			if(resultCount > 0 ){
+//				result = "2";
+//				message = "중복된 사업코드 입니다.";
+//			}else{
+				result = "1";
+				message = "추천 완료.";
+//			}
+		}
+		String json = "{\"result\" : "+result+", \"message\" : \""+message+"\"}";
+		CommonUtil.printAjax(json, response);
+	}
+	
+	//비추천 카운트 +1
+		@RequestMapping(value="/board/boardBadCnt_update_proc.ajax")
+		@ResponseBody
+		public void boardBadCountUpdate(ModelMap model, HttpServletRequest request, HttpServletResponse response) throws Exception{
+			
+			HashMap<String, Object> commandMap = CommonUtil.convertMap(request);
+			String result = "0";
+			String message = "알수없는 오류가 발생했습니다. 다시 시도해 주세요.";
+			if(commandMap.get("seq") != null){
+				int resultCount = boardService.updateBoardBadCount(commandMap);
+
+//				if(resultCount > 0 ){
+//					result = "2";
+//					message = "중복된 사업코드 입니다.";
+//				}else{
+					result = "1";
+					message = "비추천 완료.";
+//				}
+			}
+			String json = "{\"result\" : "+result+", \"message\" : \""+message+"\"}";
+			CommonUtil.printAjax(json, response);
+		}
 	
 }

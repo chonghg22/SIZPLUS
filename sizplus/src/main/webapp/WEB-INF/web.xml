@@ -16,6 +16,7 @@
   <filter-mapping>
     <filter-name>encodingFilter</filter-name>
     <url-pattern>*.do</url-pattern>
+    <url-pattern>*.ajax</url-pattern>
   </filter-mapping>
   <listener>
     <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
@@ -36,6 +37,7 @@
   <servlet-mapping>
     <servlet-name>action</servlet-name>
     <url-pattern>*.do</url-pattern>
+    <url-pattern>*.ajax</url-pattern>
   </servlet-mapping>
   <context-param>
     <param-name>contextConfigLocation</param-name>

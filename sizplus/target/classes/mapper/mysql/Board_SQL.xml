@@ -2,6 +2,32 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="board">
+
+	<sql id="listWhere">
+		<if test="schStr != null and schStr != ''">
+		<choose>
+			<when test="schFld == '1'.toString()">
+			and	a.title like concat('%' , #{schStr} , '%')
+			</when>
+			<when test="schFld == '2'.toString()">
+			and	a.input_nm like concat('%' , #{schStr} , '%')
+			</when>
+			<otherwise>
+			and	(
+				a.title like concat('%' , #{schStr} , '%')
+				or
+				a.input_nm like concat('%' , #{schStr} , '%')
+			)
+			</otherwise>
+		</choose>
+		</if>
+<!-- 		<if test="bbsId == 'faq' and typeEtc !=null and typeEtc !=''"> -->
+<!-- 		and a.type_etc = #{typeEtc} -->
+<!-- 		</if> -->
+<!-- 		<if test="openYn != null and openYn !=''"> -->
+<!-- 		and a.open_yn = #{openYn} -->
+<!-- 		</if> -->
+	</sql>
 	
 	<select id="selectBoardList" parameterType="hashmap" resultType="hashmap">
 		select
@@ -18,7 +44,9 @@
 			a.good_cnt,
 			a.hit
 		from e_board a
-		where bbs_id = #{bbsId}
+		where
+		bbs_id = #{bbsId}
+		<include refid="listWhere" />
 		order by seq desc
 		limit #{firstIndex}, #{recordCountPerPage}
 	</select>
@@ -26,8 +54,10 @@
 	<select id="selectBoardCnt" parameterType="hashmap" resultType="int">
 		select
 			count(*) cnt
-		from e_board
-		where bbs_id = #{bbsId}
+		from e_board a
+		where
+		a.bbs_id = #{bbsId}
+		<include refid="listWhere" />
 	</select>
 	
 	<select id="selectBoardView" parameterType="hashmap" resultType="hashmap">
@@ -43,6 +73,7 @@
 			a.edit_ip,
 			a.edit_date,
 			a.good_cnt,
+			a.bad_cnt,
 			a.hit
 		from e_board a
 		where 
@@ -85,6 +116,20 @@
 	<update id="updateBoardHitCount">
 		update e_board set
 			hit = hit +1
+		where 
+			seq = #{seq}
+	</update>
+	
+	<update id="updateBoardGoodCount">
+		update e_board set
+			good_cnt = good_cnt +1
+		where 
+			seq = #{seq}
+	</update>
+	
+	<update id="updateBoardBadCount">
+		update e_board set
+			bad_cnt = bad_cnt +1
 		where 
 			seq = #{seq}
 	</update>
