@@ -41,7 +41,7 @@
 	<form name="listForm" id="listForm" method="get">
 	<input type="hidden" name="viewCount" value="<c:out value="${commandMap.viewCount}" />" />
 	<input type="hidden" name="page" value="<c:out value="${commandMap.page}" />" />
-	<input type="hidden" name="seq" value="" />
+	<input type="hidden" name="boardSeq" value="" />
 	<input type="hidden" name="bbsId" value="${commandMap.get('bbsId')}" />
 	<div class="products">
 		<div class="container">
@@ -89,10 +89,10 @@
 							<td style="text-align: left;">
 							 <c:choose>
 					           <c:when test="${fn:length(result.title) > 35}">
-					            <a href="#" onclick="fn_goView('<c:out value="${result.seq}"/>','<c:out value="${result.bbs_id}"/>')" style="text-decoration: none;color: #000;"><c:out value="${fn:substring(result.title,0,35)}"/>....[1]</a>
+					            <a href="#" onclick="fn_goView('<c:out value="${result.board_seq}"/>','<c:out value="${result.bbs_id}"/>')" style="text-decoration: none;color: #000;"><c:out value="${fn:substring(result.title,0,35)}"/>....[1]</a>
 					           </c:when>
 					           <c:otherwise>
-					            <a href="#" onclick="fn_goView('<c:out value="${result.seq}"/>','<c:out value="${result.bbs_id}"/>')" style="text-decoration: none;color: #000;"><c:out value="${result.title}"/> [1]</a>
+					            <a href="#" onclick="fn_goView('<c:out value="${result.board_seq}"/>','<c:out value="${result.bbs_id}"/>')" style="text-decoration: none;color: #000;"><c:out value="${result.title}"/> [1]</a>
 					           </c:otherwise> 
 					          </c:choose>
 							</td>
@@ -161,9 +161,9 @@ function fn_goInput(bbsId){
 }
 
 /* 글 상세보기 화면 function */
-function fn_goView(seq,bbsId) {
+function fn_goView(boardSeq,bbsId) {
 	var frm = document.listForm;
-	frm.seq.value = seq;
+	frm.boardSeq.value = boardSeq;
 	frm.bbsId.value = bbsId;
 	frm.action = "/board/board_view.do";
 	frm.submit();

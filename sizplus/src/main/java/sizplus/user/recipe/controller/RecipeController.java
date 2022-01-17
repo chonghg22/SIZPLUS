@@ -69,7 +69,7 @@ public class RecipeController {
 	@RequestMapping(value="/recipe/recipe_view.do")
 	public String selectUserrecipeView(Map<String, Object> map, ModelMap model, HttpServletResponse response, HttpServletRequest request, CommandMap commandMap) throws Exception{
 		
-		map.put("seq", commandMap.get("seq").toString());
+		map.put("boardSeq", commandMap.get("boardSeq").toString());
 		map.put("bbsId", commandMap.get("bbsId").toString());
 		
 		int hitCount = recipeService.updateRecipeHitCount(map);
@@ -115,7 +115,7 @@ public class RecipeController {
 	@RequestMapping(value="/recipe/recipe_delete_proc.do")
     public String deleterecipeProc(Map<String, Object> map, ModelMap model, HttpServletResponse response, HttpServletRequest request, CommandMap commandMap) throws Exception{
 		
-		map.put("seq", commandMap.get("seq").toString());
+		map.put("boardSeq", commandMap.get("boardSeq").toString());
 		
 		int deleteResult = recipeService.deleteRecipe(map);
 		

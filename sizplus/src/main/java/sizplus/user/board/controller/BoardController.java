@@ -64,7 +64,7 @@ public class BoardController {
 	@RequestMapping(value="/board/board_view.do")
 	public String selectUserBoardView(Map<String, Object> map, ModelMap model, HttpServletResponse response, HttpServletRequest request, CommandMap commandMap) throws Exception{
 		
-		map.put("seq", commandMap.get("seq").toString());
+		map.put("boardSeq", commandMap.get("boardSeq").toString());
 		map.put("bbsId", commandMap.get("bbsId").toString());
 		
 		int hitCount = boardService.updateBoardHitCount(map);
@@ -110,7 +110,7 @@ public class BoardController {
 	@RequestMapping(value="/board/board_edit.do")
     public String updateFreeBoardList(Map<String, Object> map,ModelMap model, HttpServletResponse response, HttpServletRequest request, CommandMap commandMap) throws Exception{
 		
-		map.put("seq", commandMap.get("seq").toString());
+		map.put("boardSeq", commandMap.get("boardSeq").toString());
 		map.put("bbsId", commandMap.get("bbsId").toString());
 		
 		Map<String, Object> result = boardService.selectBoardView(map);
@@ -126,7 +126,7 @@ public class BoardController {
 	@RequestMapping(value="/board/board_edit_proc.do")
     public String updateFreeBoardProc(Map<String, Object> map, ModelMap model, HttpServletResponse response, HttpServletRequest request, CommandMap commandMap) throws Exception{
 		
-		map.put("seq", commandMap.get("seq").toString());
+		map.put("boardSeq", commandMap.get("boardSeq").toString());
 		map.put("password", CommonUtil.hexSha256(commandMap.get("password").toString()));
 		map.put("title", commandMap.get("title").toString());
 		map.put("contents", commandMap.get("contents").toString());
@@ -144,7 +144,7 @@ public class BoardController {
 	@RequestMapping(value="/board/board_delete_proc.do")
     public String deleteBoardProc(Map<String, Object> map, ModelMap model, HttpServletResponse response, HttpServletRequest request, CommandMap commandMap) throws Exception{
 		
-		map.put("seq", commandMap.get("seq").toString());
+		map.put("boardSeq", commandMap.get("boardSeq").toString());
 		
 		int deleteResult = boardService.deleteBoard(map);
 		
@@ -163,7 +163,7 @@ public class BoardController {
 		HashMap<String, Object> commandMap = CommonUtil.convertMap(request);
 		String result = "0";
 		String message = "알수없는 오류가 발생했습니다. 다시 시도해 주세요.";
-		if(commandMap.get("seq") != null){
+		if(commandMap.get("boardSeq") != null){
 			int resultCount = boardService.updateBoardGoodCount(commandMap);
 
 //			if(resultCount > 0 ){
@@ -186,7 +186,7 @@ public class BoardController {
 			HashMap<String, Object> commandMap = CommonUtil.convertMap(request);
 			String result = "0";
 			String message = "알수없는 오류가 발생했습니다. 다시 시도해 주세요.";
-			if(commandMap.get("seq") != null){
+			if(commandMap.get("boardSeq") != null){
 				int resultCount = boardService.updateBoardBadCount(commandMap);
 
 //				if(resultCount > 0 ){

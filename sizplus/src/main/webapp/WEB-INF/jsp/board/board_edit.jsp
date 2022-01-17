@@ -37,7 +37,7 @@
 <body>
 	<%@ include file="/WEB-INF/jsp/userLayout/top.jsp" %>
 	<form name="listForm" id="listForm">
-	<input type="hidden" name="seq" value="${result.seq} }" />
+	<input type="hidden" name="boardSeq" value="${result.board_seq} }" />
 	<input type="hidden" name="bbsId" value="${result.bbs_id}" />
 	<div class="products">
 		<div class="container">
@@ -47,10 +47,10 @@
 						<li class="" data-filter="*" style="float: left;">
 						<h3>
 							<c:if test="${commandMap.get('bbsId') eq 'free' }">
-							<span>자유게시판</span>
+							<span><a href="/board/board_list.do?bbsId=${commandMap.get('bbsId')}" style="color: black;">자유게시판</a></span>
 							</c:if>
 							<c:if test="${commandMap.get('bbsId') eq 'life' }">
-							<span>라이프스타일</span>
+							<span><a href="/board/board_list.do?bbsId=${commandMap.get('bbsId')}" style="color: black;">라이프스타일</a></span>
 							</c:if> 
 				  		</h3>
 						</li>

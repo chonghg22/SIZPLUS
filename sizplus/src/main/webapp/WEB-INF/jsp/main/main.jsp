@@ -243,10 +243,10 @@
 								<div class="tn-title">
 									<c:choose>
 						           <c:when test="${fn:length(free.title) > 35}">
-						            <a href="#" onclick="fn_goView('<c:out value="${free.seq}"/>','<c:out value="${free.bbs_id}"/>')" style="text-decoration: none;color: #000;"><c:out value="${fn:substring(free.title,0,35)}"/>....</a>
+						            <a href="#" onclick="fn_goView('<c:out value="${free.board_seq}"/>','<c:out value="${free.bbs_id}"/>')" style="text-decoration: none;color: #000;"><c:out value="${fn:substring(free.title,0,35)}"/>....</a>
 						           </c:when>
 						           <c:otherwise>
-						            <a href="#" onclick="fn_goView('<c:out value="${free.seq}"/>','<c:out value="${free.bbs_id}"/>')" style="text-decoration: none;color: #000;"><c:out value="${free.title}"/></a>
+						            <a href="#" onclick="fn_goView('<c:out value="${free.board_seq}"/>','<c:out value="${free.bbs_id}"/>')" style="text-decoration: none;color: #000;"><c:out value="${free.title}"/></a>
 						           </c:otherwise> 
 						          </c:choose>
 								</div>
@@ -260,10 +260,10 @@
 								<div class="tn-title">
 									<c:choose>
 						           <c:when test="${fn:length(life.title) > 35}">
-						            <a href="#" onclick="fn_goView('<c:out value="${life.seq}"/>','<c:out value="${life.bbs_id}"/>')" style="text-decoration: none;color: #000;"><c:out value="${fn:substring(life.title,0,35)}"/>....</a>
+						            <a href="#" onclick="fn_goView('<c:out value="${life.board_seq}"/>','<c:out value="${life.bbs_id}"/>')" style="text-decoration: none;color: #000;"><c:out value="${fn:substring(life.title,0,35)}"/>....</a>
 						           </c:when>
 						           <c:otherwise>
-						            <a href="#" onclick="fn_goView('<c:out value="${life.seq}"/>','<c:out value="${life.bbs_id}"/>')" style="text-decoration: none;color: #000;"><c:out value="${life.title}"/></a>
+						            <a href="#" onclick="fn_goView('<c:out value="${life.board_seq}"/>','<c:out value="${life.bbs_id}"/>')" style="text-decoration: none;color: #000;"><c:out value="${life.title}"/></a>
 						           </c:otherwise> 
 						          </c:choose>
 								</div>

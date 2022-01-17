@@ -5,7 +5,7 @@
 	
 	<select id="selectRecipeList" parameterType="hashmap" resultType="hashmap">
 		select
-			a.seq,
+			a.board_seq,
 			a.bbs_id,
 			a.open_yn,
 			a.title,
@@ -19,7 +19,7 @@
 			a.hit
 		from e_board a
 		where bbs_id = #{bbsId}
-		order by seq desc
+		order by board_seq desc
 		limit #{firstIndex}, #{recordCountPerPage}
 	</select>
 	
@@ -32,7 +32,7 @@
 	
 	<select id="selectRecipeView" parameterType="hashmap" resultType="hashmap">
 		select
-			a.seq,
+			a.board_seq,
 			a.bbs_id,
 			a.open_yn,
 			a.title,
@@ -48,7 +48,7 @@
 		where 
 		a.bbs_id = #{bbsId}
 		and
-		a.seq = #{seq}
+		a.board_seq = #{boardSeq}
 	</select>
 	
 	<insert id="insertRecipe">
@@ -72,11 +72,11 @@
 	</insert>
 	
 	<update id="updateRecipeHitCount">
-		update e_board set hit = hit +1 where seq = #{seq}
+		update e_board set hit = hit +1 where board_seq = #{boardSeq}
 	</update>
 	
 	<delete id="deleteRecipe">
-		delete from e_board where seq = #{seq}
+		delete from e_board where board_seq = #{boardSeq}
 	</delete>
 	
 </mapper>

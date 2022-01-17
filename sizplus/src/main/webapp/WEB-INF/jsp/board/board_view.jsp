@@ -38,7 +38,7 @@
 	<%@ include file="/WEB-INF/jsp/userLayout/top.jsp" %>
 	<form name="listForm" id="listForm" method="post">
 	<input type="hidden" name="bbsId" value="${result.bbs_id}" />
-	<input type="hidden" name="seq" value="${result.seq}" />
+	<input type="hidden" name="boardSeq" value="${result.board_seq}" />
 	<div class="products">
 		<div class="container">
 			<div class="col-md-12">
@@ -47,16 +47,14 @@
 						<li class="" data-filter="*" style="float: left;">
 						<h3>
 							<c:if test="${commandMap.get('bbsId') eq 'free' }">
-							<span>자유게시판</span>
+							<span><a href="/board/board_list.do?bbsId=${commandMap.get('bbsId')}" style="color: black;">자유게시판</a></span>
 							</c:if>
 							<c:if test="${commandMap.get('bbsId') eq 'life' }">
-							<span>라이프스타일</span>
+							<span><a href="/board/board_list.do?bbsId=${commandMap.get('bbsId')}" style="color: black;">라이프스타일</a></span>
 							</c:if> 
 				  		</h3>
 						</li>
 						<li class="active" data-filter="*" ></li>
-						<li data-filter=".gra" class="" style="float: right;" onclick="fn_bad();">비추천[<span id="badCnt">${result.bad_cnt}</span>]</li>
-						<li data-filter=".gra" class="" style="float: right;" onclick="fn_good();">추천[<span id="goodCnt">${result.good_cnt}</span>]</li>
 					</ul>
 				</div>
 			</div>
@@ -86,10 +84,35 @@
 				<div class="filters" style="border-bottom: 0px;">
 					<br>
 					<ul>
+						<li data-filter=".gra" class="" style="float: left;" onclick="fn_good();">추천[<span id="goodCnt">${result.good_cnt}</span>]</li>
+						<li data-filter=".gra" class="" style="float: left;" onclick="fn_bad();">비추천[<span id="badCnt">${result.bad_cnt}</span>]</li>
 						<li class="active" data-filter="*" ></li>
 						<li data-filter=".gra" class="" style="float: right;" onclick="fn_remove();">삭제</li>
 						<li data-filter=".gra" class="" style="float: right;" onclick="fn_edit();">수정</li>
 						<li data-filter=".gra" class="" style="float: right;" onclick="fn_list();">목록</li>
+					</ul>
+				</div>
+			</div>
+			<div class="row">
+				112
+				<table class="works_table" style="width: 100%;">
+					<colgroup>
+						<col style="width:15%"/>
+						<col/>
+					</colgroup>
+					<tbody>
+						<tr style=" border-bottom: solid 1px #000000;">
+							<td><textarea name="contents" id="contents" class="required" style="width:100%; height:300px;"  title="상세내용"></textarea></td>
+						</tr>
+					</tbody>
+				</table>
+        	</div>
+        	<div class="col-md-12">
+				<div class="filters" style="border-bottom: 0px;">
+					<br>
+					<ul>
+						<li class="active" data-filter="*" ></li>
+						<li data-filter=".gra" class="" style="float: right;" onclick="fn_list();">등록</li>
 					</ul>
 				</div>
 			</div>

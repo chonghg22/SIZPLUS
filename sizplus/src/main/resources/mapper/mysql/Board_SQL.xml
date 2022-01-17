@@ -31,7 +31,7 @@
 	
 	<select id="selectBoardList" parameterType="hashmap" resultType="hashmap">
 		select
-			a.seq,
+			a.board_seq,
 			a.bbs_id,
 			a.open_yn,
 			a.title,
@@ -47,7 +47,7 @@
 		where
 		bbs_id = #{bbsId}
 		<include refid="listWhere" />
-		order by seq desc
+		order by a.board_seq desc
 		limit #{firstIndex}, #{recordCountPerPage}
 	</select>
 	
@@ -62,7 +62,7 @@
 	
 	<select id="selectBoardView" parameterType="hashmap" resultType="hashmap">
 		select
-			a.seq,
+			a.board_seq,
 			a.bbs_id,
 			a.open_yn,
 			a.title,
@@ -79,7 +79,7 @@
 		where 
 		a.bbs_id = #{bbsId}
 		and
-		a.seq = #{seq}
+		a.board_seq = #{boardSeq}
 	</select>
 	
 	<insert id="insertBoard">
@@ -109,7 +109,7 @@
 			password = #{password},
 			edit_date = now()
 		where
-			seq = #{seq}
+			board_seq = #{boardSeq}
 		
 	</update>
 	
@@ -117,25 +117,25 @@
 		update e_board set
 			hit = hit +1
 		where 
-			seq = #{seq}
+			board_seq = #{boardSeq}
 	</update>
 	
 	<update id="updateBoardGoodCount">
 		update e_board set
 			good_cnt = good_cnt +1
 		where 
-			seq = #{seq}
+			board_seq = #{boardSeq}
 	</update>
 	
 	<update id="updateBoardBadCount">
 		update e_board set
 			bad_cnt = bad_cnt +1
 		where 
-			seq = #{seq}
+			board_seq = #{boardSeq}
 	</update>
 	
 	<delete id="deleteBoard">
-		delete from e_board where seq = #{seq}
+		delete from e_board where board_seq = #{boardSeq}
 	</delete>
 	
 </mapper>

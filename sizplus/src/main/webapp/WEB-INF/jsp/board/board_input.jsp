@@ -46,11 +46,11 @@
 						<h3>
 							<c:if test="${commandMap.get('bbsId') eq 'free' }">
 							<input type="hidden" name="bbsId" value="free" />
-							<span>자유게시판</span>
+							<span><a href="/board/board_list.do?bbsId=${commandMap.get('bbsId')}" style="color: black;">자유게시판</a></span>
 							</c:if>
 							<c:if test="${commandMap.get('bbsId') eq 'life' }">
 							<input type="hidden" name="bbsId" value="userTip" />
-							<span>라이프스타일</span>
+							<span><a href="/board/board_list.do?bbsId=${commandMap.get('bbsId')}" style="color: black;">라이프스타일</a></span>
 							</c:if> 
 				  		</h3>
 						</li>
