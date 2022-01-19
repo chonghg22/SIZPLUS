@@ -14,6 +14,8 @@ public interface BoardService {
 	
 	int insertBoard(Map<String, Object> map) throws Exception;
 	
+	int insertComment(Map<String, Object> map) throws Exception;
+	
 	int deleteBoard(Map<String, Object> map) throws Exception;
 	
 	int updateBoardHitCount(Map<String, Object> map) throws Exception;
@@ -25,5 +27,8 @@ public interface BoardService {
 	int updateBoard(Map<String, Object> map) throws Exception;
 	
 	Map<String, Object> selectBoardView(Map<String, Object> map) throws Exception;
+	
+	String selectCommentNumCheck(Map<String, Object> map) throws Exception;
+	
 
 }

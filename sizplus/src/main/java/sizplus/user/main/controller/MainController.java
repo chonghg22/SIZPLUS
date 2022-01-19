@@ -84,11 +84,22 @@ public class MainController {
 		MemberVO memberVO = new MemberVO();
 		//아이디를 입력하지 않고 로그인 버튼을 누를경우 alert창 호출
 		if("".equals(commandMap.get("member_id").toString())) {
-			CommonUtil.NotificationMessage(model, "오류", "아이디가 입력되지 않았습니다.", "history.back();");
+			HashMap<String, String> message = new HashMap<String, String>();
+			message.put("title","오류");
+			message.put("msg","아이디가 입력되지 않았습니다.");
+			message.put("scriptName","history.back();");
+			model.addAttribute("message", message);
+			return "comm/message/message";
 		}
 		//비밀번호를 입력하지 않고 로그인 버튼을 누를경우 alert창 호출
 		if("".equals(commandMap.get("member_pw").toString())) {
-			CommonUtil.NotificationMessage(model, "오류", "비밀번호가 입력되지 않았습니다.", "history.back();");
+//			CommonUtil.NotificationMessage(model, "오류", "비밀번호가 입력되지 않았습니다.", "history.back();");
+			HashMap<String, String> message = new HashMap<String, String>();
+			message.put("title","오류");
+			message.put("msg","비밀번호가 입력되지 않았습니다.");
+			message.put("scriptName","history.back();");
+			model.addAttribute("message", message);
+			return "comm/message/message";
 		}
 		//이용자가 입력한 Id,Pw를 memberVO 변수에 넣음
 		memberVO.setMemberId(commandMap.get("member_id").toString());
@@ -96,11 +107,19 @@ public class MainController {
 		memberVO.setMemberPw(CommonUtil.hexSha256(commandMap.get("member_pw").toString()));
 		MemberVO result = memberService.selectUserLoginView(memberVO);
 		if(result == null) {
-			CommonUtil.NotificationMessage(model, "오류", "로그인 정보를 확인 해 주세요.", "history.back();");
+			HashMap<String, String> message = new HashMap<String, String>();
+			message.put("title","오류");
+			message.put("msg","로그인 정보를 확인 해 주세요.");
+			message.put("scriptName","history.back();");
+			model.addAttribute("message", message);
+			return "comm/message/message";
 		}
+		System.out.println("여기도 들어옴?");
 		//로그인에 성공 할 경우 session에 로그인 한 유저의 정보를 저장
 		if(result != null) {
 			session.setAttribute("memberSession", memberVO);
+			session.setAttribute("memberId", result.getMemberId());
+			session.setAttribute("memberNickName", result.getMemberNickname());
 		}
 		return "redirect:/index.do";
     }

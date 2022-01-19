@@ -7,6 +7,8 @@ import java.util.Map;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -16,6 +18,7 @@ import sizplus.common.common.CommandMap;
 import sizplus.common.common.CommonUtil;
 import sizplus.common.common.PaginationInfo;
 import sizplus.user.board.service.BoardService;
+import sizplus.user.member.dao.MemberVO;
 
 @Controller
 public class BoardController {
@@ -62,7 +65,18 @@ public class BoardController {
     }
 	
 	@RequestMapping(value="/board/board_view.do")
-	public String selectUserBoardView(Map<String, Object> map, ModelMap model, HttpServletResponse response, HttpServletRequest request, CommandMap commandMap) throws Exception{
+	public String selectUserBoardView(Map<String, Object> map, ModelMap model, HttpServletResponse response, HttpServletRequest request, CommandMap commandMap, HttpSession session) throws Exception{
+		
+		if(session.getAttribute("memberSession") == null) {
+			HashMap<String, String> message = new HashMap<String, String>();
+			message.put("title","오류");
+			message.put("msg","로그인 후 이용 가능합니다.");
+			message.put("scriptName","history.back();");
+			model.addAttribute("message", message);
+			return "comm/message/message";
+		}else {
+			commandMap.put("loginMemberNickName",session.getAttribute("memberNickName").toString());
+		}
 		
 		map.put("boardSeq", commandMap.get("boardSeq").toString());
 		map.put("bbsId", commandMap.get("bbsId").toString());
@@ -79,9 +93,19 @@ public class BoardController {
 	
 	//자유게시판 글쓰기 페이지
 	@RequestMapping(value="/board/board_input.do")
-    public String insertFreeBoardList(ModelMap model, HttpServletResponse response, HttpServletRequest request, CommandMap commandMap) throws Exception{
+    public String insertFreeBoardList(ModelMap model, HttpSession session, HttpServletResponse response, HttpServletRequest request, CommandMap commandMap) throws Exception{
+		
+		if(session.getAttribute("memberSession") == null) {
+			HashMap<String, String> message = new HashMap<String, String>();
+			message.put("title","오류");
+			message.put("msg","로그인 후 이용 가능합니다.");
+			message.put("scriptName","history.back();");
+			model.addAttribute("message", message);
+			return "comm/message/message";
+		}
 		
 		model.addAttribute("commandMap", commandMap); //페이징 정보
+		
 
 		return "board/board_input";
     
@@ -179,26 +203,51 @@ public class BoardController {
 	}
 	
 	//비추천 카운트 +1
-		@RequestMapping(value="/board/boardBadCnt_update_proc.ajax")
-		@ResponseBody
-		public void boardBadCountUpdate(ModelMap model, HttpServletRequest request, HttpServletResponse response) throws Exception{
-			
-			HashMap<String, Object> commandMap = CommonUtil.convertMap(request);
-			String result = "0";
-			String message = "알수없는 오류가 발생했습니다. 다시 시도해 주세요.";
-			if(commandMap.get("boardSeq") != null){
-				int resultCount = boardService.updateBoardBadCount(commandMap);
+	@RequestMapping(value="/board/boardBadCnt_update_proc.ajax")
+	@ResponseBody
+	public void boardBadCountUpdate(ModelMap model, HttpServletRequest request, HttpServletResponse response) throws Exception{
+		
+		HashMap<String, Object> commandMap = CommonUtil.convertMap(request);
+		String result = "0";
+		String message = "알수없는 오류가 발생했습니다. 다시 시도해 주세요.";
+		if(commandMap.get("boardSeq") != null){
+			int resultCount = boardService.updateBoardBadCount(commandMap);
 
 //				if(resultCount > 0 ){
 //					result = "2";
 //					message = "중복된 사업코드 입니다.";
 //				}else{
-					result = "1";
-					message = "비추천 완료.";
+				result = "1";
+				message = "비추천 완료.";
 //				}
-			}
-			String json = "{\"result\" : "+result+", \"message\" : \""+message+"\"}";
-			CommonUtil.printAjax(json, response);
 		}
+		String json = "{\"result\" : "+result+", \"message\" : \""+message+"\"}";
+		CommonUtil.printAjax(json, response);
+	}
+		
+	//자유게시판 글등록 처리
+	@RequestMapping(value="/board/board_comment_input_proc.do")
+    public String insertBoardCommentProc(Map<String, Object> map, ModelMap model, HttpServletResponse response, HttpServletRequest request) throws Exception{
+		
+		HashMap<String, Object> commandMap = CommonUtil.convertMap(request);
+//		map.put("password", CommonUtil.hexSha256(commandMap.get("password").toString()));
+//		map.put("title", commandMap.get("title").toString());
+//		map.put("contents", commandMap.get("contents").toString());
+		String commentNo = boardService.selectCommentNumCheck(commandMap);
+		if(commentNo == null) {
+			commandMap.put("commentNo", "1");
+		}else {
+			commandMap.put("commentNo", (Integer.parseInt(commentNo)+1)+"");
+		}
+		int result = boardService.insertComment(commandMap);
+//		if(insertResult == 1) {
+//			CommonUtil.NotificationMessage(model, "성공", "수정되었습니다.", "location.href='/board/board_list.do?bbsId="+commandMap.get("bbsId").toString()+"';");
+//		}
+		
+		return "redirect:/board/board_view.do?boardSeq="+commandMap.get("boardSeq").toString()+"&bbsId="+commandMap.get("bbsId").toString()+"";
+    
+    }
+		
+		
 	
 }

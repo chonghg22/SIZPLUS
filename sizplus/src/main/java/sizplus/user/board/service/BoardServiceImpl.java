@@ -43,6 +43,11 @@ public class BoardServiceImpl implements BoardService{
 	}
 	
 	@Override
+	public int insertComment(Map<String, Object> map) throws Exception {
+		return boardDAO.insertComment(map);
+	}
+	
+	@Override
 	public int updateBoardHitCount(Map<String, Object> map) throws Exception {
 		return boardDAO.updateBoardHitCount(map);
 	}
@@ -66,5 +71,12 @@ public class BoardServiceImpl implements BoardService{
 	public int deleteBoard(Map<String, Object> map) throws Exception {
 		return boardDAO.deleteBoard(map);
 	}
+	
+	@Override
+	public String selectCommentNumCheck(Map<String, Object> map) throws Exception {
+		return boardDAO.selectCommentNumCheck(map);
+		
+	}
+	
 	
 }

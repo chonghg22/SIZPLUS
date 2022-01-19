@@ -59,13 +59,13 @@ public class MemberController {
 		//jsp에서 member_gender 값이 null 이면 에러가 떠서  member_gender가 null일경우 대체 값을 입력
 		if(commandMap.get("member_gender") == null) {
 			//대신 들어가는 값
-			map.put("memberGender", "대신 들어감");
+			map.put("memberGender", null);
 		//그게 아니고 memberGender 값이 null 아닐경우 jsp에서 보내주는 값을 저장
 		}else {
 			map.put("memberGender", commandMap.get("member_gender").toString());
 		}
 		if(commandMap.get("member_way") == null) {
-			map.put("memberWay", "대신 들어감");
+			map.put("memberWay", null);
 		}else {
 			//사용자가 입력한 값을 넣어줌
 			map.put("memberWay", commandMap.get("member_way").toString());

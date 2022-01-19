@@ -5,14 +5,8 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Enumeration;
 import java.util.HashMap;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
  
 public class CommonUtil {
@@ -69,14 +63,13 @@ public class CommonUtil {
      * @return
      * @throws IOException
      */
-    public static String NotificationMessage(ModelMap model, String title, String msg, String scriptName) throws IOException, NoSuchAlgorithmException {
+    public static String NotificationMessage(ModelMap model, String title, String msg, String scriptName) throws Exception{
     	HashMap<String, String> message = new HashMap<String, String>();
-    	message.put("title",title);
-		message.put("msg",msg);
-		message.put("script",scriptName);
-		message.put("type","alert");
+    	System.out.println("title::"+title);
+		System.out.println("msg::"+msg);
+		System.out.println("scriptName::"+scriptName);
 		model.addAttribute("message", message);
-		return "comm/message/message";
+		return "message/message";
   	}
     
     /**

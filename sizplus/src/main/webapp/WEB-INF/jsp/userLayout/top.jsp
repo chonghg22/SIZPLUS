@@ -55,7 +55,13 @@
 						</div>
 					</div>
 					<a href="single-page.html" class="nav-item nav-link">Single Page</a>
+					<c:if test="${empty memberSession }">
 					<a href="/login.do" class="nav-item nav-link">로그인</a>
+					</c:if>
+					
+					<c:if test="${not empty memberSession }">
+					<a href="/logout_proc.do" class="nav-item nav-link">로그아웃</a>
+					</c:if>
 					<a href="/member/mypage.do" class="nav-item nav-link">마이페이지</a>
 				</div>
 			</div>

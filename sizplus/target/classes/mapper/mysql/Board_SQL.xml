@@ -29,7 +29,9 @@
 <!-- 		</if> -->
 	</sql>
 	
+	<!-- 게시글 목록 -->
 	<select id="selectBoardList" parameterType="hashmap" resultType="hashmap">
+		/*selectBoardList*/
 		select
 			a.board_seq,
 			a.bbs_id,
@@ -51,7 +53,9 @@
 		limit #{firstIndex}, #{recordCountPerPage}
 	</select>
 	
+	<!-- 게시글 갯수 -->
 	<select id="selectBoardCnt" parameterType="hashmap" resultType="int">
+		/*selectBoardCnt*/
 		select
 			count(*) cnt
 		from e_board a
@@ -60,7 +64,9 @@
 		<include refid="listWhere" />
 	</select>
 	
+	<!-- 게시글 상세보기 -->
 	<select id="selectBoardView" parameterType="hashmap" resultType="hashmap">
+		/*selectBoardView*/
 		select
 			a.board_seq,
 			a.bbs_id,
@@ -82,7 +88,9 @@
 		a.board_seq = #{boardSeq}
 	</select>
 	
+	<!-- 게시글 등록 -->
 	<insert id="insertBoard">
+		/*insertBoard*/
 		insert into e_board(
 			bbs_id,
 			open_yn,
@@ -102,7 +110,9 @@
 		)
 	</insert>
 	
+	<!-- 게시글 수정 -->
 	<update id="updateBoard">
+		/*updateBoard*/
 		update e_board set
 			title = #{title},
 			contents = #{contents},
@@ -113,29 +123,67 @@
 		
 	</update>
 	
+	<!-- 게시글 조회수 증가 -->
 	<update id="updateBoardHitCount">
+		/*updateBoardHitCount*/
 		update e_board set
 			hit = hit +1
 		where 
 			board_seq = #{boardSeq}
 	</update>
 	
+	<!-- 게시글 추천  -->
 	<update id="updateBoardGoodCount">
+		/*updateBoardGoodCount*/
 		update e_board set
 			good_cnt = good_cnt +1
 		where 
 			board_seq = #{boardSeq}
 	</update>
 	
+	<!-- 게시글 비추천  -->
 	<update id="updateBoardBadCount">
+		/*updateBoardBadCount*/
 		update e_board set
 			bad_cnt = bad_cnt +1
 		where 
 			board_seq = #{boardSeq}
 	</update>
 	
+	<!-- 게시글 삭제 -->
 	<delete id="deleteBoard">
+		/*deleteBoard*/
 		delete from e_board where board_seq = #{boardSeq}
 	</delete>
+	
+	<!-- 해당게시글의 댓글순서 -->
+	<select id="selectCommentNumCheck" parameterType="hashmap" resultType="String">
+		/*selectCommentNumCheck*/
+		select
+			a.comment_no
+		from e_comment a
+		where
+		a.board_seq = #{boardSeq}
+		order by a.comment_no desc
+		limit 1
+	</select>
+	
+	<!-- 해당 게시글에 대한 답글 등록 -->
+	<insert id="insertComment">
+		/*insertBoard*/
+		insert into e_comment(
+			board_seq,
+			comment_no,
+			recomment_no,
+			comment_contents,
+			reg_dt
+		)values(
+			#{boardSeq},
+			#{commentNo},
+			#{recommentNo},
+			#{commentContents},
+			now()
+		)
+	</insert>
 	
 </mapper>
