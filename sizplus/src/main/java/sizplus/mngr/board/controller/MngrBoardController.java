@@ -84,7 +84,7 @@ public class MngrBoardController {
     		MultipartHttpServletRequest multiRequest, HttpServletRequest request, HttpSession session) throws IOException, SQLException, RuntimeException, NoSuchAlgorithmException {
 		HashMap<String, Object> commandMap = CommonUtil.convertMap(request);
 		
-		String type_etc = "";
+		String type_etc = ""; 
 		if (commandMap.get("typeEtc") !=null) {
 			type_etc = commandMap.get("typeEtc").toString();
 		}
