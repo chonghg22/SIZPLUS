@@ -1,5 +1,6 @@
 package sizplus.user.board.service;
 
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,9 +13,11 @@ public interface BoardService {
 	
 	int selectBoardCnt(HashMap<String, Object> map) throws Exception;
 	
-	int insertBoard(Map<String, Object> map) throws Exception;
+	int insertBoard(Map<String, Object> map) throws SQLException;
 	
 	int insertComment(Map<String, Object> map) throws Exception;
+	
+	int insertBoardFile(Map<String, Object> map) throws SQLException;
 	
 	int deleteBoard(Map<String, Object> map) throws Exception;
 	
@@ -30,5 +33,8 @@ public interface BoardService {
 	
 	String selectCommentNumCheck(Map<String, Object> map) throws Exception;
 	
-
+	List<Map<String, Object>> selectBoardCommentList(HashMap<String, Object> commandMap) throws Exception;
+	
+	int deleteBoardChk(HashMap<String, Object> map) throws Exception;
+	
 }

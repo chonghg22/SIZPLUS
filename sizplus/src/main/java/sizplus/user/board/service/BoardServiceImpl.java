@@ -1,5 +1,6 @@
 package sizplus.user.board.service;
 
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -32,13 +33,20 @@ public class BoardServiceImpl implements BoardService{
 	}
 	
 	@Override
+	public int insertBoardFile(Map<String, Object> map) throws SQLException {
+		return boardDAO.insertBoardFile(map);
+	}
+	
+	
+	
+	@Override
 	public Map<String, Object> selectBoardView(Map<String, Object> map) throws Exception {
 		return boardDAO.selectBoardView(map);
 		
 	}
 	
 	@Override
-	public int insertBoard(Map<String, Object> map) throws Exception {
+	public int insertBoard(Map<String, Object> map) throws SQLException {
 		return boardDAO.insertBoard(map);
 	}
 	
@@ -77,6 +85,18 @@ public class BoardServiceImpl implements BoardService{
 		return boardDAO.selectCommentNumCheck(map);
 		
 	}
+	
+	@Override
+	public List<Map<String, Object>> selectBoardCommentList(HashMap<String, Object> commandMap) throws Exception {
+		return boardDAO.selectBoardCommentList(commandMap);
+		
+	}
+	
+	@Override
+	public int deleteBoardChk(HashMap<String, Object> map) throws Exception {
+		return boardDAO.deleteBoardChk(map);
+	}
+	
 	
 	
 }

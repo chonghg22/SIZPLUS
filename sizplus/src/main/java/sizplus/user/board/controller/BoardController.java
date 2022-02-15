@@ -1,6 +1,5 @@
-	package sizplus.user.board.controller;
+package sizplus.user.board.controller;
 
-import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -18,7 +17,6 @@ import sizplus.common.common.CommandMap;
 import sizplus.common.common.CommonUtil;
 import sizplus.common.common.PaginationInfo;
 import sizplus.user.board.service.BoardService;
-import sizplus.user.member.dao.MemberVO;
 
 @Controller
 public class BoardController {
@@ -61,7 +59,7 @@ public class BoardController {
 		model.addAttribute("listNo", (totCnt - ((page - 1)* paginationInfo.getRecordCountPerPage()))); //페이지 No 의 시작 값 가상의 넘버링
 		model.addAttribute("list", list);
 		
-    	return "board/board_list";
+    	return "user/board/board_list";
     }
 	
 	@RequestMapping(value="/board/board_view.do")
@@ -77,6 +75,9 @@ public class BoardController {
 		}else {
 			commandMap.put("loginMemberNickName",session.getAttribute("memberNickName").toString());
 		}
+		HashMap<String, Object> resultMap = CommonUtil.convertMap(request);
+		
+		List<Map<String, Object>> commentList = boardService.selectBoardCommentList(resultMap);
 		
 		map.put("boardSeq", commandMap.get("boardSeq").toString());
 		map.put("bbsId", commandMap.get("bbsId").toString());
@@ -86,8 +87,9 @@ public class BoardController {
 		
 		model.addAttribute("commandMap", commandMap); //페이징 정보
 		model.addAttribute("result", result);
+		model.addAttribute("commentList", commentList);
 		
-    	return "board/board_view";
+    	return "user/board/board_view";
     }
 	
 	
@@ -106,8 +108,7 @@ public class BoardController {
 		
 		model.addAttribute("commandMap", commandMap); //페이징 정보
 		
-
-		return "board/board_input";
+		return "user/board/board_input";
     
     }
 	
@@ -120,10 +121,11 @@ public class BoardController {
 		map.put("password", CommonUtil.hexSha256(commandMap.get("password").toString()));
 		map.put("title", commandMap.get("title").toString());
 		map.put("contents", commandMap.get("contents").toString());
+		map.put("openYn", commandMap.get("openYn").toString());
 		
 		int insertResult = boardService.insertBoard(map);
 		if(insertResult == 1) {
-			CommonUtil.NotificationMessage(model, "성공", "등록 되었습니다.", "location.href='/board/board_list.do?bbsId="+commandMap.get("bbsId").toString()+"';");
+			return CommonUtil.NotificationMessage(model, "성공", "등록 되었습니다.", "location.href='/board/board_list.do?bbsId="+commandMap.get("bbsId").toString()+"';");
 		}
 		
 		return "redirect:/board/board_list.do";
@@ -142,7 +144,7 @@ public class BoardController {
 		model.addAttribute("result", result);
 		model.addAttribute("commandMap", commandMap);
 
-		return "board/board_edit";
+		return "user/board/board_edit";
     
     }
 	
@@ -227,7 +229,7 @@ public class BoardController {
 		
 	//자유게시판 글등록 처리
 	@RequestMapping(value="/board/board_comment_input_proc.do")
-    public String insertBoardCommentProc(Map<String, Object> map, ModelMap model, HttpServletResponse response, HttpServletRequest request) throws Exception{
+    public String insertBoardCommentProc(Map<String, Object> map, ModelMap model, HttpServletResponse response, HttpServletRequest request, HttpSession session) throws Exception{
 		
 		HashMap<String, Object> commandMap = CommonUtil.convertMap(request);
 //		map.put("password", CommonUtil.hexSha256(commandMap.get("password").toString()));
@@ -239,6 +241,7 @@ public class BoardController {
 		}else {
 			commandMap.put("commentNo", (Integer.parseInt(commentNo)+1)+"");
 		}
+		commandMap.put("memberSeq", (Integer.parseInt(session.getAttribute("memberSeq").toString())));
 		int result = boardService.insertComment(commandMap);
 //		if(insertResult == 1) {
 //			CommonUtil.NotificationMessage(model, "성공", "수정되었습니다.", "location.href='/board/board_list.do?bbsId="+commandMap.get("bbsId").toString()+"';");

@@ -25,8 +25,11 @@
 		</mvc:interceptor>
 	</mvc:interceptors>
 
-	<bean
-		class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping" />
+	<bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping" />
+	
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>
+
+
 
 	<bean
 		class="org.springframework.web.servlet.view.BeanNameViewResolver"

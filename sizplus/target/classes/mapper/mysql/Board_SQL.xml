@@ -4,6 +4,9 @@
 <mapper namespace="board">
 
 	<sql id="listWhere">
+		<if test="openYn == 'Y'.toString()">
+			and a.open_yn = 'Y'
+		</if>
 		<if test="schStr != null and schStr != ''">
 		<choose>
 			<when test="schFld == '1'.toString()">
@@ -44,13 +47,16 @@
 			a.edit_ip,
 			a.edit_date,
 			a.good_cnt,
+			(select count(*) cnt from e_comment b where a.board_seq = b.board_seq) commentCnt,
 			a.hit
 		from e_board a
 		where
 		bbs_id = #{bbsId}
 		<include refid="listWhere" />
 		order by a.board_seq desc
+		<if test="mngType != 'Y'.toString() ">
 		limit #{firstIndex}, #{recordCountPerPage}
+		</if>
 	</select>
 	
 	<!-- 게시글 갯수 -->
@@ -97,14 +103,18 @@
 			title,
 			contents,
 			password,
+			file_id,
+			input_id,
 			input_nm,
 			input_date
 		)values(
 			#{bbsId},
-			'Y',
+			#{openYn},
 			#{title},
 			#{contents},
 			#{password},
+			#{fileId},
+			#{inputId},
 			#{inputNm},
 			now()
 		)
@@ -173,16 +183,66 @@
 		/*insertBoard*/
 		insert into e_comment(
 			board_seq,
+			member_seq,
 			comment_no,
 			recomment_no,
 			comment_contents,
 			reg_dt
 		)values(
 			#{boardSeq},
+			#{memberSeq},
 			#{commentNo},
 			#{recommentNo},
 			#{commentContents},
 			now()
+		)
+	</insert>
+	
+	<!-- 해당 게시글의 댓글 목록  -->
+	<select id="selectBoardCommentList" parameterType="hashmap" resultType="hashmap">
+		/*selectBoardCommentList*/
+		select
+			a.comment_seq,
+			a.board_seq,
+			(select member_nickname from e_member b where a.member_seq = b.member_seq) nickname,
+			a.comment_no,
+			a.recomment_no,
+			a.comment_contents,
+			a.reg_dt
+		from e_comment a
+		where
+		board_seq = #{boardSeq}
+		order by a.comment_no desc, a.recomment_no asc
+	</select>
+	
+	<!-- 체크된 게시글 삭제 처리 -->
+	<delete id="deleteBoardChk">
+		/*deleteBoardChk*/
+		delete from  e_board
+		where
+			bbs_id = #{bbsId}
+			and
+			board_seq  in
+			<foreach item="item" index="index" open="(" close=")" separator="," collection="chkSeq">
+			#{item}
+			</foreach>
+	</delete>
+	
+	<!-- 해당 게시글에 대한 답글 등록 -->
+	<insert id="insertBoardFile">
+		/*insertBoardFile*/
+		insert into e_file(
+			file_id,
+			file_num,
+			file_name,
+			file_org_name,
+			file_path
+		)values(
+			#{fileId},
+			#{fileNum},
+			#{fileName},
+			#{fileOrgName},
+			#{filePath}
 		)
 	</insert>
 	

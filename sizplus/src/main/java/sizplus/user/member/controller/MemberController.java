@@ -27,14 +27,14 @@ public class MemberController {
 	@RequestMapping(value="/member/member_input.do")
     public String insertMember(ModelMap model, HttpServletRequest request) throws Exception{
 
-		return "member/member_input";
+		return "user/member/member_input";
     }
 	
 	//회원가입 페이지 호출
 	@RequestMapping(value="/member/mypage.do")
     public String seelctMyPageView(ModelMap model, HttpServletRequest request) throws Exception{
 
-		return "member/mypage";
+		return "user/member/mypage";
     }
 	
 	

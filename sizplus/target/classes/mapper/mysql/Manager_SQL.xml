@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="manager">
+	<!-- 1번  -->
+	<!-- SQL.xml(1번) -> DAO(2번) -> ServiceImpl(3번) -> Service(4번) -> controller(5번) -> jsp -->
+<!-- 	<insert id="insertMemberProc" parameterType="hashmap"> -->
+<!-- 		/*insertMngrManagerProc*/ -->
+<!-- 		insert into e_member( -->
+<!-- 			member_id, -->
+<!-- 			member_pw, -->
+<!-- 			member_nickname, -->
+<!-- 			member_birth, -->
+<!-- 			member_gender, -->
+<!-- 			member_way, -->
+<!-- 			reg_dt -->
+<!-- 		 ) values( -->
+<!-- 			#{memberId}, -->
+<!-- 			#{memberPw}, -->
+<!-- 			#{memberNickname}, -->
+<!-- 			#{memberBirth}, -->
+<!-- 			#{memberGender}, -->
+<!-- 			#{memberWay}, -->
+<!-- 			now() -->
+<!-- 		) -->
+<!-- 	</insert> -->
+	
+	<!-- 회원정보 수정 -->
+<!-- 	<update id="updateMemberProc" parameterType="hashmap" > -->
+<!-- 		/*updateMngrManagerProc*/ -->
+<!-- 		update e_member  -->
+<!-- 		set  -->
+<!-- 		member_pw = #{memberPw} -->
+<!-- 		where -->
+<!-- 		member_id = #{memberId} -->
+<!-- 	</update> -->
+	
+	<select id="selectManagerLoginView" parameterType="sizplus.mngr.manager.dao.ManagerVO" resultType="sizplus.mngr.manager.dao.ManagerVO">
+		select
+			mng_seq,
+			mng_id,
+			mng_name, 
+			mng_pass,
+			mng_type,
+			mng_passdt,
+			mng_passtrycnt
+		from e_manager
+		where 
+			mng_id = #{mngId}
+			and
+			mng_pass = #{mngPass}
+	</select>
+	
+</mapper>

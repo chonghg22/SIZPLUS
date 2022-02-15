@@ -1,6 +1,7 @@
 package sizplus.user.member.dao;
 
 public class MemberVO {
+	private String memberSeq = "";
 	private String memberId = "";
 	private String memberPw = "";
 	private String memberPwc = "";
@@ -9,6 +10,13 @@ public class MemberVO {
 	private String memberBrith = "";
 	private String memberGender = "";
 	private String memberWay = "";
+	
+	public String getMemberSeq() {
+		return memberSeq;
+	}
+	public void setMemberSeq(String memberSeq) {
+		this.memberSeq = memberSeq;
+	}
 	public String getMemberId() {
 		return memberId;
 	}

@@ -392,10 +392,10 @@ button.btn:hover {
     width: 100%;
 }
 
-.top-news .tn-img:hover img {
-    filter: blur(3px);
-    -webkit-filter: blur(3px);
-}
+/* .top-news .tn-img:hover img { */
+/*     filter: blur(3px); */
+/*     -webkit-filter: blur(3px); */
+/* } */
 
 .top-news .tn-title {
     position: absolute;

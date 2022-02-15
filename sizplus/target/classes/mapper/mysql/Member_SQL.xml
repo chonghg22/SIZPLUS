@@ -37,6 +37,7 @@
 	
 	<select id="selectUserLoginView" parameterType="sizplus.user.member.dao.MemberVO" resultType="sizplus.user.member.dao.MemberVO">
 		select
+			member_seq,
 			member_id, 
 			member_nickname,
 			member_birth,

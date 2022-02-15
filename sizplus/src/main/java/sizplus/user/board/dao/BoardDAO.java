@@ -1,5 +1,6 @@
 package sizplus.user.board.dao;
 
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -36,13 +37,18 @@ public class BoardDAO{
 	}
 	
 	//게시글 등록
-	public int insertBoard(Map<String, Object> map) throws Exception{
+	public int insertBoard(Map<String, Object> map) throws SQLException{
 		return sqlSession.insert("board.insertBoard", map);
 	}
 	
 	//게시글에 대한 댓글 등록
 	public int insertComment(Map<String, Object> map) throws Exception{
 		return sqlSession.insert("board.insertComment", map);
+	}
+	
+	//게시글에 대한 댓글 등록
+	public int insertBoardFile(Map<String, Object> map) throws SQLException{
+		return sqlSession.insert("board.insertBoardFile", map);
 	}
 	
 	//게시글 조회수 증가
@@ -74,5 +80,17 @@ public class BoardDAO{
 	public String selectCommentNumCheck(Map<String, Object> map) throws Exception{
 		return sqlSession.selectOne("board.selectCommentNumCheck", map);
 	}
+	
+	//게시글 목록
+	public List<Map<String, Object>> selectBoardCommentList(HashMap<String, Object> commandMap) throws Exception{
+		return sqlSession.selectList("board.selectBoardCommentList", commandMap);
+	}
+	
+	//선택된 게시글 삭제
+	public int deleteBoardChk(HashMap<String, Object> map) throws Exception{
+		return sqlSession.delete("board.deleteBoardChk", map);
+	}
+	
+	
 	
 }

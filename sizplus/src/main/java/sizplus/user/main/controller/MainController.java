@@ -52,26 +52,30 @@ public class MainController {
 		HashMap<String, Object> resultMap = CommonUtil.convertMap(request);
 		resultMap.put("firstIndex", 0);
 		resultMap.put("recordCountPerPage", 5);
+		resultMap.put("openYn", "Y");
 		resultMap.put("bbsId", "free");
 		List<Map<String, Object>> freeBoardList = boardService.selectBoardList(resultMap);
 		resultMap.put("bbsId", "life");
 		List<Map<String, Object>> lifeBoardList = boardService.selectBoardList(resultMap);
+		resultMap.put("bbsId", "notice");
+		List<Map<String, Object>> noticeBoardList = boardService.selectBoardList(resultMap);
 		model.addAttribute("freeBoardList", freeBoardList);
 		model.addAttribute("lifeBoardList", lifeBoardList);
+		model.addAttribute("noticeBoardList", noticeBoardList);
 		
-    	return "main/main";
+    	return "user/main/main";
     }
 	
 	@RequestMapping(value="/login.do")
     public String loginView(CommandMap commandMap) throws Exception{
     	
-    	return "main/login";
+    	return "user/main/login";
     }
 	
 	@RequestMapping(value="/contact.do")
     public String contactView(CommandMap commandMap) throws Exception{
     	
-    	return "main/contact";
+    	return "user/main/contact";
     }
 	
 	@RequestMapping(value="/login_proc.do")
@@ -114,10 +118,10 @@ public class MainController {
 			model.addAttribute("message", message);
 			return "comm/message/message";
 		}
-		System.out.println("여기도 들어옴?");
 		//로그인에 성공 할 경우 session에 로그인 한 유저의 정보를 저장
 		if(result != null) {
 			session.setAttribute("memberSession", memberVO);
+			session.setAttribute("memberSeq", result.getMemberSeq());
 			session.setAttribute("memberId", result.getMemberId());
 			session.setAttribute("memberNickName", result.getMemberNickname());
 		}
