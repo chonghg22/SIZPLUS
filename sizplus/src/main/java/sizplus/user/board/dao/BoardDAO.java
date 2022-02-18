@@ -46,11 +46,6 @@ public class BoardDAO{
 		return sqlSession.insert("board.insertComment", map);
 	}
 	
-	//게시글에 대한 댓글 등록
-	public int insertBoardFile(Map<String, Object> map) throws SQLException{
-		return sqlSession.insert("board.insertBoardFile", map);
-	}
-	
 	//게시글 조회수 증가
 	public int updateBoardHitCount(Map<String, Object> map) throws Exception{
 		return sqlSession.update("board.updateBoardHitCount", map);

@@ -33,13 +33,6 @@ public class BoardServiceImpl implements BoardService{
 	}
 	
 	@Override
-	public int insertBoardFile(Map<String, Object> map) throws SQLException {
-		return boardDAO.insertBoardFile(map);
-	}
-	
-	
-	
-	@Override
 	public Map<String, Object> selectBoardView(Map<String, Object> map) throws Exception {
 		return boardDAO.selectBoardView(map);
 		

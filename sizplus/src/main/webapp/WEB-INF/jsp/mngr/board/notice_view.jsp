@@ -59,7 +59,10 @@
 								</div>
 								<label class="col-sm-2 col-form-label" for="inputPassword">첨부파일</label>
 								<div class="col-sm-10">
-									<input class="form-control" id="formFileMultiple" type="file" multiple="multiple" />
+									<c:forEach var="fileList" items="${fileList}" varStatus="status">
+									<a href="<c:url value="/file/download.do?filePath=${fileList.file_path}&fileName=${fileList.file_name}&fileOrgName=${fileList.file_org_name}" />" style="font-weight: bold;color: #555;text-decoration: none;"><c:out value="${fileList.file_org_name}"/></a>
+									<br>
+									</c:forEach>
 									<div class="mb-3 row"></div>
 								</div>
 							</div>

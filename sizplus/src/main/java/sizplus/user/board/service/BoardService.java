@@ -17,8 +17,6 @@ public interface BoardService {
 	
 	int insertComment(Map<String, Object> map) throws Exception;
 	
-	int insertBoardFile(Map<String, Object> map) throws SQLException;
-	
 	int deleteBoard(Map<String, Object> map) throws Exception;
 	
 	int updateBoardHitCount(Map<String, Object> map) throws Exception;

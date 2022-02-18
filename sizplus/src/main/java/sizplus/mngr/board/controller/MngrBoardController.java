@@ -26,6 +26,7 @@ import sizplus.common.common.CommandMap;
 import sizplus.common.common.CommonUtil;
 import sizplus.mngr.manager.service.ManagerService;
 import sizplus.user.board.service.BoardService;
+import sizplus.user.file.service.FileService;
 
 @Controller
 public class MngrBoardController {
@@ -36,6 +37,9 @@ public class MngrBoardController {
 	
 	@Resource(name="boardService")
 	private BoardService boardService;
+	
+	@Resource(name="fileService")
+	private FileService fileService;
 	
 	@RequestMapping(value="/mngr/board/notice_list.do")
     public String mngrNoticeList(ModelMap model, HttpSession session, HttpServletResponse response, HttpServletRequest request) throws Exception{
@@ -60,8 +64,11 @@ public class MngrBoardController {
 		}
 		HashMap<String, Object> commandMap = CommonUtil.convertMap(request);
 		Map<String, Object> result = boardService.selectBoardView(commandMap);
+		commandMap.put("fileId", result.get("file_id").toString());
+		List<Map<String, Object>> fileList = fileService.selectFileList(commandMap);
 		
 		model.addAttribute("commandMap", commandMap);
+		model.addAttribute("fileList", fileList);
 		model.addAttribute("result", result);
 		
     	return "mngr/board/notice_view";
@@ -108,23 +115,22 @@ public class MngrBoardController {
 	        String path = "C:/image/notice/";
 	        int fileNum = 0; 
 	        for (MultipartFile mf : fileList) {
-	        	String fileName = mf.getName();
 	            String originFileName = mf.getOriginalFilename(); // 원본 파일 명
 	            long fileSize = mf.getSize(); // 파일 사이즈
 
 	            System.out.println("originFileName : " + originFileName);
 	            System.out.println("fileSize : " + fileSize);
-
-	            String safeFile = path + System.currentTimeMillis() + originFileName;
+	            String randomId = CommonUtil.idMake("");
+	            String safeFile = path + randomId + originFileName;
 	            fileNum = fileNum+1;
 	            fileMap.put("fileId", file_id);
 	            fileMap.put("fileNum", fileNum);
-	            fileMap.put("fileName", fileName);
+	            fileMap.put("fileName", randomId + originFileName);
 	            fileMap.put("fileOrgName", originFileName);
 	            fileMap.put("filePath", path);
 	            try {
 	                mf.transferTo(new File(safeFile));
-	                int result = boardService.insertBoardFile(fileMap);
+	                int result = fileService.insertFile(fileMap);
 	            } catch (IllegalStateException e) {
 	                // TODO Auto-generated catch block
 	                e.printStackTrace();
