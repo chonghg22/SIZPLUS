@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="file">
+
+	<sql id="listWhere">
+		<if test="openYn == 'Y'.toString()">
+			and a.open_yn = 'Y'
+		</if>
+		<if test="schStr != null and schStr != ''">
+		<choose>
+			<when test="schFld == '1'.toString()">
+			and	a.title like concat('%' , #{schStr} , '%')
+			</when>
+			<when test="schFld == '2'.toString()">
+			and	a.input_nm like concat('%' , #{schStr} , '%')
+			</when>
+			<otherwise>
+			and	(
+				a.title like concat('%' , #{schStr} , '%')
+				or
+				a.input_nm like concat('%' , #{schStr} , '%')
+			)
+			</otherwise>
+		</choose>
+		</if>
+<!-- 		<if test="bbsId == 'faq' and typeEtc !=null and typeEtc !=''"> -->
+<!-- 		and a.type_etc = #{typeEtc} -->
+<!-- 		</if> -->
+<!-- 		<if test="openYn != null and openYn !=''"> -->
+<!-- 		and a.open_yn = #{openYn} -->
+<!-- 		</if> -->
+	</sql>
+	
+	<!-- 게시글 목록 -->
+	<select id="selectFileList" parameterType="hashmap" resultType="hashmap">
+		/*selectFileList*/
+		select
+			a.file_seq,
+			a.file_id,
+			a.file_num,
+			a.file_name,
+			a.file_org_name,
+			a.file_path,
+			a.file_reg_date
+		from e_file a
+		where
+		file_id = #{fileId}
+		order by a.file_reg_date desc
+	</select>
+	
+	<insert id="insertFile">
+		/*insertFile*/
+		insert into e_file(
+			file_id,
+			file_num,
+			file_name,
+			file_org_name,
+			file_path,
+			file_reg_date
+		)values(
+			#{fileId},
+			#{fileNum},
+			#{fileName},
+			#{fileOrgName},
+			#{filePath},
+			now()
+		)
+	</insert>
+</mapper>
