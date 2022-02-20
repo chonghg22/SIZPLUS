@@ -260,10 +260,10 @@
 								<div class="tn-title" style="width: 100%;">
 									<c:choose>
 						           <c:when test="${fn:length(free.title) > 35}">
-						            <a href="#" class="climp" onclick="fn_goView('<c:out value="${free.board_seq}"/>','<c:out value="${free.bbs_id}"/>')" style="text-decoration: none;color: #000;"><c:out value="${fn:substring(free.title,0,35)}"/>....</a>
+						            <a href="/board/board_view.do?boardSeq=${free.board_seq}&bbsId=free" class="climp" onclick="fn_goView('<c:out value="${free.board_seq}"/>','<c:out value="${free.bbs_id}"/>')" style="text-decoration: none;color: #000;"><c:out value="${fn:substring(free.title,0,35)}"/>....</a>
 						           </c:when>
 						           <c:otherwise>
-						            <a href="#" class="climp" onclick="fn_goView('<c:out value="${free.board_seq}"/>','<c:out value="${free.bbs_id}"/>')" style="text-decoration: none;color: #000;"><c:out value="${free.title}"/></a>
+						            <a href="/board/board_view.do?boardSeq=${free.board_seq}&bbsId=free" class="climp" onclick="fn_goView('<c:out value="${free.board_seq}"/>','<c:out value="${free.bbs_id}"/>')" style="text-decoration: none;color: #000;"><c:out value="${free.title}"/></a>
 						           </c:otherwise> 
 						          </c:choose>
 						          <span style="float: right;color: #555;">${fn:substring(free.input_date,0,16)}</span>
@@ -278,10 +278,10 @@
 								<div class="tn-title" style="width: 100%;">
 									<c:choose>
 						           <c:when test="${fn:length(life.title) > 35}">
-						            <a href="#" class="climp" onclick="fn_goView('<c:out value="${life.board_seq}"/>','<c:out value="${life.bbs_id}"/>')" style="text-decoration: none;color: #000;"><c:out value="${fn:substring(life.title,0,35)}"/>....</a>
+						            <a href="/board/board_view.do?boardSeq=${life.board_seq}&bbsId=life" class="climp" onclick="fn_goView('<c:out value="${life.board_seq}"/>','<c:out value="${life.bbs_id}"/>')" style="text-decoration: none;color: #000;"><c:out value="${fn:substring(life.title,0,35)}"/>....</a>
 						           </c:when>
 						           <c:otherwise>
-						            <a href="#" class="climp" onclick="fn_goView('<c:out value="${life.board_seq}"/>','<c:out value="${life.bbs_id}"/>')" style="text-decoration: none;color: #000;">
+						            <a href="/board/board_view.do?boardSeq=${life.board_seq}&bbsId=life" class="climp" onclick="fn_goView('<c:out value="${life.board_seq}"/>','<c:out value="${life.bbs_id}"/>')" style="text-decoration: none;color: #000;">
 						            	<c:out value="${life.title}"/>
 						            </a>
 						           </c:otherwise> 
@@ -345,10 +345,10 @@
 								<div class="tn-title" style="width: 100%;">
 									<c:choose>
 						           <c:when test="${fn:length(notice.title) > 35}">
-						            <a href="#" class="climp" onclick="fn_goView('<c:out value="${notice.board_seq}"/>','<c:out value="${notice.bbs_id}"/>')" style="text-decoration: none;color: #000;"><c:out value="${fn:substring(notice.title,0,35)}"/>....</a>
+						            <a href="/board/board_view.do?boardSeq=${notice.board_seq}&bbsId=notice" class="climp" onclick="fn_goView('<c:out value="${notice.board_seq}"/>','<c:out value="${notice.bbs_id}"/>')" style="text-decoration: none;color: #000;"><c:out value="${fn:substring(notice.title,0,35)}"/>....</a>
 						           </c:when>
 						           <c:otherwise>
-						            <a href="#" class="climp" onclick="fn_goView('<c:out value="${notice.board_seq}"/>','<c:out value="${notice.bbs_id}"/>')" style="text-decoration: none;color: #000;"><c:out value="${notice.title}"/></a>
+						            <a href="/board/board_view.do?boardSeq=${notice.board_seq}&bbsId=notice" class="climp" onclick="fn_goView('<c:out value="${notice.board_seq}"/>','<c:out value="${notice.bbs_id}"/>')" style="text-decoration: none;color: #000;"><c:out value="${notice.title}"/></a>
 						           </c:otherwise> 
 						          </c:choose>
 						          <span style="float: right;color: #555;">${fn:substring(notice.input_date,0,16)}</span>

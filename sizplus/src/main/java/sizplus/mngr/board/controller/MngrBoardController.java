@@ -18,6 +18,7 @@ import org.apache.commons.collections.set.SynchronizedSet;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
@@ -42,28 +43,29 @@ public class MngrBoardController {
 	@Resource(name="fileService")
 	private FileService fileService;
 	
-	@RequestMapping(value="/mngr/board/notice_list.do")
-    public String mngrNoticeList(ModelMap model, HttpSession session, HttpServletResponse response, HttpServletRequest request) throws Exception{
+	@RequestMapping(value="/mngr/board/{bbsId}_list.do")
+    public String mngrNoticeList(@PathVariable String bbsId, ModelMap model, HttpSession session, HttpServletResponse response, HttpServletRequest request) throws Exception{
 		if(session.getAttribute("managerSession") == null) {
 			return CommonUtil.NotificationMessage(model, "오류", "로그인 후 이용 가능합니다.", "location.href='/mngr/main/login.do'");
 		}
 		HashMap<String, Object> commandMap = CommonUtil.convertMap(request);
-		commandMap.put("bbsId", "notice");
+		commandMap.put("bbsId", bbsId);
 		commandMap.put("mngType", "Y");
 		List<Map<String, Object>> list = boardService.selectBoardList(commandMap);
 		
 		model.addAttribute("commandMap", commandMap);
 		model.addAttribute("list", list);
 		
-    	return "mngr/board/notice_list";
+    	return "mngr/board/board_list";
     }
 	
-	@RequestMapping(value="/mngr/board/notice_view.do")
-    public String mngrNoticeView(ModelMap model, HttpSession session, HttpServletResponse response, HttpServletRequest request) throws Exception{
+	@RequestMapping(value="/mngr/board/{bbsId}_view.do")
+    public String mngrNoticeView(@PathVariable String bbsId, ModelMap model, HttpSession session, HttpServletResponse response, HttpServletRequest request) throws Exception{
 		if(session.getAttribute("managerSession") == null) {
 			return CommonUtil.NotificationMessage(model, "오류", "로그인 후 이용 가능합니다.", "location.href='/mngr/main/login.do'");
 		}
 		HashMap<String, Object> commandMap = CommonUtil.convertMap(request);
+		commandMap.put("bbsId", bbsId);
 		Map<String, Object> result = boardService.selectBoardView(commandMap);
 		commandMap.put("fileId", result.get("file_id").toString());
 		List<Map<String, Object>> fileList = fileService.selectFileList(commandMap);
@@ -72,50 +74,44 @@ public class MngrBoardController {
 		model.addAttribute("commandMap", commandMap);
 		model.addAttribute("result", result);
 		
-    	return "mngr/board/notice_view";
+    	return "mngr/board/board_view";
     }
 	
 	//글쓰기 페이지
-	@RequestMapping(value="/mngr/board/notice_input.do")
-    public String insertFreeBoardList(ModelMap model, HttpSession session, HttpServletResponse response, HttpServletRequest request, CommandMap commandMap) throws Exception{
+	@RequestMapping(value="/mngr/board/{bbsId}_input.do")
+    public String insertFreeBoardList(@PathVariable String bbsId, ModelMap model, HttpSession session, HttpServletResponse response, HttpServletRequest request) throws Exception{
 		if(session.getAttribute("managerSession") == null) {
 			return CommonUtil.NotificationMessage(model, "오류", "로그인 후 이용 가능합니다.", "location.href='/mngr/main/login.do'");
 		}
+		HashMap<String, Object> commandMap = CommonUtil.convertMap(request);
+		commandMap.put("bbsId", bbsId);
 		model.addAttribute("commandMap", commandMap); //페이징 정보
 		
-		return "mngr/board/notice_input";
+		return "mngr/board/board_input";
     }
 	
 	//자유게시판 글등록 처리
-	@RequestMapping(value="/mngr/board/notice_input_proc.do")
-    public String insertMngrBoardProc(ModelMap model, HttpServletResponse response,
+	@RequestMapping(value="/mngr/board/{bbsId}_input_proc.do")
+    public String insertMngrBoardProc(@PathVariable String bbsId, ModelMap model, HttpServletResponse response,
     		MultipartHttpServletRequest multiRequest, HttpServletRequest request, HttpSession session) throws IOException, SQLException, RuntimeException, NoSuchAlgorithmException {
 		HashMap<String, Object> commandMap = CommonUtil.convertMap(request);
 		
-//		String type_etc = ""; 
-//		if (commandMap.get("typeEtc") !=null) {
-//			type_etc = commandMap.get("typeEtc").toString();
-//		}
 		String file_id = "";
 		//관리자가 등록한 파일이 있을 경우
-		
-		if(multiRequest.getFileMap().get("noticeFile").getSize() > 0) {
+		if(multiRequest.getFileMap().get("bbsFile").getSize() > 0) {
 			/* 파일 아이디는 시 분 초 랜덤숫자까지 섞여서 아이디를 생성*/
-//			file_id = CommonUtil.idMake("");
 			file_id = UUID.randomUUID().toString();
-			System.out.println("file_id::"+file_id); 
 		}
-//		commandMap.put("typeEtc", type_etc);
 		commandMap.put("fileId", file_id);
 		commandMap.put("inputId", session.getAttribute("mngId"));
 		commandMap.put("inputNm", session.getAttribute("mngName"));
 		commandMap.put("password", null);
 		
 		int insertResult = boardService.insertBoard(commandMap);
-		if(multiRequest.getFileMap().get("noticeFile").getSize() > 0) {
+		if(multiRequest.getFileMap().get("bbsFile").getSize() > 0) {
 			Map<String, Object> fileMap = new HashMap<String, Object>();
 			if(insertResult ==1) {
-				List<MultipartFile> fileList = multiRequest.getFiles("noticeFile");
+				List<MultipartFile> fileList = multiRequest.getFiles("bbsFile");
 		        String path = "C:/image/notice/";
 		        int fileNum = 0; 
 		        for (MultipartFile mf : fileList) {
@@ -140,21 +136,22 @@ public class MngrBoardController {
 			}
 		}
 		if(insertResult == 1) {
-			return CommonUtil.NotificationMessage(model, "성공", "등록 되었습니다.", "location.href='/mngr/board/notice_list.do';");
+			return CommonUtil.NotificationMessage(model, "성공", "등록 되었습니다.", "location.href='/mngr/board/"+bbsId+"_list.do';");
 		}
 		
-		return "redirect:/mngr/board/notice_list.do";
+		return "redirect:/mngr/board/board_list.do";
     
     }
 	
 	//글쓰기 페이지
-	@RequestMapping(value="/mngr/board/notice_edit.do")
-    public String updateFreeBoardList(ModelMap model, HttpSession session, HttpServletResponse response, HttpServletRequest request) throws Exception{
+	@RequestMapping(value="/mngr/board/{bbsId}_edit.do")
+    public String updateFreeBoardList(@PathVariable String bbsId, ModelMap model, HttpSession session, HttpServletResponse response, HttpServletRequest request) throws Exception{
 		if(session.getAttribute("managerSession") == null) {
 			return CommonUtil.NotificationMessage(model, "오류", "로그인 후 이용 가능합니다.", "location.href='/mngr/main/login.do'");
 		}
 		
 		HashMap<String, Object> commandMap = CommonUtil.convertMap(request);
+		commandMap.put("bbsId", bbsId);
 		Map<String, Object> result = boardService.selectBoardView(commandMap);
 		commandMap.put("fileId", result.get("file_id").toString());
 		List<Map<String, Object>> fileList = fileService.selectFileList(commandMap);
@@ -163,36 +160,32 @@ public class MngrBoardController {
 		model.addAttribute("result", result);
 		model.addAttribute("commandMap", commandMap); //페이징 정보
 		
-		return "mngr/board/notice_edit";
+		return "mngr/board/board_edit";
     }
 	
 	//자유게시판 글등록 처리
-	@RequestMapping(value="/mngr/board/notice_edit_proc.do")
-    public String updateMngrBoardProc(ModelMap model, HttpServletResponse response,
+	@RequestMapping(value="/mngr/board/{bbsId}_edit_proc.do")
+    public String updateMngrBoardProc(@PathVariable String bbsId, ModelMap model, HttpServletResponse response,
     		MultipartHttpServletRequest multiRequest, HttpServletRequest request, HttpSession session) throws IOException, SQLException, RuntimeException, NoSuchAlgorithmException {
 		HashMap<String, Object> commandMap = CommonUtil.convertMap(request);
 		
-//		String type_etc = ""; 
-//		if (commandMap.get("typeEtc") !=null) {
-//			type_etc = commandMap.get("typeEtc").toString();
-//		}
 		String file_id = "";
+		commandMap.put("bbsId", bbsId);
 		//관리자가 등록한 파일이 있을 경우
-		if(multiRequest.getFileMap().get("noticeFile").getSize() > 0) {
+		if(multiRequest.getFileMap().get("bbsFile").getSize() > 0) {
 			/* 파일 아이디는 시 분 초 랜덤숫자까지 섞여서 아이디를 생성*/
 			file_id = UUID.randomUUID().toString();
 			commandMap.put("updateFile", "Y");
 		}
 		commandMap.put("fileId", file_id);
-//		commandMap.put("typeEtc", type_etc);
 		commandMap.put("editId", session.getAttribute("mngId"));
 		commandMap.put("password", null);
 		
 		int insertResult = boardService.updateBoard(commandMap);
-		if(multiRequest.getFileMap().get("noticeFile").getSize() > 0) {
+		if(multiRequest.getFileMap().get("bbsFile").getSize() > 0) {
 			Map<String, Object> fileMap = new HashMap<String, Object>();
 			if(insertResult ==1) {
-				List<MultipartFile> fileList = multiRequest.getFiles("noticeFile");
+				List<MultipartFile> fileList = multiRequest.getFiles("bbsFile");
 		        String path = "C:/image/notice/";
 		        int fileNum = 0; 
 		        for (MultipartFile mf : fileList) {
@@ -217,17 +210,18 @@ public class MngrBoardController {
 			}
 		}
 		if(insertResult == 1) {
-			return CommonUtil.NotificationMessage(model, "성공", "수정 되었습니다.", "location.href='/mngr/board/notice_list.do';");
+			return CommonUtil.NotificationMessage(model, "성공", "수정 되었습니다.", "location.href='/mngr/board/"+bbsId+"_list.do';");
 		}
 		
-		return "redirect:/mngr/board/notice_list.do";
+		return "redirect:/mngr/board/board_list.do";
     
     }
 	
-	@RequestMapping(value = "/mngr/board/notice_delete_chkProc.do")
-	public String mngrBoardDeleteChkProc(@RequestParam(value="chkSeq") String[] arr, ModelMap model, HttpServletResponse response, HttpServletRequest request) throws Exception{
+	@RequestMapping(value = "/mngr/board/{bbsId}_delete_chkProc.do")
+	public String mngrBoardDeleteChkProc(@PathVariable String bbsId, @RequestParam(value="chkSeq") String[] arr, ModelMap model, HttpServletResponse response, HttpServletRequest request) throws Exception{
 		
 		HashMap<String, Object> commandMap = CommonUtil.convertMap(request);
+		commandMap.put("bbsId", bbsId);
 		for(int i=0; i<arr.length; i++) {
 			commandMap.put("seq", arr[i]);
 		}
@@ -235,7 +229,18 @@ public class MngrBoardController {
 		
 		int result = boardService.deleteBoardChk(commandMap);
 		
-		return CommonUtil.NotificationMessage(model, "성공", "삭제 되었습니다.", "location.href='/mngr/board/notice_list.do';");
+		return CommonUtil.NotificationMessage(model, "성공", "삭제 되었습니다.", "location.href='/mngr/board/"+bbsId+"_list.do';");
+	}
+	
+	@RequestMapping(value = "/mngr/board/{bbsId}_delete_proc.do")
+	public String mngrBoardDeleteProc(@PathVariable String bbsId, ModelMap model, HttpServletResponse response, HttpServletRequest request) throws Exception{
+		
+		HashMap<String, Object> commandMap = CommonUtil.convertMap(request);
+		commandMap.put("bbsId", bbsId);
+		
+		int result = boardService.deleteBoard(commandMap);
+		
+		return CommonUtil.NotificationMessage(model, "성공", "삭제 되었습니다.", "location.href='/mngr/board/"+bbsId+"_list.do';");
 	}
 	
 	

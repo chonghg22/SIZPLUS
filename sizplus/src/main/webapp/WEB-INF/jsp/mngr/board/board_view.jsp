@@ -25,7 +25,7 @@
             <div id="content">
 				<%@ include file="/WEB-INF/jsp/mngr/mngrLayout/top.jsp" %>
 				<form id="insertForm" name="insertForm" method="post">
-				<input type="hidden" name="bbsId" value="notice"/>
+				<input type="hidden" name="bbsId" value="${commandMap.bbsId}"/>
 				<input type="hidden" name="boardSeq" value="${result.board_seq }"/>
                 <div class="container-fluid">
                     <div class="card shadow mb-4">
@@ -67,9 +67,9 @@
 									<div class="mb-3 row"></div>
 								</div>
 							</div>
-							<button class="btn btn-primary" type="button" style="float: right;" onclick="fn_input();">삭제</button>
+							<button class="btn btn-primary" type="button" style="float: right;" onclick="fn_delete();">삭제</button>
 							<button class="btn btn-primary" type="button" style="float: right;margin-right: 5px;" onclick="fn_edit();">수정</button>
-							<button class="btn btn-primary" type="button" style="float: right;margin-right: 5px;" onclick="fn_input();">목록</button>
+							<button class="btn btn-primary" type="button" style="float: right;margin-right: 5px;" onclick="fn_list();">목록</button>
                         </div>
                     </div>
                 </div>
@@ -91,18 +91,22 @@
     <script src="/lib/mngr/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="/lib/mngr/vendor/jquery-easing/jquery.easing.min.js"></script>
     <script>
-    function fn_input(){
+    function fn_delete(){
     	var frm = document.insertForm;
-    	frm.action = "/mngr/board/notice_input_proc.do";
+    	frm.action = "/mngr/board/${commandMap.bbsId}_delete_proc.do";
     	frm.method = "post";
     	frm.submit();
     }
     
     function fn_edit(){
     	var frm = document.insertForm;
-    	frm.action = "/mngr/board/notice_edit.do";
+    	frm.action = "/mngr/board/${commandMap.bbsId}_edit.do";
     	frm.method = "post";
     	frm.submit();
+    }
+    
+    function fn_list(){
+    	location.href="/mngr/board/${commandMap.bbsId}_list.do";
     }
     </script>
     

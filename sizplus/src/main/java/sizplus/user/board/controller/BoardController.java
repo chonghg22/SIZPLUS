@@ -65,14 +65,7 @@ public class BoardController {
 	@RequestMapping(value="/board/board_view.do")
 	public String selectUserBoardView(Map<String, Object> map, ModelMap model, HttpServletResponse response, HttpServletRequest request, CommandMap commandMap, HttpSession session) throws Exception{
 		
-		if(session.getAttribute("memberSession") == null) {
-			HashMap<String, String> message = new HashMap<String, String>();
-			message.put("title","오류");
-			message.put("msg","로그인 후 이용 가능합니다.");
-			message.put("scriptName","history.back();");
-			model.addAttribute("message", message);
-			return "comm/message/message";
-		}else {
+		if(session.getAttribute("memberNickName") != null) {
 			commandMap.put("loginMemberNickName",session.getAttribute("memberNickName").toString());
 		}
 		HashMap<String, Object> resultMap = CommonUtil.convertMap(request);
@@ -232,9 +225,14 @@ public class BoardController {
     public String insertBoardCommentProc(Map<String, Object> map, ModelMap model, HttpServletResponse response, HttpServletRequest request, HttpSession session) throws Exception{
 		
 		HashMap<String, Object> commandMap = CommonUtil.convertMap(request);
-//		map.put("password", CommonUtil.hexSha256(commandMap.get("password").toString()));
-//		map.put("title", commandMap.get("title").toString());
-//		map.put("contents", commandMap.get("contents").toString());
+		if(session.getAttribute("memberSession") == null) {
+			HashMap<String, String> message = new HashMap<String, String>();
+			message.put("title","오류");
+			message.put("msg","로그인 후 이용 가능합니다.");
+			message.put("scriptName","history.back();");
+			model.addAttribute("message", message);
+			return "comm/message/message";
+		}
 		String commentNo = boardService.selectCommentNumCheck(commandMap);
 		if(commentNo == null) {
 			commandMap.put("commentNo", "1");

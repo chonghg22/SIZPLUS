@@ -106,26 +106,7 @@
 					</div>
 				</div>
 				<div class="row" style="margin-top: -80px;">
-				<span>${commandMap.get('loginMemberNickName') }</span>
-				<table class="works_table" style="width: 100%;">
-					<tbody>
-						<tr >
-							<td><textarea name="commentContents" id="commentContents" style="width:100%; height:100px;"  title="상세내용"></textarea></td>
-						</tr>
-					</tbody>
-				</table>
-        		</div>
-        		<div class="col-md-12">
-					<div class="filters" style="border-bottom: 0px; margin-bottom: -25px;">
-						<br>
-						<ul>
-							<li class="active" data-filter="*"></li>
-							<li data-filter=".gra" class="" style="float: right;" onclick="fn_input();">등록</li>
-						</ul>
-					</div>
-				</div>
 				<h4>댓글</h4>
-				</table>
 				<div>
 					<c:forEach var="result" items="${commentList}" varStatus="status">
 					<c:if test="${result.recomment_no eq '0'}">
@@ -148,6 +129,25 @@
 					</c:if>
 					</c:forEach>
 				</div>
+				<span>${commandMap.get('loginMemberNickName') }</span>
+				<table class="works_table" style="width: 100%;">
+					<tbody>
+						<tr >
+							<td><textarea name="commentContents" id="commentContents" style="width:100%; height:100px;"  title="상세내용"></textarea></td>
+						</tr>
+					</tbody>
+				</table>
+        		</div>
+        		<div class="col-md-12">
+					<div class="filters" style="border-bottom: 0px; margin-bottom: -25px;">
+						<br>
+						<ul>
+							<li class="active" data-filter="*"></li>
+							<li data-filter=".gra" class="" style="float: right;" onclick="fn_input();">등록</li>
+						</ul>
+					</div>
+				</div>
+				</table>
 			</div>
 		</div>
 		<%@ include file="/WEB-INF/jsp/user/userLayout/bottom.jsp"%>

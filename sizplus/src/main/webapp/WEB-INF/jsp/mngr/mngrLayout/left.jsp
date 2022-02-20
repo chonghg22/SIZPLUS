@@ -43,12 +43,12 @@
                     <span>공지사항</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="charts.html">
+                <a class="nav-link" href="/mngr/board/faq_list.do">
                     <i class="fas fa-fw fa-wrench"></i>
                     <span>자주묻는질문</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="charts.html">
+                <a class="nav-link" href="/mngr/board/qna_list.do">
                     <i class="fas fa-fw fa-wrench"></i>
                     <span>Q&A</span></a>
             </li>

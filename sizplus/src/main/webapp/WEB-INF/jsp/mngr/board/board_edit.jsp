@@ -25,7 +25,7 @@
             <div id="content">
 				<%@ include file="/WEB-INF/jsp/mngr/mngrLayout/top.jsp" %>
 				<form id="insertForm" name="insertForm" method="post" encType="multipart/form-data">
-				<input type="hidden" name="bbsId" value="notice"/>
+				<input type="hidden" name="bbsId" value="${commandMap.bbsId}"/>
 				<input type="hidden" name="file_count" value="1" />
 				<input type="hidden" name="boardSeq" value="${result.board_seq }" />
                 <div class="container-fluid">
@@ -61,7 +61,7 @@
 								</div>
 								<label class="col-sm-2 col-form-label" for="inputPassword">첨부파일</label>
 								<div class="col-sm-10">
-									<input class="form-control" id="formFileMultiple" type="file" multiple="multiple" name="noticeFile" />
+									<input class="form-control" id="formFileMultiple" type="file" multiple="multiple" name="bbsFile" />
 									<div class="mb-3 row"></div>
 								</div>
 							</div>
@@ -89,7 +89,7 @@
     <script>
     function fn_input(){
     	var frm = document.insertForm;
-    	frm.action = "/mngr/board/notice_edit_proc.do";
+    	frm.action = "/mngr/board/${commandMap.bbsId}_edit_proc.do";
     	frm.method = "post";
     	if($("#title").val() == ''){
     		alert("제목을 입력 해 주세요.");

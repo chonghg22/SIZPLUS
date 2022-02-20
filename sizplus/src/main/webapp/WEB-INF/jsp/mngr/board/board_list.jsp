@@ -33,7 +33,7 @@
             <div id="content">
 				<%@ include file="/WEB-INF/jsp/mngr/mngrLayout/top.jsp" %>
 				<form action="" name="listForm" id="listForm">
-				<input type="hidden" name="bbsId" value="notice"/>
+				<input type="hidden" name="bbsId" value="${commandMap.bbsId }"/>
 				<input type="hidden" name="boardSeq" value="" />
 				
                 <!-- Begin Page Content -->
@@ -65,7 +65,7 @@
 												<td><input type="checkbox" name="chkSeq" id="chkSeq" value="<c:out value="${result.board_seq }" />" title="선택" /></td>
 												<td><c:out value="${status.index}"/></td>
 												<td>
-												<a href="#" onclick="fn_goView('<c:out value="${result.board_seq}"/>','<c:out value="${result.bbs_id}"/>')" style="text-decoration: none;color: #000;"><c:out value="${result.title}"/><c:out value="${result.title}"/></a>
+												<a href="#" onclick="fn_goView('<c:out value="${result.board_seq}"/>')" style="text-decoration: none;color: #000;"><c:out value="${result.title}"/></a>
 												</td>
 												<td><c:out value="${result.input_nm}"/></td>
 												<td><c:out value="${fn:substring(result.input_date,0,10)}"/></td>
@@ -119,10 +119,10 @@
     <script src="/lib/mngr/js/demo/datatables-demo.js"></script>
     
     <script>
-  //검색
+ 	//검색
     function fn_input(){
     	var frm = document.listForm;
-    	frm.action = "/mngr/board/notice_input.do";
+    	frm.action = "/mngr/board/${commandMap.bbsId}_input.do";
     	frm.submit();
     }
   
@@ -139,18 +139,17 @@
     	}else{
     		if(confirm("선택한 항목을 삭제하시겠습니까?")){
     			var frm = document.listForm;
-    			frm.action = "/mngr/board/notice_delete_chkProc.do";
+    			frm.action = "/mngr/board/${commandMap.bbsId}_delete_chkProc.do";
     			frm.submit();
     		}
     	}
     }
     
     /* 글 상세보기 화면 function */
-    function fn_goView(boardSeq,bbsId) {
+    function fn_goView(boardSeq) {
     	var frm = document.listForm;
     	frm.boardSeq.value = boardSeq;
-    	frm.bbsId.value = bbsId;
-    	frm.action = "/mngr/board/notice_view.do";
+    	frm.action = "/mngr/board/${commandMap.bbsId}_view.do";
     	frm.submit();
     }
     </script>
