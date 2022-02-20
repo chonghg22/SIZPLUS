@@ -62,7 +62,7 @@ public class BoardDAO{
 	}
 	
 	//게시글 수정
-	public int updateBoard(Map<String, Object> map) throws Exception{
+	public int updateBoard(Map<String, Object> map) throws SQLException{
 		return sqlSession.update("board.updateBoard", map);
 	}
 	

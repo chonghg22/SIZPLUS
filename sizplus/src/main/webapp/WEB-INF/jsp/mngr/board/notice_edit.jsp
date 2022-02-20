@@ -24,52 +24,48 @@
         <div id="content-wrapper" class="d-flex flex-column">
             <div id="content">
 				<%@ include file="/WEB-INF/jsp/mngr/mngrLayout/top.jsp" %>
-				<form id="insertForm" name="insertForm" method="post">
+				<form id="insertForm" name="insertForm" method="post" encType="multipart/form-data">
 				<input type="hidden" name="bbsId" value="notice"/>
-				<input type="hidden" name="boardSeq" value="${result.board_seq }"/>
+				<input type="hidden" name="file_count" value="1" />
+				<input type="hidden" name="boardSeq" value="${result.board_seq }" />
                 <div class="container-fluid">
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">공지사항 - 상세</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">공지사항 - 등록</h6>
                         </div>
                         <div class="card-body">
 							<div class="mb-3 row">
 								<label class="col-sm-2 col-form-label" for="staticEmail">제목</label>
 								<div class="col-sm-10">
-									<c:out value="${result.title }"/>
+										<input class="form-control" id="title" type="text" name="title" value="${result.title}"/>
 							  		<div class="mb-3 row"></div>
 								</div>
 								<label class="col-sm-2 col-form-label" for="inputPassword">내용</label>
 								<div class="col-sm-10">
 							  		<div class="mb-3">
-							  			<c:out value="${result.contents}"/>
+							  			<textarea class="form-control" id="contents" name="contents" rows="3">${result.contents }</textarea>
 							  		</div>
 							  		<div class="mb-3 row"></div>
 								</div>
 								<label class="col-sm-2 col-form-label" for="inputPassword">공개여부</label>
 								<div class="col-sm-10">
 									<div class="form-check form-check-inline">
-										<input class="form-check-input" id="openYn1" type="radio" name="openYn" disabled="disabled" value="Y" <c:if test="${result.open_yn eq 'Y' }">checked="checked"</c:if>/>
+										<input class="form-check-input" id="openYn1" type="radio" name="openYn" value="Y" checked="checked" />
 										<label class="form-check-label" for="inlineRadio1">공개</label>
 									</div>
 									<div class="form-check form-check-inline">
-										<input class="form-check-input" id="openYn2" type="radio" name="openYn" disabled="disabled" value="N" <c:if test="${result.open_yn eq 'N' }">checked="checked"</c:if>/>
+										<input class="form-check-input" id="openYn2" type="radio" name="openYn" value="N" />
 										<label class="form-check-label" for="inlineRadio2">비공개</label>
 									</div>
 									<div class="mb-3 row"></div>
 								</div>
 								<label class="col-sm-2 col-form-label" for="inputPassword">첨부파일</label>
 								<div class="col-sm-10">
-									<c:forEach var="fileList" items="${fileList}" varStatus="status">
-									<a href="<c:url value="/file/download.do?filePath=${fileList.file_path}&fileName=${fileList.file_name}&fileOrgName=${fileList.file_org_name}" />" style="font-weight: bold;color: #555;text-decoration: none;"><c:out value="${fileList.file_org_name}"/></a>
-									<br>
-									</c:forEach>
+									<input class="form-control" id="formFileMultiple" type="file" multiple="multiple" name="noticeFile" />
 									<div class="mb-3 row"></div>
 								</div>
 							</div>
-							<button class="btn btn-primary" type="button" style="float: right;" onclick="fn_input();">삭제</button>
-							<button class="btn btn-primary" type="button" style="float: right;margin-right: 5px;" onclick="fn_edit();">수정</button>
-							<button class="btn btn-primary" type="button" style="float: right;margin-right: 5px;" onclick="fn_input();">목록</button>
+							<button class="btn btn-primary" type="button" style="float: right;" onclick="fn_input();">수정</button>
                         </div>
                     </div>
                 </div>
@@ -93,15 +89,17 @@
     <script>
     function fn_input(){
     	var frm = document.insertForm;
-    	frm.action = "/mngr/board/notice_input_proc.do";
+    	frm.action = "/mngr/board/notice_edit_proc.do";
     	frm.method = "post";
-    	frm.submit();
-    }
-    
-    function fn_edit(){
-    	var frm = document.insertForm;
-    	frm.action = "/mngr/board/notice_edit.do";
-    	frm.method = "post";
+    	if($("#title").val() == ''){
+    		alert("제목을 입력 해 주세요.");
+    		return false;
+    	}
+    	
+    	if($("#contents").val() == ''){
+    		alert("내용을 입력 해 주세요.");
+    		return false;
+    	}
     	frm.submit();
     }
     </script>

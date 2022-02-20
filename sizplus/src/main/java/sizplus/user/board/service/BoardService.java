@@ -25,7 +25,7 @@ public interface BoardService {
 	
 	int updateBoardBadCount(Map<String, Object> map) throws Exception;
 	
-	int updateBoard(Map<String, Object> map) throws Exception;
+	int updateBoard(Map<String, Object> map) throws SQLException;
 	
 	Map<String, Object> selectBoardView(Map<String, Object> map) throws Exception;
 	

@@ -127,6 +127,13 @@
 		update e_board set
 			title = #{title},
 			contents = #{contents},
+			<if test="updateFile == 'Y'.toString()">
+			file_id = #{fileId},
+			</if>
+			<if test="openYn != null and openYn != ''">
+			open_yn = #{openYn},
+			</if>
+			edit_id = #{editId},
 			password = #{password},
 			edit_date = now()
 		where

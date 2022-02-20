@@ -108,35 +108,6 @@ public class CommonUtil {
 	    response.getWriter().close();
     }
     
-    /**
-	 * 현재의 날짜와 시간에 해당하는 아이디를 만들고 parameter와 합쳐서 return 한다.
-	 *
-	 * @param str 접두 문자열
-	 * @return 아이디
-	 */
-	public static String idMake(String str) {
-		String id;
-
-		try{
-			int count = getCount();
-			SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMddHHmmssSSS", new Locale("ko","KO"));
-			String formattedValue = formatter.format(new Date());
-			id = str + formattedValue + count;
-			return id;
-		}
-		catch (RuntimeException e)
-		{
-			System.out.println("idMake 에러발생");
-			return str;
-		}
-	}
-	
-	private static int iCount = (new Random()).nextInt();
-	private synchronized static int getCount() {
-		// 100 ~ 999 사이 난수 생성
-		iCount = (new Random(899)).nextInt() + 100;
-		return iCount;
-	}
 	
 	/**
 	 * 지정된 이름의 파일 확장자를 검사함

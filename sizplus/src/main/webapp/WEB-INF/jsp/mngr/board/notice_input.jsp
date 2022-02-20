@@ -36,7 +36,6 @@
 							<div class="mb-3 row">
 								<label class="col-sm-2 col-form-label" for="staticEmail">제목</label>
 								<div class="col-sm-10">
-<!-- 									<input class="form-control-plaintext outline-none" id="staticEmail" type="text" readonly="" value="email@example.com" /> -->
 										<input class="form-control" id="title" type="text" name="title" />
 							  		<div class="mb-3 row"></div>
 								</div>
@@ -91,6 +90,15 @@
     	var frm = document.insertForm;
     	frm.action = "/mngr/board/notice_input_proc.do";
     	frm.method = "post";
+    	if($("#title").val() == ''){
+    		alert("제목을 입력 해 주세요.");
+    		return false;
+    	}
+    	
+    	if($("#contents").val() == ''){
+    		alert("내용을 입력 해 주세요.");
+    		return false;
+    	}
     	frm.submit();
     }
     </script>

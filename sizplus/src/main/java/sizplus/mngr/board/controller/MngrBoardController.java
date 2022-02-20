@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -67,8 +68,8 @@ public class MngrBoardController {
 		commandMap.put("fileId", result.get("file_id").toString());
 		List<Map<String, Object>> fileList = fileService.selectFileList(commandMap);
 		
-		model.addAttribute("commandMap", commandMap);
 		model.addAttribute("fileList", fileList);
+		model.addAttribute("commandMap", commandMap);
 		model.addAttribute("result", result);
 		
     	return "mngr/board/notice_view";
@@ -91,57 +92,52 @@ public class MngrBoardController {
     		MultipartHttpServletRequest multiRequest, HttpServletRequest request, HttpSession session) throws IOException, SQLException, RuntimeException, NoSuchAlgorithmException {
 		HashMap<String, Object> commandMap = CommonUtil.convertMap(request);
 		
-		String type_etc = ""; 
-		if (commandMap.get("typeEtc") !=null) {
-			type_etc = commandMap.get("typeEtc").toString();
-		}
+//		String type_etc = ""; 
+//		if (commandMap.get("typeEtc") !=null) {
+//			type_etc = commandMap.get("typeEtc").toString();
+//		}
 		String file_id = "";
-		if(multiRequest !=null) {
+		//관리자가 등록한 파일이 있을 경우
+		
+		if(multiRequest.getFileMap().get("noticeFile").getSize() > 0) {
 			/* 파일 아이디는 시 분 초 랜덤숫자까지 섞여서 아이디를 생성*/
-			file_id = CommonUtil.idMake("");
+//			file_id = CommonUtil.idMake("");
+			file_id = UUID.randomUUID().toString();
+			System.out.println("file_id::"+file_id); 
 		}
-		commandMap.put("typeEtc", type_etc);
+//		commandMap.put("typeEtc", type_etc);
 		commandMap.put("fileId", file_id);
 		commandMap.put("inputId", session.getAttribute("mngId"));
 		commandMap.put("inputNm", session.getAttribute("mngName"));
 		commandMap.put("password", null);
 		
 		int insertResult = boardService.insertBoard(commandMap);
-		Map<String, Object> fileMap = new HashMap<String, Object>();
-		if(insertResult ==1) {
-			List<MultipartFile> fileList = multiRequest.getFiles("noticeFile");
-	        String src = multiRequest.getParameter("src");
-	        System.out.println("src value : " + src);
-	        String path = "C:/image/notice/";
-	        int fileNum = 0; 
-	        for (MultipartFile mf : fileList) {
-	            String originFileName = mf.getOriginalFilename(); // 원본 파일 명
-	            long fileSize = mf.getSize(); // 파일 사이즈
-
-	            System.out.println("originFileName : " + originFileName);
-	            System.out.println("fileSize : " + fileSize);
-	            String randomId = CommonUtil.idMake("");
-	            String safeFile = path + randomId + originFileName;
-	            fileNum = fileNum+1;
-	            fileMap.put("fileId", file_id);
-	            fileMap.put("fileNum", fileNum);
-	            fileMap.put("fileName", randomId + originFileName);
-	            fileMap.put("fileOrgName", originFileName);
-	            fileMap.put("filePath", path);
-	            try {
-	                mf.transferTo(new File(safeFile));
-	                int result = fileService.insertFile(fileMap);
-	            } catch (IllegalStateException e) {
-	                // TODO Auto-generated catch block
-	                e.printStackTrace();
-	            } catch (IOException e) {
-	                // TODO Auto-generated catch block
-	                e.printStackTrace();
-	            }
-	        }
-//			CommonUtil.requestupload2(multiRequest);
-//					int file = fileService.insertFile(paramMap);
-//					file_seq++;
+		if(multiRequest.getFileMap().get("noticeFile").getSize() > 0) {
+			Map<String, Object> fileMap = new HashMap<String, Object>();
+			if(insertResult ==1) {
+				List<MultipartFile> fileList = multiRequest.getFiles("noticeFile");
+		        String path = "C:/image/notice/";
+		        int fileNum = 0; 
+		        for (MultipartFile mf : fileList) {
+		            String originFileName = mf.getOriginalFilename(); // 원본 파일 명
+		            String randomId = UUID.randomUUID().toString();
+		            String safeFile = path + randomId + originFileName;
+		            fileNum = fileNum+1;
+		            fileMap.put("fileId", file_id);
+		            fileMap.put("fileNum", fileNum);
+		            fileMap.put("fileName", randomId + originFileName);
+		            fileMap.put("fileOrgName", originFileName);
+		            fileMap.put("filePath", path);
+		            try {
+		                mf.transferTo(new File(safeFile));
+		                int result = fileService.insertFile(fileMap);
+		            } catch (IllegalStateException e) {
+		                e.printStackTrace();
+		            } catch (IOException e) {
+		                e.printStackTrace();
+		            }
+		        }
+			}
 		}
 		if(insertResult == 1) {
 			return CommonUtil.NotificationMessage(model, "성공", "등록 되었습니다.", "location.href='/mngr/board/notice_list.do';");
@@ -160,11 +156,72 @@ public class MngrBoardController {
 		
 		HashMap<String, Object> commandMap = CommonUtil.convertMap(request);
 		Map<String, Object> result = boardService.selectBoardView(commandMap);
+		commandMap.put("fileId", result.get("file_id").toString());
+		List<Map<String, Object>> fileList = fileService.selectFileList(commandMap);
 		
+		model.addAttribute("fileList", fileList);
 		model.addAttribute("result", result);
 		model.addAttribute("commandMap", commandMap); //페이징 정보
 		
 		return "mngr/board/notice_edit";
+    }
+	
+	//자유게시판 글등록 처리
+	@RequestMapping(value="/mngr/board/notice_edit_proc.do")
+    public String updateMngrBoardProc(ModelMap model, HttpServletResponse response,
+    		MultipartHttpServletRequest multiRequest, HttpServletRequest request, HttpSession session) throws IOException, SQLException, RuntimeException, NoSuchAlgorithmException {
+		HashMap<String, Object> commandMap = CommonUtil.convertMap(request);
+		
+//		String type_etc = ""; 
+//		if (commandMap.get("typeEtc") !=null) {
+//			type_etc = commandMap.get("typeEtc").toString();
+//		}
+		String file_id = "";
+		//관리자가 등록한 파일이 있을 경우
+		if(multiRequest.getFileMap().get("noticeFile").getSize() > 0) {
+			/* 파일 아이디는 시 분 초 랜덤숫자까지 섞여서 아이디를 생성*/
+			file_id = UUID.randomUUID().toString();
+			commandMap.put("updateFile", "Y");
+		}
+		commandMap.put("fileId", file_id);
+//		commandMap.put("typeEtc", type_etc);
+		commandMap.put("editId", session.getAttribute("mngId"));
+		commandMap.put("password", null);
+		
+		int insertResult = boardService.updateBoard(commandMap);
+		if(multiRequest.getFileMap().get("noticeFile").getSize() > 0) {
+			Map<String, Object> fileMap = new HashMap<String, Object>();
+			if(insertResult ==1) {
+				List<MultipartFile> fileList = multiRequest.getFiles("noticeFile");
+		        String path = "C:/image/notice/";
+		        int fileNum = 0; 
+		        for (MultipartFile mf : fileList) {
+		            String originFileName = mf.getOriginalFilename(); // 원본 파일 명
+		            String randomId = UUID.randomUUID().toString();
+		            String safeFile = path + randomId + originFileName;
+		            fileNum = fileNum+1;
+		            fileMap.put("fileId", file_id);
+		            fileMap.put("fileNum", fileNum);
+		            fileMap.put("fileName", randomId + originFileName);
+		            fileMap.put("fileOrgName", originFileName);
+		            fileMap.put("filePath", path);
+		            try {
+		                mf.transferTo(new File(safeFile));
+		                int result = fileService.insertFile(fileMap);
+		            } catch (IllegalStateException e) {
+		                e.printStackTrace();
+		            } catch (IOException e) {
+		                e.printStackTrace();
+		            }
+		        }
+			}
+		}
+		if(insertResult == 1) {
+			return CommonUtil.NotificationMessage(model, "성공", "수정 되었습니다.", "location.href='/mngr/board/notice_list.do';");
+		}
+		
+		return "redirect:/mngr/board/notice_list.do";
+    
     }
 	
 	@RequestMapping(value = "/mngr/board/notice_delete_chkProc.do")
