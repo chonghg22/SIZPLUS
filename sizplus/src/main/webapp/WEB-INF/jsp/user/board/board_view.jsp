@@ -60,6 +60,21 @@
 											<a href="/board/board_list.do?bbsId=${commandMap.get('bbsId')}" style="color: black;">라이프스타일</a>
 										</span>
 									</c:if>
+									<c:if test="${commandMap.get('bbsId') eq 'notice' }">
+										<span>
+											<a href="/board/board_list.do?bbsId=${commandMap.get('bbsId')}" style="color: black;">공지사항</a>
+										</span>
+									</c:if>
+									<c:if test="${commandMap.get('bbsId') eq 'faq' }">
+										<span>
+											<a href="/board/board_list.do?bbsId=${commandMap.get('bbsId')}" style="color: black;">FAQ</a>
+										</span>
+									</c:if>
+									<c:if test="${commandMap.get('bbsId') eq 'qna' }">
+										<span>
+											<a href="/board/board_list.do?bbsId=${commandMap.get('bbsId')}" style="color: black;">자주묻는질문</a>
+										</span>
+									</c:if>
 								</h3>
 							</li>
 							<li class="active" data-filter="*"></li>

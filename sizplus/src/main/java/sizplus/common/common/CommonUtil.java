@@ -1,17 +1,22 @@
 package sizplus.common.common;
  
 import java.io.BufferedInputStream;
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.net.URLEncoder;
 import java.security.GeneralSecurityException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Enumeration;
 import java.util.HashMap;
@@ -24,6 +29,11 @@ import java.util.Map.Entry;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.springframework.ui.ModelMap;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -290,4 +300,41 @@ public class CommonUtil {
 		}
 		return dispositionPrefix + encodedFilename;
 	}
+	
+	public static List<Map<String, Object>> youtubeSearch(String search) throws Exception {
+		String apiurl = "https://www.googleapis.com/youtube/v3/search";
+		apiurl += "?key=AIzaSyB5c5auzKfEsQiFdt92yNUB0HVnSyTmYEw";
+		apiurl += "&part=snippet&type=video&maxResults=5&videoEmbeddable=true";
+		apiurl += "&q="+URLEncoder.encode(search,"UTF-8");
+		
+		URL url = new URL(apiurl);
+		HttpURLConnection con = (HttpURLConnection) url.openConnection();
+		con.setRequestMethod("GET");
+		
+		BufferedReader br = new BufferedReader(new InputStreamReader(con.getInputStream(),"UTF-8"));
+		String inputLine;
+		StringBuffer response = new StringBuffer();
+		while((inputLine = br.readLine()) != null) {
+			response.append(inputLine);
+		}
+		br.close();
+		List<Map<String, Object>> listMapInsert = new ArrayList<Map<String, Object>>();
+		JSONParser jsonPares = new JSONParser();
+		JSONObject obj = (JSONObject)jsonPares.parse(response.toString());
+		JSONArray jArray = (JSONArray) obj.get("items");
+		for(int i=0;i<jArray.size();i++){
+			Map<String, Object> map = new  HashMap<String, Object>();
+			JSONObject tmp = (JSONObject) (jArray.get(i));//인덱스 번호로 접근해서 가져온다.
+			JSONObject snippet = (JSONObject)tmp.get("snippet");
+			JSONObject thumbnailsObj = (JSONObject)jsonPares.parse(snippet.get("thumbnails").toString());
+			JSONObject defaultObj = (JSONObject)jsonPares.parse(thumbnailsObj.get("medium").toString());
+			JSONObject idObj = (JSONObject)tmp.get("id");
+			map.put("title", snippet.get("title").toString());
+			map.put("tumbUrl", defaultObj.get("url").toString());
+			map.put("id",idObj.get("videoId").toString());
+			listMapInsert.add(map);
+		}
+		return listMapInsert;
+	}
+		
 }

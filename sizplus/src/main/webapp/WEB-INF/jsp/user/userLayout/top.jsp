@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+	<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -54,7 +54,14 @@
 							<a href="/recipe/recipe_list.do" class="dropdown-item">모두의 레시피</a>
 						</div>
 					</div>
-					<a href="single-page.html" class="nav-item nav-link">Single Page</a>
+					<div class="nav-item dropdown">
+						<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">커뮤니티</a>
+						<div class="dropdown-menu">
+							<a href="/board/board_list.do?bbsId=free" class="dropdown-item">공지사항</a>
+							<a href="/board/board_list.do?bbsId=faq" class="dropdown-item">FAQ</a>
+							<a href="/board/board_list.do?bbsId=qna" class="dropdown-item">자주묻는질문</a>
+						</div>
+					</div>
 					<c:if test="${empty memberSession }">
 					<a href="/login.do" class="nav-item nav-link">로그인</a>
 					</c:if>

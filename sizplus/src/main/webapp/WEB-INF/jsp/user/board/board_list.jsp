@@ -51,11 +51,20 @@
 						<li class="" data-filter="*" style="float: left;">
 						<h3>
 							<c:if test="${commandMap.get('bbsId') eq 'free' }">
-							<span>자유게시판</span>
+								<span>자유게시판</span>
 							</c:if>
 							<c:if test="${commandMap.get('bbsId') eq 'life' }">
-							<span>라이프스타일</span>
+								<span>라이프스타일</span>
+							</c:if>
+							<c:if test="${commandMap.get('bbsId') eq 'notice' }">
+								<span>공지사항</span>
 							</c:if> 
+							<c:if test="${commandMap.get('bbsId') eq 'faq' }">
+								<span>FAQ</span>
+							</c:if>
+							<c:if test="${commandMap.get('bbsId') eq 'qna' }">
+								<span>자주묻는질문</span>
+							</c:if>
 				  		</h3>
 						</li>
 						<li class="active" data-filter="*" ></li>

@@ -172,59 +172,49 @@
 				<div class="col-md-6">
 					<h2>HOT한 먹방 영상</h2>
 					<div class="row cn-slider">
+						<c:forEach var="eat" items="${eatSearch}" varStatus="status">
 						<div class="col-md-6">
-							<div class="cn-img">
-								<img src="/lib/user/img/핫먹방_사치닭_350x223.jpg" />
+							<div class="cn-img" style="width: 255px;height: 166px;">
+								<img src="${eat.tumbUrl }"/>
 								<div class="cn-title">
-									<a href="">편스토랑 류수영 "사치닭"</a>
+									<a href="https://www.youtube.com/watch?v=${eat.id }" target="_blank">
+									<c:choose>
+										<c:when test="${fn:length(eat.title) > 24}">
+											${fn:substring(eat.title,0,25)}....
+										</c:when>
+										<c:otherwise>
+											${fn:substring(eat.title,0,25)}
+										</c:otherwise>
+									</c:choose>
+									</a>
 								</div>
 							</div>
 						</div>
-						<div class="col-md-6">
-							<div class="cn-img">
-								<img src="/lib/user/img/핫먹방_해방타운_육합_350x223.jpg" />
-								<div class="cn-title">
-									<a href="">해방타운 백지영 "육합"</a>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-6">
-							<div class="cn-img">
-								<img src="/lib/user/img/핫먹방_나혼산_간장국수_350x223.jpg" />
-								<div class="cn-title">
-									<a href="">나혼산 화사 "간장국수"</a>
-								</div>
-							</div>
-						</div>
+						</c:forEach>
 					</div>
 				</div>
 				<div class="col-md-6">
 					<h2>HOT한 요리 영상</h2>
 					<div class="row cn-slider">
+						<c:forEach var="cook" items="${cookSearch}" varStatus="status">
 						<div class="col-md-6">
-							<div class="cn-img">
-								<img src="/lib/user/img/유튜버_고기남자_썸네일_350x223.jpg"/>
+							<div class="cn-img" style="width: 255px;height: 166px;">
+								<img src="${cook.tumbUrl }"/>
 								<div class="cn-title">
-									<a href="">"유튜브"<br>고기남자의 오마카세 </a>
+									<a href="https://www.youtube.com/watch?v=${cook.id }" target="_blank">
+									<c:choose>
+										<c:when test="${fn:length(cook.title) > 24}">
+											${fn:substring(cook.title,0,25)}....
+										</c:when>
+										<c:otherwise>
+											${fn:substring(cook.title,0,25)}
+										</c:otherwise>
+									</c:choose>
+									</a>
 								</div>
 							</div>
 						</div>
-						<div class="col-md-6">
-							<div class="cn-img">
-								<img src="/lib/user/img/유튜버_육식맨_양갈비썸네일_350x223.jpg" />
-								<div class="cn-title">
-									<a href="">"유튜브"<br>육식맨 양갈비</a>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-6">
-							<div class="cn-img">
-								<img src="/lib/user/img/유튜버_승우아빠_황금볶음밥썸네일_350x223.jpg" />
-								<div class="cn-title">
-									<a href="">"유튜브"<br>승우아빠 황금볶음밥</a>
-								</div>
-							</div>
-						</div>
+						</c:forEach>
 					</div>
 				</div>
 			</div>
@@ -339,7 +329,7 @@
 
 					<div class="tab-content">
 						<div id="m-viewed" class="container tab-pane active">
-							<a href="products.html" style="padding-left: 415px;">더보기 <i class="fa fa-angle-right"></i></a><br>
+							<a href="#" onclick="fn_goBoard('notice')" style="padding-left: 415px;">더보기 <i class="fa fa-angle-right"></i></a><br>
 							<c:forEach var="notice" items="${noticeBoardList}" varStatus="status">
 							<div class="tn-news" style="margin-bottom: 19.5px;">
 								<div class="tn-title" style="width: 100%;">
@@ -357,64 +347,40 @@
 							</c:forEach>
 						</div>
 						<div id="m-read" class="container tab-pane fade">
-							<a href="products.html" style="padding-left: 415px;">더보기 <i class="fa fa-angle-right"></i></a><br>
+							<a href="#" onclick="fn_goBoard('qna')" style="padding-left: 415px;">더보기 <i class="fa fa-angle-right"></i></a><br>
+							<c:forEach var="qna" items="${qnaBoardList}" varStatus="status">
 							<div class="tn-news" style="margin-bottom: 19.5px;">
-								<div class="tn-title">
-									<a href="">1.공지사항</a>
+								<div class="tn-title" style="width: 100%;">
+									<c:choose>
+						           <c:when test="${fn:length(qna.title) > 35}">
+						            <a href="/board/board_view.do?boardSeq=${qna.board_seq}&bbsId=qna" class="climp" onclick="fn_goView('<c:out value="${qna.board_seq}"/>','<c:out value="${qna.bbs_id}"/>')" style="text-decoration: none;color: #000;"><c:out value="${fn:substring(qna.title,0,35)}"/>....</a>
+						           </c:when>
+						           <c:otherwise>
+						            <a href="/board/board_view.do?boardSeq=${qna.board_seq}&bbsId=qna" class="climp" onclick="fn_goView('<c:out value="${qna.board_seq}"/>','<c:out value="${qna.bbs_id}"/>')" style="text-decoration: none;color: #000;"><c:out value="${qna.title}"/></a>
+						           </c:otherwise> 
+						          </c:choose>
+						          <span style="float: right;color: #555;">${fn:substring(qna.input_date,0,16)}</span>
 								</div>
 							</div>
-							<div class="tn-news" style="margin-bottom: 19.5px;">
-								<div class="tn-title">
-									<a href="">2.공지사항</a>
-								</div>
-							</div>
-							<div class="tn-news" style="margin-bottom: 19.5px;">
-								<div class="tn-title">
-									<a href="">3.공지사항</a>
-								</div>
-
-							</div>
-							<div class="tn-news" style="margin-bottom: 19.5px;">
-								<div class="tn-title">
-									<a href="">4.공지사항</a>
-								</div>
-
-							</div>
-							<div class="tn-news" style="margin-bottom: 19.5px;">
-								<div class="tn-title">
-									<a href="">5.공지사항</a>
-								</div>
-							</div>
+							</c:forEach>
 						</div>
 						<div id="m-recent" class="container tab-pane fade">
-							<a href="products.html" style="padding-left: 415px;">더보기 <i class="fa fa-angle-right"></i></a><br>
+							<a href="#" onclick="fn_goBoard('faq')" style="padding-left: 415px;">더보기 <i class="fa fa-angle-right"></i></a><br>
+							<c:forEach var="faq" items="${faqBoardList}" varStatus="status">
 							<div class="tn-news" style="margin-bottom: 19.5px;">
-								<div class="tn-title">
-									<a href="">자주 묻겠습니다.</a>
+								<div class="tn-title" style="width: 100%;">
+									<c:choose>
+						           <c:when test="${fn:length(faq.title) > 35}">
+						            <a href="/board/board_view.do?boardSeq=${faq.board_seq}&bbsId=faq" class="climp" onclick="fn_goView('<c:out value="${faq.board_seq}"/>','<c:out value="${faq.bbs_id}"/>')" style="text-decoration: none;color: #000;"><c:out value="${fn:substring(faq.title,0,35)}"/>....</a>
+						           </c:when>
+						           <c:otherwise>
+						            <a href="/board/board_view.do?boardSeq=${faq.board_seq}&bbsId=faq" class="climp" onclick="fn_goView('<c:out value="${faq.board_seq}"/>','<c:out value="${faq.bbs_id}"/>')" style="text-decoration: none;color: #000;"><c:out value="${faq.title}"/></a>
+						           </c:otherwise> 
+						          </c:choose>
+						          <span style="float: right;color: #555;">${fn:substring(faq.input_date,0,16)}</span>
 								</div>
 							</div>
-							<div class="tn-news" style="margin-bottom: 19.5px;">
-								<div class="tn-title">
-									<a href="">자주 묻겠습니다.</a>
-								</div>
-							</div>
-							<div class="tn-news" style="margin-bottom: 19.5px;">
-								<div class="tn-title">
-									<a href="">자주 묻겠습니다.</a>
-								</div>
-
-							</div>
-							<div class="tn-news" style="margin-bottom: 19.5px;">
-								<div class="tn-title">
-									<a href="">자주 묻겠습니다.</a>
-								</div>
-
-							</div>
-							<div class="tn-news" style="margin-bottom: 19.5px;">
-								<div class="tn-title">
-									<a href="">자주 묻겠습니다.</a>
-								</div>
-							</div>
+							</c:forEach>
 						</div>
 					</div>
 				</div>

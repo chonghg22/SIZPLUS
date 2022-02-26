@@ -15,8 +15,11 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 import org.apache.log4j.Logger;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -59,6 +62,20 @@ public class MainController {
 		List<Map<String, Object>> lifeBoardList = boardService.selectBoardList(resultMap);
 		resultMap.put("bbsId", "notice");
 		List<Map<String, Object>> noticeBoardList = boardService.selectBoardList(resultMap);
+		resultMap.put("bbsId", "faq");
+		List<Map<String, Object>> faqBoardList = boardService.selectBoardList(resultMap);
+		resultMap.put("bbsId", "qna");
+		List<Map<String, Object>> qnaBoardList = boardService.selectBoardList(resultMap);
+		String search = "";
+		search = "요리";
+		List<Map<String, Object>> cookSearch = CommonUtil.youtubeSearch(search);
+		search = "먹방";
+		List<Map<String, Object>> eatSearch = CommonUtil.youtubeSearch(search);
+		
+		model.addAttribute("cookSearch", cookSearch);
+		model.addAttribute("eatSearch", eatSearch);
+		model.addAttribute("qnaBoardList", qnaBoardList);
+		model.addAttribute("faqBoardList", faqBoardList);
 		model.addAttribute("freeBoardList", freeBoardList);
 		model.addAttribute("lifeBoardList", lifeBoardList);
 		model.addAttribute("noticeBoardList", noticeBoardList);
